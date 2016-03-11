@@ -49,7 +49,7 @@ CC=g++
 CCFLAGS+=-Wall -fPIC -fpermissive -Wextra -Woverloaded-virtual -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
 
 EL=g++ #Éditeur de liens
-ELFLAGS= -shared
+ELFLAGS= 
 
 DEBUG?=FALSE
 
