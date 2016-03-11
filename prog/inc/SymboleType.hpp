@@ -5,7 +5,7 @@
 
 enum SymboleType
 {
-	// Symboles nons terminaux
+	// Symboles non terminaux
 	PROGRAMME,
 	DECLARATIONS,
 	DECLARATION_VAR,
@@ -17,7 +17,6 @@ enum SymboleType
 	FACTEUR,
 
 	// Symboles terminaux
-
 	PARENTHESE_OUV,
 	PARENTHESE_FER,
 	OPERATEUR_MUL,
