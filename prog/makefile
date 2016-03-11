@@ -92,8 +92,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 ALL: $(PROGNAME)
 	
 $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ)) 
-	$(ECHO) "Fabrication de la bibliothèque"
-	$(EL) -o $(LIBNAME) $(addprefix $(OBJDIR)/, $(OBJ)) $(ELFLAGS) $(addprefix -l, $(LIB)) 
+	$(ECHO) "Fabrication de l'executable"
+	$(EL) -o $(PROGNAME) $(addprefix $(OBJDIR)/, $(OBJ)) $(ELFLAGS) $(addprefix -l, $(LIB)) 
 
 #Fichiers de dépendance
 -include $(SRC:%.cpp=$(DEPDIR)/%.P)
