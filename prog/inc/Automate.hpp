@@ -12,6 +12,8 @@ public:
 	Automate();
 	~Automate();
 
+	Programme* getProgramme();
+
 	void pushEtat(Etat* etat);
 	void pushSymbole(Symbole* symbole);
 

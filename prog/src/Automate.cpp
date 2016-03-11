@@ -12,6 +12,17 @@ Automate::~Automate()
 
 }
 
+
+Programme* Automate::getProgramme()
+{
+	Programme* programme = nullptr;
+
+	// appel au lexer
+	// récupération du flux des symboles
+
+	return programme;
+}
+
 void Automate::pushEtat(Etat* etat)
 {
 	_pileEtats.push(etat);
@@ -40,10 +51,10 @@ Symbole* Automate::popSymbole()
 
 Etat* etatCourant()
 {
-	return _pileEtats.pop();
+	return _pileEtats.top();
 }
 
 Symbole* symboleCourant()
 {
-	return _pileSymboles();
+	return _pileSymboles.top();
 }
