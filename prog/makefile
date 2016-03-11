@@ -3,11 +3,6 @@ RM=rm
 # Flags de délétion
 RMFLAGS=-rf
 
-# Commande de copie
-CP=cp
-
-# Bibliothèques supplémentaires
-LIB=
 
 # Répertoires de bibliothèques
 LIBDIR?=
@@ -34,7 +29,8 @@ OBJDIR=.obj
 DEPDIR=.dep
 df=$(DEPDIR)/$(*F)
 
-SRC=$(shell find $(SRCDIR) -type f -name *.cpp | sed -e "s/$(SRCDIR)\///")
+ALLSRC=$(shell find $(SRCDIR) -type f -name *.cpp)
+SRC=$(ALLSRC:$(SRCDIR)/%=%)
 INC=$(shell find $(INCDIR) -type f \( -name *.hpp -o -name *.h -o -name *.tpp \) | sed -e "s/$(INCDIR)\///")
 
 OBJ=$(SRC:.cpp=.o)
@@ -46,7 +42,7 @@ MAKEDEPEND = g++ $(addprefix -I, $(EXTINCDIR)) -I$(INCDIR) -o $(df).d -std=c++11
 #Compilateur
 CC=g++
 #Options du compilateur
-CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
+CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
 
 EL=g++ #Éditeur de liens
 ELFLAGS= 
@@ -76,6 +72,7 @@ endif
 .PHONY: ALL
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
+	$(ECHO) $(SRC)
 	@mkdir -p $(DEPDIR);
 	@mkdir -p $(OBJDIR);
 	@$(MAKEDEPEND); \
@@ -99,4 +96,4 @@ $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ))
 -include $(SRC:%.cpp=$(DEPDIR)/%.P)
 
 $(CLEAR):
-	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/*.P $(LIBNAME) 
+	$(RM) $(RMFLAGS) $(OBJDIR)/*.o $(DEPDIR)/*.P $(LIBNAME) 
