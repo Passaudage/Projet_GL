@@ -5,7 +5,7 @@
 
 enum SymboleType
 {
-	/* à compléter */
+	// Symboles nons terminaux
 	PROGRAMME,
 	DECLARATIONS,
 	DECLARATION_VAR,
@@ -15,7 +15,9 @@ enum SymboleType
 	EXPRESSION,
 	TERME,
 	FACTEUR,
-	
+
+	// Symboles terminaux
+
 	PARENTHESE_OUV,
 	PARENTHESE_FER,
 	OPERATEUR_MUL,
@@ -27,7 +29,9 @@ enum SymboleType
 	AFFICHAGE,
 	AFFECTATION,
 	VALEUR,
-	IDENTIFIANT
+	IDENTIFIANT,
+	VARIABLE,
+	CONSTANTE
 };
 
 #endif
