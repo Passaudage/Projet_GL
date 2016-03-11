@@ -34,7 +34,6 @@ enum SymboleType
 	VIRGULE,
 	DEUXPOINTS_EGA,
 	EGAL,
-	SYMBOLE_D
 };
 
 #endif

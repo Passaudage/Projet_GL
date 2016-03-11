@@ -5,6 +5,7 @@
 #include "Etat.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
+#include "Etat1.hpp"
 
 class Etat0 : public Etat
 {
