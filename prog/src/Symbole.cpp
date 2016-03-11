@@ -1,4 +1,4 @@
-#include "../inc/Symbole.hpp"
+#include "Symbole.hpp"
 
 Symbole::Symbole()
 {

@@ -1,7 +1,7 @@
 #include "../inc/Automate.hpp"
 
-#include "../inc/Etat.hpp"
-#include "../inc/Symbole.hpp"
+#include "Etat.hpp"
+#include "Symbole.hpp"
 
 Automate::Automate()
 {
