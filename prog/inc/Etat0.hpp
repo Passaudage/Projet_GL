@@ -1,7 +1,7 @@
 #ifndef ETAT0_HPP
 #define ETAT0_HPP
 
-#include <stdio>
+#include <iostream>
 #include "Etat.hpp"
 
 class Etat0 : public Etat
