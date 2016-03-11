@@ -49,7 +49,7 @@ CC=g++
 CCFLAGS+=-Wall -fPIC -fpermissive -Wextra -Woverloaded-virtual -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
 
 EL=g++ #Éditeur de liens
-ELFLAGS= -shared
+ELFLAGS= 
 
 DEBUG?=FALSE
 
@@ -92,8 +92,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 ALL: $(PROGNAME)
 	
 $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ)) 
-	$(ECHO) "Fabrication de la bibliothèque"
-	$(EL) -o $(LIBNAME) $(addprefix $(OBJDIR)/, $(OBJ)) $(ELFLAGS) $(addprefix -l, $(LIB)) 
+	$(ECHO) "Fabrication de l'executable"
+	$(EL) -o $(PROGNAME) $(addprefix $(OBJDIR)/, $(OBJ)) $(ELFLAGS) $(addprefix -l, $(LIB)) 
 
 #Fichiers de dépendance
 -include $(SRC:%.cpp=$(DEPDIR)/%.P)
