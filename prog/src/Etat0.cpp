@@ -1,5 +1,7 @@
 #include  "Etat0.hpp"
 
+#include "Symbole.hpp"
+
 Etat0::Etat0()
 {
 
