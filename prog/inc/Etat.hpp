@@ -7,7 +7,8 @@
 class Etat 
 {
 	public:
+		Etat();
 		~Etat();
-		virtual void transition(Automate* a, Symbole* s);
+		virtual void transition(Automate* a, Symbole* s) = 0;
 };
 #endif 	

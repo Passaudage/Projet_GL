@@ -1,6 +1,8 @@
 #ifndef SYMBOLE_HPP
 #define SYMBOLE_HPP
 
+#include "SymboleType.hpp"
+
 class Symbole
 {
 public:

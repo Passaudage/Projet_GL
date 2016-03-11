@@ -33,7 +33,8 @@ enum SymboleType
 	POINT_VIR,
 	VIRGULE,
 	DEUXPOINTS_EGA,
-	EGAL
+	EGAL,
+	SYMBOLE_D
 };
 
 #endif
