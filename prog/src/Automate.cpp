@@ -1,4 +1,4 @@
-#include "../inc/Automate.hpp"
+#include "Automate.hpp"
 
 #include "Etat.hpp"
 #include "Symbole.hpp"
@@ -49,12 +49,12 @@ Symbole* Automate::popSymbole()
 	return symbole;
 }
 
-Etat* etatCourant()
+Etat* Automate::etatCourant() const
 {
 	return _pileEtats.top();
 }
 
-Symbole* symboleCourant()
+Symbole* Automate::symboleCourant() const
 {
 	return _pileSymboles.top();
 }
