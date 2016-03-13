@@ -2,29 +2,30 @@
 #define LEXER_HPP
 
 #include <string>
-
-using namespace std;
+#include <fstream>
 
 class Symbole;
 
 class Lexer
 {
 public:
-    Lexer(string & nomFichier);
+    Lexer(std::string & nomFichier);
     ~Lexer();
     
-    friend ostream& operator<<(ostream& os, const Lexer& lex);
+    //friend std::ostream& operator<<(std::ostream& os, const Lexer& lex);
     
-    Symbole* getSymbole();
-    void decalage();
-    string const& getContenu() const;     
+    Symbole* lireSymboleCourant();
+    Symbole* lireSymboleSuivant();
+    void decaler();
+
+private:
+    std::ifstream _fichierSource;
+
+    Symbole* _symboleCourant;
+    Symbole* _symboleSuivant;
     
-private: 
-	int ligneCourante;
-    int carCourant;
-    string contenuFichier;
-    Symbole* symboleCourant;
-    
+    Symbole* lire_decaler();
+
     void reduction();
 };
 

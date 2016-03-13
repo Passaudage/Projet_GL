@@ -1,59 +1,94 @@
 #include <string>
 #include <iostream>
-#include <fstream>
+
 #include <sstream>
+
+#include <exception>
 
 #include "Lexer.hpp"
 #include "Symbole.hpp"
 
-using namespace std;
 
 // #### Constructeur et destructeur #### //
-Lexer::Lexer(string & nomFichier)
-{
-	fstream fichierSource;
-	fichierSource.open(nomFichier);
+Lexer::Lexer(std::string & nomFichier)
+{	
+	_fichierSource.open(nomFichier);
 
-	stringstream stream;
-	stream << fichierSource.rdbuf();
-	contenuFichier = stream.str();
+	if(_fichierSource.good()) {
 
-	fichierSource.close();
+	} else {
+		/* TODO : faire mieux comme message et gestion des erreurs */
+		throw std::exception();
+	}
 
-	ligneCourante = 1;
-	carCourant = 1;
+	_symboleCourant = lire_decaler();
+	_symboleSuivant = lire_decaler();
 }
 
 Lexer::~Lexer()
 {
-	delete symboleCourant;
+	_fichierSource.close();
 }
 
+/*
 // #### Surcharge #### //
 std::ostream& operator << (std::ostream& os, const Lexer& lex)  
-{  
-    os << lex.getContenu();
+{
     return os;  
 } 
+*/
 
 // #### Publique #### //
-void Lexer::decalage()
+
+Symbole* Lexer::lireSymboleCourant()
 {
-	symboleCourant = NULL;
+	return _symboleCourant;
 }
 
-string const& Lexer::getContenu() const
+Symbole* Lexer::lireSymboleSuivant()
 {
-	return contenuFichier;
+	return _symboleSuivant;
 }
 
-Symbole * Lexer::getSymbole()
+void Lexer::decaler()
 {
-	// TODO
-	return NULL;
+	_symboleCourant = _symboleSuivant;
+	_symboleSuivant = lire_decaler();
 }
 
 // #### Privée #### //
+
+Symbole* Lexer::lire_decaler()
+{
+	Symbole* symboleCourant = nullptr;
+	char caractere;
+
+	if(!_fichierSource.get(caractere)) {
+		std::cerr << "Plus rien à lire" << std::endl;
+		return nullptr;
+	}
+
+	// Ici on lit les caractères pour attribuer à
+	// symboleCourant le symbole effectif.
+
+	// D'abord les symboles simples
+
+	switch(caractere) {
+		case ',':
+			//symboleCourant = new Virgule();
+			break;
+		case ';':
+			//symboleCourant = new PointVirgule();
+			break;
+		default:
+			// traitement des expressions plus "compliquées"
+			// TODO : tokenizer (séparer grâce aux espaces)
+			break;
+	}
+
+	return symboleCourant;
+}
+
 void Lexer::reduction()
 {
 	// TODO
