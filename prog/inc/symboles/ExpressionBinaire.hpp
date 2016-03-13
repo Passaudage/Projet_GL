@@ -1,41 +1,44 @@
 /*************************************************************************
-                           Valeur  -  description
+                           ExpressionBinaire  -  description
                              -------------------
     début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Valeur> (fichier Valeur.hpp) ------
-#ifndef VALEUR_H
-#define VALEUR_H
+//--------- Interface de la classe <ExpressionBinaire> (fichier ExpressionBinaire.cpp) ------
+#ifndef EXPRESSIONBINAIRE_H
+#define EXPRESSIONBINAIRE_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Expression.hpp"
-
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Valeur>
+// Rôle de la classe <ExpressionBinaire>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Valeur : public Expression
+class ExpressionBinaire : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	int calculer(Programme &);
+	virtual int calculer(Programme &) = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Valeur& operator=(const Valeur & unValeur) = delete;
+    ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =
+		delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Valeur(const Valeur & unValeur) = delete;
+    ExpressionBinaire(const ExpressionBinaire & unExpressionBinaire) = delete;
 
-    Valeur(int valeur);
+    ExpressionBinaire(Expression& exprGauche, Expression& exprDroite);
+
+    virtual ~ExpressionBinaire();
+
 //------------------------------------------------------------------ PRIVE 
 
 protected:
@@ -46,10 +49,11 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	Expression& _exprGauche;
+	Expression& _exprDroite;
 
 private:
 //------------------------------------------------------- Attributs privés
-	int _valeur;
 
 //---------------------------------------------------------- Classes amies
 
@@ -59,7 +63,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Valeur>
+//-------------------------------- Types dépendants de <ExpressionBinaire>
 
-#endif // VALEUR_H
+#endif // EXPRESSIONBINAIRE_H
 
