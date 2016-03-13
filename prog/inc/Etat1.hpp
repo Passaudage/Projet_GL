@@ -15,7 +15,6 @@
 
 class Etat1 : public Etat
 {
-
 	public:
 		Etat1();
 		~Etat1();
