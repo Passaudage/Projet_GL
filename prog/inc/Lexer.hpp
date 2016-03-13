@@ -1,12 +1,11 @@
-#ifndef LEXER_H
-#define LEXER_H
-
-#include "Symbole.h"
+#ifndef LEXER_HPP
+#define LEXER_HPP
 
 #include <string>
-#include <vector>
 
 using namespace std;
+
+class Symbole;
 
 class Lexer
 {
@@ -16,19 +15,17 @@ public:
     
     friend ostream& operator<<(ostream& os, const Lexer& lex);
     
-    Symbole *  getSymbole();
+    Symbole* getSymbole();
     void decalage();
-    string& getContenu();
-             
+    string const& getContenu() const;     
     
 private: 
 	int ligneCourante;
     int carCourant;
     string contenuFichier;
-    Symbole * symboleCourant;
+    Symbole* symboleCourant;
     
     void reduction();
-    
 };
 
 #endif

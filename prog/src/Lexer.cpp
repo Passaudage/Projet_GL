@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "Lexer.h"
-#include "Symbole.h"
+#include "Lexer.hpp"
+#include "Symbole.hpp"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ using namespace std;
 Lexer::Lexer(string & nomFichier)
 {
 	fstream fichierSource;
-	fichierSource.open(nomFichier.c_str());
+	fichierSource.open(nomFichier);
 
 	stringstream stream;
 	stream << fichierSource.rdbuf();
@@ -42,7 +42,7 @@ void Lexer::decalage()
 	symboleCourant = NULL;
 }
 
-string& Lexer::getContenu()
+string const& Lexer::getContenu() const
 {
 	return contenuFichier;
 }
