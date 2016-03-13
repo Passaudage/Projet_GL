@@ -2,12 +2,10 @@
 
 Symbole::Symbole()
 {
-
 }
 
 Symbole::~Symbole()
 {
-
 }
 
 Symbole::operator int()

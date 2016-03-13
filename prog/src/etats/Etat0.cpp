@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+#include "Automate.hpp"
+#include "Symbole.hpp"
+
 Etat0::Etat0()
 {
 
