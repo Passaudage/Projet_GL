@@ -47,7 +47,7 @@ CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDI
 EL=g++ #Éditeur de liens
 ELFLAGS= 
 
-DEBUG?=TRUE
+DEBUG?=FALSE
 
 MAP?=FALSE
 

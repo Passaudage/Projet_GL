@@ -11,6 +11,7 @@
 
 #include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Valeur.hpp"
+#include "symboles/Identifiant.hpp"
 
 // #### Constructeur et destructeur #### //
 Lexer::Lexer(std::string & nomFichier)

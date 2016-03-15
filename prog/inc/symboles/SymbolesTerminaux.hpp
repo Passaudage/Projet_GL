@@ -9,7 +9,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
-#include <string>
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -54,18 +53,6 @@ typedef SymboleTerminal<Symbole::Type::CONSTANTE> Constante;
 typedef SymboleTerminal<Symbole::Type::VARIABLE> Variable;
 typedef SymboleTerminal<Symbole::Type::LECTURE> Lecture;
 typedef SymboleTerminal<Symbole::Type::AFFICHAGE> Affichage;
-
-
-class Identifiant : public SymboleTerminal<Symbole::Type::IDENTIFIANT>
-{
-public:
-//----------------------------------------------------- Méthodes publiques
-	std::string const& get() const;
-//-------------------------------------------- Constructeurs - destructeur
-	Identifiant(std::string const& identifiant);
-protected:
-	std::string const& _identifiant;
-};
 
 class OperateurMult : public SymboleTerminal<Symbole::Type::OPERATEUR_MUL>
 {
