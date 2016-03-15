@@ -16,17 +16,28 @@ public:
     
     Symbole* lireSymboleCourant();
     Symbole* lireSymboleSuivant();
-    void decaler();
+
+    /** Renvoie vrai lorsqu'il est encore possible de lire un symbole courant après
+      * décalage. Sinon, renvoie faux pour indiquer la fin de la lecture des symboles.
+      */
+    bool decaler();
 
 private:
     std::ifstream _fichierSource;
 
     Symbole* _symboleCourant;
     Symbole* _symboleSuivant;
+
+    Symbole* _delimiteurSuivant;
     
     Symbole* lire_decaler();
+    /** Lit le prochain caractère. Si celui-ci correspond à un délimiteur,
+      * le symbole correspondant est retourné, 
+      *
+      */
+    Symbole* lire_delimiteur(char& caractere);
 
-    void reduction();
+    Symbole* lire_identifiant(std::string& identifiant);
 };
 
 #endif
