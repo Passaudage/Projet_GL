@@ -27,9 +27,9 @@ class Declarations : public Symbole
 public:
 //------------------------------------------------------ Classes publiques
 	struct Entite {
-		int _valeur;
-		bool _initialise;
-		bool _modifiable;
+		int valeur;
+		bool initialise;
+		bool modifiable;
 	};
 
 	typedef std::pair<std::string, Entite> Enregistrement; 
