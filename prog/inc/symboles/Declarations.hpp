@@ -13,17 +13,12 @@
 
 #include <string>
 #include <list>
-#include <utility>
+#include <unordered_map>
 
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
-
-//------------------------------------------------------------------------ 
-// Rôle de la classe <Declarations>
-//
-//
-//------------------------------------------------------------------------ 
+using namespace std;
 
 class Declarations : public Symbole
 {
@@ -31,10 +26,15 @@ class Declarations : public Symbole
 
 public:
 //------------------------------------------------------ Classes publiques
+	struct Entite {
+		int _valeur;
+		bool _initialise;
+		bool _modifiable;
+	};
 
 	typedef std::list<std::pair<std::string, Entite>> ListEntites;
 
-	class IDC
+	class IDC : public Symbole
 	{
 	public:
 		IDC();
@@ -47,7 +47,7 @@ public:
 
 	};
 
-	class IDV
+	class IDV : public Symbole
 	{
 	public:
 		IDV();
@@ -60,6 +60,8 @@ public:
 	};
 
 //----------------------------------------------------- Méthodes publiques
+	void enregistrerConstantes(IDC& idc);
+	void enregistrerVariables(IDV& idv);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -82,6 +84,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	unordered_map<string, Entite> _entites;	
 
 private:
 //------------------------------------------------------- Attributs privés
