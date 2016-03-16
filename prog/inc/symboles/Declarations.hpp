@@ -28,6 +28,33 @@ public:
 		bool _modifiable;
 	};
 
+	typedef std::list<std::pair<std::string, Entite>> ListEntites;
+
+	class IDC
+	{
+	public:
+		IDC();
+		~IDC();
+
+		void ajouterConstante(std::string const& identifiant, int valeur);
+
+	private:
+		ListEntites _listEntites;
+
+	};
+
+	class IDV
+	{
+	public:
+		IDV();
+		~IDV();
+
+		void ajouterVariable(std::string const& identifiant);
+
+	private:
+		ListEntites _listEntites;
+	};
+
 //----------------------------------------------------- Méthodes publiques
 
 
