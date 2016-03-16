@@ -28,6 +28,7 @@ public:
 		bool _modifiable;
 	};
 
+	typedef std::pair<std::string, Entite> Enregistrement; 
 	typedef std::list<std::pair<std::string, Entite>> ListEntites;
 
 	class IDC : public Symbole
@@ -58,6 +59,8 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void enregistrerConstantes(IDC& idc);
 	void enregistrerVariables(IDV& idv);
+
+
 
 
 //------------------------------------------------- Surcharge d'opérateurs
