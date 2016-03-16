@@ -30,7 +30,7 @@ public:
 
 	typedef std::list<std::pair<std::string, Entite>> ListEntites;
 
-	class IDC
+	class IDC : public Symbole
 	{
 	public:
 		IDC();
@@ -43,7 +43,7 @@ public:
 
 	};
 
-	class IDV
+	class IDV : public Symbole
 	{
 	public:
 		IDV();
@@ -56,6 +56,8 @@ public:
 	};
 
 //----------------------------------------------------- Méthodes publiques
+	void enregistrerConstantes(IDC& idc);
+	void enregistrerVariables(IDV& idv);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
