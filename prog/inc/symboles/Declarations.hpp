@@ -63,9 +63,8 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void enregistrerConstantes(IDC& idc);
 	void enregistrerVariables(IDV& idv);
-
-
-
+	int getValeur(string& identifiant);
+	void setValeur(string& identifiant, int valeur);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;
