@@ -10,15 +10,11 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
+#include <unordered_map>
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
-
-//------------------------------------------------------------------------ 
-// Rôle de la classe <Declarations>
-//
-//
-//------------------------------------------------------------------------ 
+using namespace std;
 
 class Declarations : public Symbole
 {
@@ -26,6 +22,11 @@ class Declarations : public Symbole
 
 public:
 //------------------------------------------------------ Classes publiques
+	struct Entite {
+		int _valeur;
+		bool _initialise;
+		bool _modifiable;
+	};
 
 //----------------------------------------------------- Méthodes publiques
 
@@ -50,6 +51,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	unordered_map<string, Entite> _entites;	
 
 private:
 //------------------------------------------------------- Attributs privés
