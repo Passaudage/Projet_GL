@@ -33,7 +33,7 @@ public:
 	};
 
 	typedef std::pair<std::string, Entite> Enregistrement; 
-	typedef std::list<std::pair<std::string, Entite>> ListEntites;
+	typedef std::list<Enregistrement> ListEntites;
 
 	class IDC : public Symbole
 	{
