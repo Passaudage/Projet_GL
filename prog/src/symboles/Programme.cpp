@@ -1,9 +1,12 @@
 #include "symboles/Programme.hpp"
 
 #include "symboles/Declarations.hpp"
+#include "symboles/Instructions.hpp"
 
-Programme::Programme(Declarations* declarations) : Symbole(PROGRAMME),
-	_declarations(declarations)
+Programme::Programme(Declarations* declarations, Instructions* instructions) : 
+	Symbole(PROGRAMME),
+	_declarations(declarations),
+	_instructions(instructions)
 {
 }
 
@@ -26,7 +29,7 @@ void Programme::transformer()
 
 void Programme::executer()
 {
-	// TODO
+	_instructions->executer(*this);
 }
 
 void Programme::analyser()
