@@ -13,7 +13,7 @@ Programme::Programme(Declarations* declarations, Instructions* instructions) :
 Programme::~Programme()
 {
 	delete _declarations;
-	// delete _instructions;
+	delete _instructions;
 }
 
 
