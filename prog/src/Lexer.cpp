@@ -88,8 +88,17 @@ Symbole* Lexer::lire_decaler()
 
 		// lecture du prochain caractère
 		if(!_fichierSource.get(caractere)) {
-			std::cerr << "Plus rien à lire" << std::endl;
-			return new FinDeFlux();
+			//fin du flux
+
+			symbole = new FinDeFlux();
+
+			if(!debut_mot) {
+				// on renvoie la fin de flux
+				return symbole;
+			}
+			// il reste à transformer en symbole
+			// ce qui est dans le "buffer"
+			break;
 		}
 
 		//std::cout << "-->" << caractere << "<--" << std::endl;
@@ -97,20 +106,25 @@ Symbole* Lexer::lire_decaler()
 		// est-ce un delimiteur ?
 
 		if(caractere == ' ' || caractere == '\n' || caractere == '\r') {
-			if(debut_mot) {
-				break;
-			} else {
+			if(!debut_mot) {
+				// on regarde le prochain caractère
 				continue;
 			}
+
+			// délimiteur => fin du symbole courant
+			//
+			// il reste à transformer en symbole
+			// ce qui est dans le "buffer"
+			break;
 		}
 
-		try {
-			symbole = lire_delimiteur(caractere);
-		} catch(std::exception& e) {
-			std::cerr << "Erreur de lecture de symbole" << std::endl;
-		}
+		symbole = lire_delimiteur(caractere);
 
 		if(symbole != nullptr) {
+			// on a trouvé un délimiteur,
+			//
+			// il reste à transformer en symbole
+			// ce qui est dans le "buffer"
 			break;
 		}
 
@@ -130,18 +144,19 @@ Symbole* Lexer::lire_decaler()
 		symbole = lire_identifiant(identifiant);
 
 		if(delimiteur != nullptr) {
-			// si un délimiteur a été trouvé
+			// si un délimiteur a été trouvé précédemment
 			// on le met de côté pour un prochain décalage
+			// car il correspond au symbole après le suivant
 			_delimiteurSuivant = delimiteur;
 		}
 
 		return symbole;
 		
 	} else if(symbole != nullptr) {
+		// on renvoie le délimiteur seulement
+		// car pas d'identifiant/mot clé trouvé avant
 		return symbole;
 	}
-
-	std::cout << "identifiant : " << identifiant << std::endl;
 
 	return nullptr;
 }
@@ -187,9 +202,8 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 		case ':':
 
 			if(!_fichierSource.get(caractere_suivant) ||
-				caractere_suivant != '=') {
-				std::cerr << "Symbole \":\" invalide" << std::endl;
-				throw;
+				caractere_suivant != '=') { 
+				throw "Symbole \":\" invalide";
 			}
 
 			delimiteur = new Affectation();
