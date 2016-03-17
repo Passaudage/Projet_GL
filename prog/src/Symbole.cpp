@@ -12,3 +12,8 @@ Symbole::operator int()
 Symbole::~Symbole()
 {
 }
+
+void Symbole::setType(Type symboleType)
+{
+	_symboleType = symboleType;
+}
