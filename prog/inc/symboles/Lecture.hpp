@@ -49,7 +49,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	Identifiant& _identifiant();
+	Identifiant& _identifiant;
 
 private:
 //------------------------------------------------------- Attributs privés

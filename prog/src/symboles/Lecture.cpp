@@ -1,4 +1,4 @@
-#include "symboles/Lecture.cpp"
+#include "symboles/Lecture.hpp"
 #include <iostream>
 
 void Lecture::effectuer(Programme & programme)
