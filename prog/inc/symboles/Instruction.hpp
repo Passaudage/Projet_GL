@@ -10,6 +10,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
+#include "symboles/Programme.hpp"
 
 //------------------------------------------------------------- Constantes 
 
@@ -27,7 +28,7 @@ class Instruction : public Symbole
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	virtual void effectuer() = 0;
+	virtual void effectuer(Programme& programme) = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     Instruction& operator=(const Instruction & unInstruction) = delete;

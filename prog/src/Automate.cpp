@@ -3,7 +3,10 @@
 #include "Etat.hpp"
 #include "Symbole.hpp"
 
-Automate::Automate()
+#include "symboles/Programme.hpp"
+
+Automate::Automate(std::string const& fichier_lutin) : _fichier_lutin(fichier_lutin),
+	_lexer(fichier_lutin)
 {
 }
 
@@ -16,8 +19,7 @@ Programme* Automate::getProgramme()
 {
 	Programme* programme = nullptr;
 
-	// appel au lexer
-	// récupération du flux des symboles
+	// on commence la valse des états
 
 	return programme;
 }
@@ -56,4 +58,9 @@ Etat* Automate::etatCourant() const
 Symbole* Automate::symboleCourant() const
 {
 	return _pileSymboles.top();
+}
+
+Lexer& Automate::getLexer()
+{
+	return _lexer;
 }

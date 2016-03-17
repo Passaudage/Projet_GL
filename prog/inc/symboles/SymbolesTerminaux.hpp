@@ -54,6 +54,8 @@ typedef SymboleTerminal<Symbole::Type::VARIABLE> Variable;
 typedef SymboleTerminal<Symbole::Type::LECTURE> Lecture;
 typedef SymboleTerminal<Symbole::Type::AFFICHAGE> Affichage;
 
+typedef SymboleTerminal<Symbole::Type::FINDEFLUX> FinDeFlux;
+
 class OperateurMult : public SymboleTerminal<Symbole::Type::OPERATEUR_MUL>
 {
 public:

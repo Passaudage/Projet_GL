@@ -9,7 +9,8 @@
 #define AFFECTATION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "../symboles/InstructionExpression.hpp"
+#include "symboles/Identifiant.hpp"
+#include "symboles/InstructionExpression.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -26,7 +27,7 @@ class Affectation : public InstructionExpression
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	virtual void effectuer();
+	void effectuer(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Affectation& operator=(const Affectation & unAffectation) = delete;
@@ -34,7 +35,9 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Affectation(const Affectation & unAffectation) = delete;
 
-    Affectation(Expression& expr, Identifiant&);
+    Affectation(Expression& expr, Identifiant& identifiant);
+	
+	~Affectation();
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -46,7 +49,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-
+	Identifiant& _identifiant;
 private:
 //------------------------------------------------------- Attributs privés
 

@@ -28,7 +28,7 @@ class InstructionExpression : public Instruction
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	virtual void effectuer() = 0;
+	virtual void effectuer(Programme& programme) = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     InstructionExpression& operator=(const InstructionExpression & unInstructionExpression) = delete;

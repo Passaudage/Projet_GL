@@ -30,7 +30,9 @@ public:
 		VALEUR,
 		IDENTIFIANT,
 		VARIABLE,
-		CONSTANTE
+		CONSTANTE,
+		
+		FINDEFLUX
 	};
 
 	Symbole(Type symboleType);

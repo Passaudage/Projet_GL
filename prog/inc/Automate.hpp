@@ -2,6 +2,9 @@
 #define AUTOMATE_HPP
 
 #include <stack>
+#include <string>
+
+#include "Lexer.hpp"
 
 class Symbole;
 class Etat;
@@ -11,7 +14,7 @@ class Programme;
 class Automate
 {
 public:
-	Automate();
+	Automate(std::string const& fichier_lutin);
 	~Automate();
 
 	Programme* getProgramme();
@@ -25,9 +28,13 @@ public:
 	Etat* etatCourant() const;
 	Symbole* symboleCourant() const;
 
+	Lexer& getLexer();
+
 private:
 	std::stack<Symbole*> _pileSymboles;
 	std::stack<Etat*> _pileEtats;
+	std::string _fichier_lutin;
+	Lexer _lexer;
 };
 
 #endif
