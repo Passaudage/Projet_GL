@@ -10,6 +10,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Instruction.hpp"
+#include "symboles/Identifiant.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -20,13 +21,13 @@
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class Lecture : public Instruction
 {
 //----------------------------------------------------------------- PUBLIC
-
+	
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	void effectuer(Programme & programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Lecture& operator=(const Lecture & unLecture) = delete;
@@ -34,7 +35,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Lecture(const Lecture & unLecture) = delete;
 
-    Lecture();
+    Lecture(Identifiant& identifiant);
 
     virtual ~Lecture();
 
@@ -48,6 +49,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	Identifiant& _identifiant();
 
 private:
 //------------------------------------------------------- Attributs privés
