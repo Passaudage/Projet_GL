@@ -51,7 +51,7 @@ protected:
 
 private:
 
-	//Declarations _declarations;
+	Declarations _declarations;
 	//Instructions _instructions;
 
 };

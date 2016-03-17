@@ -41,7 +41,7 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 			if(arg_cmd->transformer) {
 				programme->afficher();
 			} else {
-				//std::cout << automate.getLexer().getCode() << std::endl;
+				std::cout << automate.getLexer().getCode() << std::endl;
 			}
 		}
 
