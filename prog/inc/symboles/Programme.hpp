@@ -49,6 +49,7 @@ public:
 	void analyser();
 
 	int getValeur(std::string const& identifiant) const;
+    void setValeur(std::string const& identifiant, int valeur);
 
 //------------------------------------------------------------------ PRIVE 
 
