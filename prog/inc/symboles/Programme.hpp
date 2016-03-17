@@ -40,6 +40,7 @@ public:
     Programme(const Programme & unProgramme) = delete;
 
     Programme(Declarations* declarations);
+    ~Programme();
 
     // correspond aux 4 options possibles de la ligne de commande
 	void afficher();
