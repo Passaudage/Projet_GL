@@ -45,7 +45,7 @@ CC=g++
 CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
 
 EL=g++ #Éditeur de liens
-ELFLAGS= 
+ELFLAGS=-largp
 
 DEBUG?=FALSE
 
