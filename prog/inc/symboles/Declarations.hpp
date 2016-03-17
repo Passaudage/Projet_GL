@@ -39,9 +39,9 @@ public:
 	{
 	public:
 		IDC();
-		~IDC();
 
 		void ajouterConstante(std::string const& identifiant, int valeur);
+		ListEntites& getliste();
 
 	private:
 		ListEntites _listEntites;
@@ -52,15 +52,16 @@ public:
 	{
 	public:
 		IDV();
-		~IDV();
 
 		void ajouterVariable(std::string const& identifiant);
+		ListEntites& getliste();
 
 	private:
 		ListEntites _listEntites;
 	};
 
 //----------------------------------------------------- Méthodes publiques
+	inline bool identifiantPris(string& identifiant);
 	void enregistrerConstantes(IDC& idc);
 	void enregistrerVariables(IDV& idv);
 	int getValeur(string& identifiant);
@@ -73,8 +74,6 @@ public:
     Declarations(const Declarations & unDeclarations) = delete;
 
     Declarations();
-
-    virtual ~Declarations();
 
 //------------------------------------------------------------------ PRIVE 
 
