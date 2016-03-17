@@ -10,6 +10,8 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
+#include "symboles/Declarations.hpp"
+
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -35,25 +37,22 @@ public:
     Programme(const Programme & unProgramme) = delete;
 
     Programme();
+
+    // correspond aux 4 options possibles de la ligne de commande
+	void afficher();
+	void transformer();
+	void executer();
+	void analyser();
+
+
 //------------------------------------------------------------------ PRIVE 
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 private:
-//------------------------------------------------------- Méthodes privées
 
-protected:
-//----------------------------------------------------- Attributs protégés
-
-private:
-//------------------------------------------------------- Attributs privés
-
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privées
-
-//----------------------------------------------------------- Types privés
+	//Declarations _declarations;
+	//Instructions _instructions;
 
 };
 

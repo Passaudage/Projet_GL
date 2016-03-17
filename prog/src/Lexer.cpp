@@ -14,7 +14,7 @@
 #include "symboles/Identifiant.hpp"
 
 // #### Constructeur et destructeur #### //
-Lexer::Lexer(std::string & nomFichier)
+Lexer::Lexer(std::string const& nomFichier)
 {	
 	_fichierSource.open(nomFichier);
 
@@ -22,7 +22,7 @@ Lexer::Lexer(std::string & nomFichier)
 
 	} else {
 		/* TODO : faire mieux comme message et gestion des erreurs */
-		throw std::exception();
+		throw "Bouh, tu es nul, ce n'est pas le bon fichier lutin !";
 	}
 
 	_delimiteurSuivant = nullptr;
@@ -88,7 +88,7 @@ Symbole* Lexer::lire_decaler()
 		// lecture du prochain caractère
 		if(!_fichierSource.get(caractere)) {
 			std::cerr << "Plus rien à lire" << std::endl;
-			return nullptr;
+			return new FinDeFlux();
 		}
 
 		//std::cout << "-->" << caractere << "<--" << std::endl;
@@ -152,7 +152,6 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 	switch(caractere) {
 		case ',':
-			std::cout << "Virgule !" << std::endl;
 			delimiteur = new Virgule();
 			break;
 		case ';':
@@ -186,18 +185,14 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 		case ':':
 
-			if(!_fichierSource.get(caractere_suivant)) {
-				std::cerr << "Plus rien à lire" << std::endl;
-				throw;
-			} else if(caractere_suivant != '=') {
+			if(!_fichierSource.get(caractere_suivant) ||
+				caractere_suivant != '=') {
 				std::cerr << "Symbole \":\" invalide" << std::endl;
 				throw;
 			}
 
-			//std::cout << "caractere_suivant >" << caractere_suivant << "<" << std::endl;
-
 			delimiteur = new Affectation();
-			 
+			
 			break;
 	}
 
@@ -249,4 +244,11 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 	return nullptr;
 }
- 
+
+std::string const& getCode()
+{
+	// TODO : lire le fichier pour renvoyer le code de départ
+	// attention : le curseur courant doit être sauvegardé
+
+	return std::string("");
+}

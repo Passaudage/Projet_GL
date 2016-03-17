@@ -9,7 +9,7 @@ class Symbole;
 class Lexer
 {
 public:
-    Lexer(std::string & nomFichier);
+    Lexer(std::string const& nomFichier);
     ~Lexer();
     
     //friend std::ostream& operator<<(std::ostream& os, const Lexer& lex);
@@ -21,6 +21,8 @@ public:
       * décalage. Sinon, renvoie faux pour indiquer la fin de la lecture des symboles.
       */
     bool decaler();
+
+    std::string const& getCode();
 
 private:
     std::ifstream _fichierSource;
