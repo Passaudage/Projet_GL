@@ -10,7 +10,8 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
-#include "symboles/Declarations.hpp"
+
+#include <string>
 
 //------------------------------------------------------------- Constantes 
 
@@ -21,6 +22,8 @@
 //
 //
 //------------------------------------------------------------------------ 
+
+class Declarations;
 
 class Programme : public Symbole
 {
@@ -36,7 +39,8 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Programme(const Programme & unProgramme) = delete;
 
-    Programme();
+    Programme(Declarations* declarations);
+    ~Programme();
 
     // correspond aux 4 options possibles de la ligne de commande
 	void afficher();
@@ -44,6 +48,7 @@ public:
 	void executer();
 	void analyser();
 
+	int getValeur(std::string const& identifiant) const;
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -51,8 +56,8 @@ protected:
 
 private:
 
-	Declarations _declarations;
-	//Instructions _instructions;
+	Declarations* _declarations;
+	//Instructions* _instructions;
 
 };
 
