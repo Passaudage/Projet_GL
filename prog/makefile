@@ -45,7 +45,11 @@ CC=g++
 CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDIR) $(addprefix -I, $(EXTINCDIR)) $(addprefix -l, $(LIB)) 
 
 EL=g++ #Éditeur de liens
-ELFLAGS=-largp
+ELFLAGS=
+
+ifeq ($(OS),Windows_NT)
+    ELFLAGS+= -largp
+endif
 
 DEBUG?=FALSE
 
@@ -96,4 +100,4 @@ $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ))
 -include $(SRC:%.cpp=$(DEPDIR)/%.P)
 
 $(CLEAR):
-	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/* $(LIBNAME) 
+	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/* $(PROGNAME)
