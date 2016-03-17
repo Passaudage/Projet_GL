@@ -10,7 +10,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
-
 #include <string>
 
 //------------------------------------------------------------- Constantes 
@@ -24,6 +23,7 @@
 //------------------------------------------------------------------------ 
 
 class Declarations;
+class Instructions;
 
 class Programme : public Symbole
 {
@@ -39,7 +39,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Programme(const Programme & unProgramme) = delete;
 
-    Programme(Declarations* declarations);
+    Programme(Declarations* declarations, Instructions* instructions);
     ~Programme();
 
     // correspond aux 4 options possibles de la ligne de commande
@@ -58,7 +58,7 @@ protected:
 private:
 
 	Declarations* _declarations;
-	//Instructions* _instructions;
+	Instructions* _instructions;
 
 };
 
