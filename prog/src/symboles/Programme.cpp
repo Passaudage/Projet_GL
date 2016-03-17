@@ -38,3 +38,8 @@ int Programme::getValeur(std::string const& identifiant) const
 {
 	return _declarations->getValeur(identifiant);
 }
+
+void Programme::setValeur(std::string const& identifiant, int valeur)
+{
+	_declarations->setValeur(identifiant, valeur);
+}
