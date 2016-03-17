@@ -1,5 +1,5 @@
 #include "symboles/Declarations.hpp"
-bool Declarations::identifiantPris(string& identifiant)
+bool Declarations::identifiantPris(string const& identifiant) const
 {
 	return _entites.count(identifiant) != 0;
 }
@@ -26,14 +26,14 @@ void Declarations::enregistrerVariables(IDV& idv)
 	}
 }
 
-int Declarations::getValeur(string& identifiant)
+int Declarations::getValeur(string const& identifiant) const
 {
 	if(!identifiantPris(identifiant))
 		return 0;
 	return _entites.find(identifiant)->second.valeur;
 }
 
-void Declarations::setValeur(string& identifiant, int valeur) {
+void Declarations::setValeur(string const& identifiant, int valeur) {
 	if (identifiantPris(identifiant)) {
 		unordered_map<string, Entite>::iterator it = _entites.find(identifiant);
 		Entite& entite = it->second;

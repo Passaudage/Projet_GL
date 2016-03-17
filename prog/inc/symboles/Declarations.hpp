@@ -61,11 +61,11 @@ public:
 	};
 
 //----------------------------------------------------- Méthodes publiques
-	inline bool identifiantPris(string& identifiant);
+	inline bool identifiantPris(string const& identifiant) const;
 	void enregistrerConstantes(IDC& idc);
 	void enregistrerVariables(IDV& idv);
-	int getValeur(string& identifiant);
-	void setValeur(string& identifiant, int valeur);
+	int getValeur(string const& identifiant) const;
+	void setValeur(string const& identifiant, int valeur);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;

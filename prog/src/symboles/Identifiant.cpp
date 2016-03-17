@@ -6,8 +6,7 @@ Identifiant::Identifiant(std::string const& identifiant) : Expression(IDENTIFIAN
 
 int Identifiant::calculer(Programme& programme)
 {
-	// TODO
-	return 0;
+	return programme.getValeur(_identifiant);
 }
 
 std::string const& Identifiant::get() const

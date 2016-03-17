@@ -1,6 +1,9 @@
 #include "symboles/Programme.hpp"
 
-Programme::Programme():Symbole(PROGRAMME)
+#include "symboles/Declarations.hpp"
+
+Programme::Programme(Declarations* declarations) : Symbole(PROGRAMME),
+	_declarations(declarations)
 {
 }
 
@@ -23,4 +26,9 @@ void Programme::executer()
 void Programme::analyser()
 {
 
+}
+
+int Programme::getValeur(std::string const& identifiant) const
+{
+	return _declarations->getValeur(identifiant);
 }
