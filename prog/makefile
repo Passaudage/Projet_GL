@@ -96,4 +96,4 @@ $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ))
 -include $(SRC:%.cpp=$(DEPDIR)/%.P)
 
 $(CLEAR):
-	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/* $(LIBNAME) 
+	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/* $(PROGNAME)
