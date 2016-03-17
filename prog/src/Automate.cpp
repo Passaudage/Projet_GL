@@ -9,7 +9,6 @@ Automate::Automate()
 
 Automate::~Automate()
 {
-
 }
 
 

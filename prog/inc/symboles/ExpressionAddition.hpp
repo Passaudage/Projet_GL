@@ -1,42 +1,42 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionAddition  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+//--------- Interface de la classe <ExpressionAddition> (fichier ExpressionAddition.hpp) ------
+#ifndef EXPRESSIONADDITION_H
+#define EXPRESSIONADDITION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/ExpressionBinaire.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionAddition>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionAddition : public ExpressionBinaire
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	int calculer(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionAddition& operator=(
+			const ExpressionAddition & unExpressionAddition) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionAddition(
+			const ExpressionAddition & unExpressionAddition) = delete;
 
-    Lecture();
-
-    virtual ~Lecture();
+    ExpressionAddition(Expression& exprgauche, Expression& exprDroite);
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -60,7 +60,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//----------------------------------------- Types dépendants de <ExpressionAddition>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONADDITION_H
 

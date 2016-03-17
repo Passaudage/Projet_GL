@@ -2,10 +2,11 @@
 #define ETAT0_HPP
 
 #include "Etat.hpp"
-#include "Automate.hpp"
-#include "Symbole.hpp"
 
 /* #include "Etat1.hpp" */
+
+class Automate;
+class Symbole;
 
 class Etat0 : public Etat
 {
@@ -18,4 +19,3 @@ class Etat0 : public Etat
 };
 
 #endif
-

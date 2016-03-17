@@ -3,8 +3,6 @@
 
 #include <stack>
 
-#include "SymboleType.hpp"
-
 class Symbole;
 class Etat;
 

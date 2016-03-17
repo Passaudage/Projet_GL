@@ -1,4 +1,5 @@
 #include <iostream>
+#include <argp.h>
 
 #include "Automate.hpp"
 

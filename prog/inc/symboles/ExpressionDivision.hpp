@@ -1,42 +1,42 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionDivision  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+//--------- Interface de la classe <ExpressionDivision> (fichier ExpressionDivision.hpp) ------
+#ifndef EXPRESSIONDIVISION_H
+#define EXPRESSIONDIVISION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/ExpressionBinaire.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionDivision>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionDivision : public ExpressionBinaire
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	int calculer(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionDivision& operator=(
+			const ExpressionDivision & unExpressionDivision) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionDivision(
+			const ExpressionDivision & unExpressionDivision) = delete;
 
-    Lecture();
-
-    virtual ~Lecture();
+    ExpressionDivision(Expression& exprgauche, Expression& exprDroite);
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -60,7 +60,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//----------------------------------------- Types dépendants de <ExpressionDivision>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONDIVISION_H
 

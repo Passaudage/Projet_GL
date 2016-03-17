@@ -1,42 +1,42 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionSoustraction  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+//--------- Interface de la classe <ExpressionSoustraction> (fichier ExpressionSoustraction.hpp) ------
+#ifndef EXPRESSIONSOUSTRACTION_H
+#define EXPRESSIONSOUSTRACTION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/ExpressionBinaire.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionSoustraction>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionSoustraction : public ExpressionBinaire
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	int calculer(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionSoustraction& operator=(
+			const ExpressionSoustraction & unExpressionSoustraction) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionSoustraction(
+			const ExpressionSoustraction & unExpressionSoustraction) = delete;
 
-    Lecture();
-
-    virtual ~Lecture();
+    ExpressionSoustraction(Expression& exprgauche, Expression& exprDroite);
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -60,7 +60,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//----------------------------------------- Types dépendants de <ExpressionSoustraction>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONSOUSTRACTION_H
 

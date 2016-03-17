@@ -1,42 +1,42 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionMultiplication  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+//--------- Interface de la classe <ExpressionMultiplication> (fichier ExpressionMultiplication.hpp) ------
+#ifndef EXPRESSIONMULTIPLICATION_H
+#define EXPRESSIONMULTIPLICATION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/ExpressionBinaire.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionMultiplication>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionMultiplication : public ExpressionBinaire
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	int calculer(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionMultiplication& operator=(
+			const ExpressionMultiplication & unExpressionMultiplication) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionMultiplication(
+			const ExpressionMultiplication & unExpressionMultiplication) = delete;
 
-    Lecture();
-
-    virtual ~Lecture();
+    ExpressionMultiplication(Expression& exprgauche, Expression& exprDroite);
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -60,7 +60,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//----------------------------------------- Types dépendants de <ExpressionMultiplication>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONMULTIPLICATION_H
 

@@ -1,42 +1,45 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionParenthesee  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+// Interface de la classe <ExpressionParenthesee> 
+// (fichier ExpressionParenthesee.hpp) ------
+#ifndef EXPRESSIONPARENTHESEE_H
+#define EXPRESSIONPARENTHESEE_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/Expression.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionParenthesee>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionParenthesee : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	int calculer(Programme & programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionParenthesee& operator=(
+			const ExpressionParenthesee & unExpressionParenthesee) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionParenthesee(
+			const ExpressionParenthesee & unExpressionParenthesee) = delete;
 
-    Lecture();
+    ExpressionParenthesee(Expression& exprInter);
 
-    virtual ~Lecture();
+    ~ExpressionParenthesee();
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -48,6 +51,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	Expression& _exprInter;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -60,7 +64,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//----------------------------------------- Types dépendants de <ExpressionParenthesee>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONPARENTHESEE_H
 

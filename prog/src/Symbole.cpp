@@ -1,16 +1,14 @@
 #include "Symbole.hpp"
 
-Symbole::Symbole()
+Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType)
 {
-
-}
-
-Symbole::~Symbole()
-{
-
 }
 
 Symbole::operator int()
 {
 	return _symboleType;
+}
+
+Symbole::~Symbole()
+{
 }

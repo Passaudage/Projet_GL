@@ -1,42 +1,43 @@
 /*************************************************************************
-                           Lecture  -  description
+                           ExpressionBinaire  -  description
                              -------------------
-    début                : mar. 15 mars 2016
+    début                : dim. 13 mars 2016
 *************************************************************************/
 
-//--------- Interface de la classe <Lecture> (fichier Lecture.hpp) ------
-#ifndef LECTURE_H
-#define LECTURE_H
+//--------- Interface de la classe <ExpressionBinaire> (fichier ExpressionBinaire.cpp) ------
+#ifndef EXPRESSIONBINAIRE_H
+#define EXPRESSIONBINAIRE_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "symboles/Instruction.hpp"
+#include "symboles/Expression.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <Lecture>
+// Rôle de la classe <ExpressionBinaire>
 //
 //
 //------------------------------------------------------------------------ 
 
-class Lecture : public Ancetre
+class ExpressionBinaire : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	virtual int calculer(Programme &) = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Lecture& operator=(const Lecture & unLecture) = delete;
+    ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =
+		delete;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Lecture(const Lecture & unLecture) = delete;
+    ExpressionBinaire(const ExpressionBinaire & unExpressionBinaire) = delete;
 
-    Lecture();
+    ExpressionBinaire(Expression& exprGauche, Expression& exprDroite);
 
-    virtual ~Lecture();
+    virtual ~ExpressionBinaire();
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -48,6 +49,8 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+	Expression& _exprGauche;
+	Expression& _exprDroite;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -60,7 +63,7 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <Lecture>
+//-------------------------------- Types dépendants de <ExpressionBinaire>
 
-#endif // LECTURE_H
+#endif // EXPRESSIONBINAIRE_H
 
