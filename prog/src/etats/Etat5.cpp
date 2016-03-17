@@ -18,7 +18,7 @@ Etat5::~Etat5()
 void Etat5::transition(Automate* a, Symbole* s)
 {
 	switch(*s){
-		case IDENTIFIANT:
+		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat6());
 			break;

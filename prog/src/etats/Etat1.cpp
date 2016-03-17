@@ -24,31 +24,31 @@ Etat1::~Etat1()
 void Etat1::transition(Automate* a, Symbole* s)
 {
 	switch(*s){
-		case INSTRUCTIONS:
+		case Symbole::INSTRUCTIONS:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat2());
 			break;
-		case INSTRUCTION:
+		case Symbole::INSTRUCTION:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat10());
 			break;
-		case VARIABLE:
+		case Symbole::VARIABLE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat3());
 			break;
-		case CONSTANTE:
+		case Symbole::CONSTANTE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat4());
 			break;
-		case IDENTIFIANT:
+		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat8());
 			break;
-		case LECTURE:
+		case Symbole::LECTURE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat5());
 			break;
-		case AFFICHAGE:
+		case Symbole::AFFICHAGE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat7());
 			break;

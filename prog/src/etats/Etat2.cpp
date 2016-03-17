@@ -20,19 +20,19 @@ Etat2::~Etat2()
 void Etat2::transition(Automate* a, Symbole* s)
 {
 	switch(*s){
-		case INSTRUCTION:
+		case Symbole::INSTRUCTION:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat10());
 			break;
-		case IDENTIFIANT:
+		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat8());
 			break;
-		case LECTURE:
+		case Symbole::LECTURE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat5());
 			break;
-		case AFFICHAGE:
+		case Symbole::AFFICHAGE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat7());
 			break;

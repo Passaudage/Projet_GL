@@ -17,10 +17,11 @@ Etat11::~Etat11()
 
 void Etat11::transition(Automate* a, Symbole* s) //réduction de la règle 10
 {
-	Symbole* p_virgule = a->popSymbole();
-	Symbole* instruction = a->popSymbole();
-	Symbole* instructions = new Instructions(instruction, p_virgule);
-	a-> popState();
-	a-> popState();
-	a->etatCourrant()->transition(a, instruction);
+	a->popSymbole();
+	Symbole* instruction = (Instruction*) a->popSymbole();
+	Symbole* instructions = new Instructions();
+	instructions->ajouteIntruction(instruction);
+	a-> popEtat();
+	a-> popEtat();
+	a->etatCourant()->transition(a, instructions);
 }
