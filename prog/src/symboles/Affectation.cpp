@@ -1,7 +1,7 @@
-#include "Affectation.hpp"
+#include "symboles/Affectation.hpp"
 
 void Affectation::effectuer(Programme& programme) {
-	
+
 }
 
 Affectation::Affectation(Expression& expr, Identifiant& identifiant) : 

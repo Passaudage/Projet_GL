@@ -9,7 +9,8 @@
 #define AFFECTATION_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "../symboles/InstructionExpression.hpp"
+#include "symboles/Identifiant.hpp"
+#include "symboles/InstructionExpression.hpp"
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
