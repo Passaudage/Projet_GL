@@ -41,10 +41,12 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 
 		if(arg_cmd->analyser) {
 			std::cout << "Analyse statique en cours..." << std::endl;
+			programme->analyser();
 		}
 
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
+			programme->executer();
 		}
 
 	} catch(std::exception& e) {
