@@ -27,6 +27,7 @@ class Lecture : public Instruction
 	
 public:
 //----------------------------------------------------- Méthodes publiques
+	void afficher();
 	void effectuer(Programme & programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -46,7 +47,7 @@ protected:
 
 private:
 //------------------------------------------------------- Méthodes privées
-
+	static const std::string _keyword;
 protected:
 //----------------------------------------------------- Attributs protégés
 	Identifiant& _identifiant;

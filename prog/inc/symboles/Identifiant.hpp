@@ -10,6 +10,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	std::string const& get() const;
 	virtual int calculer(Programme& programme);
+	void afficher();
 
 //-------------------------------------------- Constructeurs - destructeur
 	Identifiant(std::string const& identifiant);

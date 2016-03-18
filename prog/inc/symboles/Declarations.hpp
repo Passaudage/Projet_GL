@@ -66,6 +66,7 @@ public:
 	void enregistrerVariables(IDV& idv);
 	int getValeur(string const& identifiant) const;
 	void setValeur(string const& identifiant, int valeur);
+	void affiche();
 
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;
