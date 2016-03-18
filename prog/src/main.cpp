@@ -35,22 +35,18 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 		}
 
 		if(arg_cmd->afficher) {
-			// si transformation avant, alors afficher via programme
-			// sinon, afficher le fichier lutin de base
 			std::cout << "Voici l'affichage du code..." << std::endl;
-			if(arg_cmd->transformer) {
-				programme->afficher();
-			} else {
-				std::cout << automate.getLexer().getCode() << std::endl;
-			}
+			programme->afficher();
 		}
 
 		if(arg_cmd->analyser) {
 			std::cout << "Analyse statique en cours..." << std::endl;
+			programme->analyser();
 		}
 
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
+			programme->executer();
 		}
 
 	} catch(std::exception& e) {
