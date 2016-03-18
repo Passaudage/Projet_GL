@@ -29,6 +29,7 @@ class Instruction : public Symbole
 public:
 //----------------------------------------------------- Méthodes publiques
 	virtual void effectuer(Programme& programme) = 0;
+	virtual void afficher() = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     Instruction& operator=(const Instruction & unInstruction) = delete;

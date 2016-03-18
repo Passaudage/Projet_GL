@@ -1,5 +1,13 @@
 #include "symboles/Instructions.hpp"
 
+void Instructions::affiche()
+{
+	std::list<Instruction*>::iterator it;
+	for (it = _instructions.begin() ; it != _instructions.end() ; it++) {
+		(*it)->affiche();
+	}
+}
+
 void Instructions::ajouteInstruction(Instruction* instruction)
 {
 	_instructions.push_back(instruction);
