@@ -19,9 +19,8 @@ void Etat34::transition(Automate* a, Symbole* s)
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat17());
+			a->decaler();
 			break;
-
-
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;
 			break;

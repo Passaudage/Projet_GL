@@ -20,6 +20,7 @@ void Etat33::transition(Automate* a, Symbole* s)
 		case Symbole::EGAL:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat34());
+			a->decaler();
 			break;
 
 		default:

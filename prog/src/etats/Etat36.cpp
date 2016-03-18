@@ -15,7 +15,7 @@ Etat36::~Etat36()
 {
     //dtor
 }
-void Etat36::transition(Automate* a, Symbole* s)
+void Etat36::transition(Automate* a, Symbole* s) 
 {
 	a->popSymbole();
 	Instruction* instruction = (Instruction*) a->popSymbole();

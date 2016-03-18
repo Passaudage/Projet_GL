@@ -22,14 +22,17 @@ void Etat29::transition(Automate* a, Symbole* s)
 		case Symbole::FACTEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat32());
+			a->decaler();
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat31());
+			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat30());
+			a->decaler();
 			break;
 
 		default:

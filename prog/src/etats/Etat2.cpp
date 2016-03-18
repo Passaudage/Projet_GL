@@ -23,18 +23,22 @@ void Etat2::transition(Automate* a, Symbole* s)
 		case Symbole::INSTRUCTION:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat35());
+			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat8());
+			a->decaler();
 			break;
 		case Symbole::LECTURE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat5());
+			a->decaler();
 			break;
 		case Symbole::AFFICHAGE:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat7());
+			a->decaler();
 			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl; 

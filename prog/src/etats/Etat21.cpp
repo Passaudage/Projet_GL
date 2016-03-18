@@ -20,6 +20,7 @@ void Etat21::transition(Automate* a, Symbole* s)
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat22());
+			a->decaler();
 			break;
 		case Symbole::LECTURE:
 		case Symbole::AFFICHAGE:

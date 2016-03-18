@@ -23,6 +23,7 @@ void Etat23::transition(Automate* a, Symbole* s)
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat29());
+			a->decaler();
 			break;
 		case Symbole::POINT_VIR:
 		case Symbole::PARENTHESE_FER:
