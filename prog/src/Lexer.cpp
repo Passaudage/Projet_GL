@@ -259,13 +259,3 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 	return nullptr;
 }
-
-std::string const& Lexer::getCode()
-{
-	// TODO : lire le fichier pour renvoyer le code de départ
-	// attention : le curseur courant doit être sauvegardé
-
-	std::string* code = new std::string("CODE");
-
-	return *code;
-}
