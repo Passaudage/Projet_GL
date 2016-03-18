@@ -19,7 +19,7 @@ void Etat0::transition(Automate* a, Symbole* s)
 		case Symbole::DECLARATIONS:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat1()); 
-			a->decaler();
+			//a->decaler();
 			break;
 		case Symbole::VARIABLE:
 		case Symbole::CONSTANTE:
