@@ -1,5 +1,8 @@
 #include "symboles/Valeur.hpp"
 
+#include <iostream>
+
+
 int Valeur::calculer(Programme &)
 {
 	return _valeur;
@@ -12,4 +15,9 @@ int Valeur::getValeur() const
 
 Valeur::Valeur(int valeur):Expression(VALEUR),_valeur(valeur)
 {
+}
+
+void Valeur::afficher()
+{
+	std::cout << _valeur;
 }

@@ -28,6 +28,7 @@ class ExpressionParenthesee : public Expression
 public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme & programme);
+	void afficher();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionParenthesee& operator=(

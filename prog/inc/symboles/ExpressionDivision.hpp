@@ -27,6 +27,7 @@ class ExpressionDivision : public ExpressionBinaire
 public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme& programme);
+	void afficher();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionDivision& operator=(

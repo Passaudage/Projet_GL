@@ -27,6 +27,7 @@ class ExpressionSoustraction : public ExpressionBinaire
 public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme& programme);
+	void afficher();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionSoustraction& operator=(

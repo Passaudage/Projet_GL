@@ -27,6 +27,7 @@ class ExpressionAddition : public ExpressionBinaire
 public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme& programme);
+	void afficher();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionAddition& operator=(

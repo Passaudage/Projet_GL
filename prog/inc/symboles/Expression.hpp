@@ -29,6 +29,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	//Calcule la valeur de l'expression
 	virtual int calculer(Programme & programme) = 0;
+	virtual void afficher() = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     Expression& operator=(const Expression & unExpression)=delete ;
