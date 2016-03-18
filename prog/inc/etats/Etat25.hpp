@@ -1,8 +1,8 @@
 #ifndef ETAT25_H
 #define ETAT25_H
+#include "Etat.hpp"
 
-
-class Etat25
+class Etat25 : public Etat
 {
     public:
         Etat25();

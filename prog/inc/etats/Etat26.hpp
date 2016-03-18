@@ -2,7 +2,7 @@
 #define ETAT26_H
 #include "Etat.hpp"
 
-class Etat26
+class Etat26 : public Etat
 {
     public:
         Etat26();

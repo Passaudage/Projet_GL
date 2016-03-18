@@ -1,3 +1,4 @@
+#include <iostream>
 #include "symboles/Affichage.hpp"
 #include <iostream>
 

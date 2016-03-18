@@ -1,6 +1,8 @@
-#include "Etat34.h"
+#include <iostream>
+#include "etats/Etat34.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
+#include "etats/Etat17.hpp"
 
 Etat34::Etat34()
 {
@@ -14,7 +16,7 @@ Etat34::~Etat34()
 void Etat34::transition(Automate* a, Symbole* s)
 {
      switch(*s){
-		case VALEUR:
+		case Symbole::VALEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat17());
 			break;

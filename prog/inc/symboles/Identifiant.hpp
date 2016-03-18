@@ -1,3 +1,6 @@
+#ifndef IDENTIFIANT_HPP
+#define IDENTIFIANT_HPP
+
 #include "symboles/Expression.hpp"
 #include <string>
 
@@ -13,3 +16,5 @@ public:
 protected:
 	std::string const& _identifiant;
 };
+
+#endif

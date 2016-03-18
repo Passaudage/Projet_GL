@@ -3,7 +3,7 @@
 
 #include "Etat.hpp"
 
-class Etat18
+class Etat18: public Etat
 {
     public:
         Etat18();

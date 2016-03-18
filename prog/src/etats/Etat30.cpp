@@ -1,4 +1,5 @@
-#include "Etat30.h"
+#include <iostream>
+#include "etats/Etat30.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
 
@@ -15,6 +16,6 @@ void Etat30::transition(Automate* a, Symbole* s) //réduction règle 19
 {
     Symbole* id = a->popSymbole();
     id->setType(Symbole::FACTEUR);
-	a-> popState();
+	a-> popEtat();
 	a->etatCourant()->transition(a, id);
 }

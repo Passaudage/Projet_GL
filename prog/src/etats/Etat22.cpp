@@ -1,6 +1,13 @@
-#include "Etat22.h"
+#include <iostream>
+#include "etats/Etat22.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
+#include "etats/Etat25.hpp"
+#include "etats/Etat30.hpp"
+#include "etats/Etat31.hpp"
+#include "etats/Etat24.hpp"
+#include "etats/Etat28.hpp"
+
 Etat22::Etat22()
 {
     //ctor
@@ -13,30 +20,28 @@ Etat22::~Etat22()
 void Etat22::transition(Automate* a, Symbole* s)
 {
     switch(*s){
-		case PARENTHESE_OUV:
+		case Symbole::PARENTHESE_OUV:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat25());
 			break;
-        case IDENTIFIANT:
+        case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat30());
 			break;
-        case VALEUR:
+        case Symbole::VALEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat31());
 			break;
-
-        case FACTEUR:
+        case Symbole::FACTEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
 			break;
-        case TERME:
+        case Symbole::TERME:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
 			break;
-
-
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;
 			break;
+		}
 }

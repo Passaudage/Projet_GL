@@ -2,7 +2,7 @@
 #include "etats/Etat2.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
-#include "etats/Etat10.hpp"
+#include "etats/Etat35.hpp"
 #include "etats/Etat8.hpp"
 #include "etats/Etat5.hpp"
 #include "etats/Etat7.hpp"
@@ -22,7 +22,7 @@ void Etat2::transition(Automate* a, Symbole* s)
 	switch(*s){
 		case Symbole::INSTRUCTION:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat10());
+			a->pushEtat(new Etat35());
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);

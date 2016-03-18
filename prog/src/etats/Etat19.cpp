@@ -1,6 +1,10 @@
-#include "Etat19.h"
+#include <iostream>
+#include "etats/Etat19.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
+#include "symboles/Declarations.hpp"
+#include "symboles/Valeur.hpp"
+#include "symboles/Identifiant.hpp"
 
 Etat19::Etat19()
 {
@@ -15,15 +19,15 @@ Etat19::~Etat19()
 void Etat19::transition(Automate* a, Symbole* s)
 {
     a->popSymbole();
-	Symbole* val = (Valeur*) a->popSymbole();
+	Valeur* val = (Valeur*) a->popSymbole();
 	a->popSymbole();
-	Symbole* id = (Identifiant*) a->popSymbole();
-	Symbole* idc = (IDC*) a->popSymbole();
+	Identifiant* id = (Identifiant*) a->popSymbole();
+	Declarations::IDC* idc = (Declarations::IDC*) a->popSymbole();
 	idc->ajouterConstante(id->get(), val->getValeur());
-	a-> popState();
-	a-> popState();
-	a-> popState();
-	a-> popState();
-	a-> popState();
-	a->etatCourrant()->transition(a, idc);
+	a-> popEtat();
+	a-> popEtat();
+	a-> popEtat();
+	a-> popEtat();
+	a-> popEtat();
+	a->etatCourant()->transition(a, idc);
 }

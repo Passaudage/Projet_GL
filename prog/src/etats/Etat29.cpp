@@ -1,6 +1,11 @@
-#include "Etat29.h"
+#include <iostream>
+
+#include "etats/Etat29.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
+#include "etats/Etat32.hpp"
+#include "etats/Etat31.hpp"
+#include "etats/Etat30.hpp"
 
 Etat29::Etat29()
 {
@@ -14,15 +19,15 @@ Etat29::~Etat29()
 void Etat29::transition(Automate* a, Symbole* s)
 {
     switch(*s){
-		case FACTEUR:
+		case Symbole::FACTEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat32());
 			break;
-		case VALEUR:
+		case Symbole::VALEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat31());
 			break;
-		case IDENTIFIANT:
+		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat30());
 			break;

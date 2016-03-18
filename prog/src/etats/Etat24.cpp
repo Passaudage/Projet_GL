@@ -1,4 +1,5 @@
-#include "Etat24.h"
+#include <iostream>
+#include "etats/Etat24.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
 

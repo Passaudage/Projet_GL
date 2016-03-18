@@ -24,8 +24,10 @@ void Etat3::transition(Automate* a, Symbole* s)
 			a->pushEtat(new Etat12());
 			break;
 		case Symbole::IDENTIFIANT:
-			Symbole* idv = new IDV();
-			a->etatCourant()->transition(a, idv);
+			{
+				Symbole* idv = new Declarations::IDV();
+				a->etatCourant()->transition(a, idv);
+			}
 			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl; 
