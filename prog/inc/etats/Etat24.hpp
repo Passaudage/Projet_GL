@@ -8,7 +8,7 @@ class Etat24 : public Etat
         Etat24();
         virtual ~Etat24();
 
-  void transition(Automate* a, Symbole* s);
+  void transition(Automate* a, Symbole* );
 };
 
 #endif // ETAT24_H

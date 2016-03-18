@@ -7,7 +7,7 @@ class Etat27 : public Etat
     public:
         Etat27();
         virtual ~Etat27();
-void transition(Automate* a, Symbole* s);
+void transition(Automate* a, Symbole* );
 };
 
 #endif // ETAT27_H

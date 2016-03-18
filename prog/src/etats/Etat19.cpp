@@ -16,7 +16,7 @@ Etat19::~Etat19()
     //dtor
 }
 
-void Etat19::transition(Automate* a, Symbole* s)
+void Etat19::transition(Automate* a, Symbole* )
 {
     a->popSymbole();
 	Valeur* val = (Valeur*) a->popSymbole();

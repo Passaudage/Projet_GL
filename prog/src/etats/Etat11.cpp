@@ -16,7 +16,7 @@ Etat11::~Etat11()
 
 }
 
-void Etat11::transition(Automate* a, Symbole* s) //réduction de la règle 10
+void Etat11::transition(Automate* a, Symbole* ) //réduction de la règle 10
 {
 	a->popSymbole();
 	Instruction* instruction = (Instruction*) a->popSymbole();

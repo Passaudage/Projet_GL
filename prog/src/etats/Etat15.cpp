@@ -16,7 +16,7 @@ Etat15::~Etat15()
 
 }
 
-void Etat15::transition(Automate* a, Symbole* s) //réduction de la règle 2
+void Etat15::transition(Automate* a, Symbole* ) //réduction de la règle 2
 {
 	a->popSymbole();
 	Identifiant* id = (Identifiant*) a->popSymbole();

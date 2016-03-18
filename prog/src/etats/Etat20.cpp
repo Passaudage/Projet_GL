@@ -22,9 +22,7 @@ void Etat20::transition(Automate* a, Symbole* s)
 			a->pushEtat(new Etat22());
 			a->decaler();
 			break;
-		case Symbole::LECTURE:
-		case Symbole::AFFICHAGE:
-		case Symbole::AFFECTATION:
+		case Symbole::POINT_VIR:
 			{
 				Expression* expr = (Expression*) a->popSymbole();
 				a->popSymbole();
@@ -32,8 +30,8 @@ void Etat20::transition(Automate* a, Symbole* s)
 				a->popEtat();
 				a->popEtat();
 				a->etatCourant()->transition(a, ecriture);
-				break;
 			}
+			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;
 			break;

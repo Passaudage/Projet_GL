@@ -9,7 +9,7 @@ class Etat32 : public Etat
         Etat32();
         virtual ~Etat32();
 
-   void transition(Automate* a, Symbole* s);
+   void transition(Automate* a, Symbole* );
 };
 
 #endif // ETAT32_H

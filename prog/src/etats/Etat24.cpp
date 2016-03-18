@@ -12,7 +12,7 @@ Etat24::~Etat24()
 {
     //dtor
 }
-void Etat24::transition(Automate* a, Symbole* s) //réduction règle 17
+void Etat24::transition(Automate* a, Symbole* ) //réduction règle 17
 {
 
 	Symbole* facteur = a->popSymbole();

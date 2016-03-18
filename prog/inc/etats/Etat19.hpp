@@ -8,7 +8,7 @@ class Etat19: public Etat
         Etat19();
         virtual ~Etat19();
 
-    void transition(Automate* a, Symbole* s);
+    void transition(Automate* a, Symbole* );
 };
 
 #endif // ETAT19_H
