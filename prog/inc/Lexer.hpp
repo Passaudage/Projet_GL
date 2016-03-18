@@ -22,8 +22,6 @@ public:
       */
     bool decaler();
 
-    std::string const& getCode();
-
 private:
     std::ifstream _fichierSource;
 
