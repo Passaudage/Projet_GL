@@ -100,16 +100,32 @@ int parse_opt(int key, char *arg, struct argp_state *state)
 
 int main(int argc, char* argv[])
 {
-	struct argp_option options[] = 
-	{
-		{0, 'p', 0, 0, "Affiche le code du programme lutin"},
-		{0, 'a', 0, 0, "Analyse statique du code lutin"},
-		{0, 'e', 0, 0, "Execute le programme lutin"},
-		{0, 'o', 0, 0, "Transforme et simplifie le code lutin"},
-		{ 0 } 
-	};
+	struct argp_option options[5];
 
-	struct argp argp = {options, parse_opt, "FILE"};
+	options[0] = {};
+	options[0].key = 'p';
+	options[0].doc = "Affiche le code du programme lutin";
+
+	options[1] = {};
+	options[1].key = 'a';
+	options[1].doc = "Analyse statique du code lutin";
+
+	options[2] = {};
+	options[2].key = 'e';
+	options[2].doc = "Execute le programme lutin";
+
+	options[3] = {};
+	options[3].key = 'o';
+	options[3].doc = "Transforme et simplifie le code lutin";
+
+	options[4] = {};	
+
+	struct argp argp = {};
+
+	argp.options = options;
+	argp.parser = parse_opt;
+	argp.args_doc ="FILE";
+
 	arg_cmd_struct arg_cmd;
 
 	arg_cmd.arg_count = 1;
