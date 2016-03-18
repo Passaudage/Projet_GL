@@ -13,7 +13,7 @@ class Etat0 : public Etat
 
 	public:
 		Etat0();
-		~Etat0();
+
 		void transition(Automate* a, Symbole* s);
 
 };

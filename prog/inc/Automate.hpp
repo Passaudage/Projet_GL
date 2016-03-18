@@ -22,7 +22,7 @@ public:
 	void pushEtat(Etat* etat);
 	void pushSymbole(Symbole* symbole);
 
-	Etat* popEtat();
+	void popEtat();
 	Symbole* popSymbole();
 
 	Etat* etatCourant() const;
