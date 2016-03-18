@@ -1,11 +1,11 @@
 #include "symboles/Lecture.hpp"
 #include <iostream>
 
-Lecture::_keyword = "lire";
+const std::string Lecture::_keyword = "lire";
 
-void Lecture::affiche()
+void Lecture::afficher()
 {
-	std::cout << _keyword << ' ' << _identifiant.get() << ';';
+	std::cout << _keyword << ' ' << _identifiant.get() << ';' << std::endl;
 }
 
 void Lecture::effectuer(Programme & programme)

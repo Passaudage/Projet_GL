@@ -4,7 +4,7 @@ void Instructions::affiche()
 {
 	std::list<Instruction*>::iterator it;
 	for (it = _instructions.begin() ; it != _instructions.end() ; it++) {
-		(*it)->affiche();
+		(*it)->afficher();
 	}
 }
 
