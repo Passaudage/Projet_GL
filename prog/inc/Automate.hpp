@@ -22,13 +22,16 @@ public:
 	void pushEtat(Etat* etat);
 	void pushSymbole(Symbole* symbole);
 
-	Etat* popEtat();
+	void popEtat();
 	Symbole* popSymbole();
 
 	Etat* etatCourant() const;
 	Symbole* symboleCourant() const;
 
-	Lexer& getLexer();
+	Symbole* lireSymboleCourant();
+    Symbole* lireSymboleSuivant();
+
+    bool decaler();
 
 private:
 	std::stack<Symbole*> _pileSymboles;

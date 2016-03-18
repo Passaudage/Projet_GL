@@ -8,8 +8,8 @@ class Etat
 {
 	public:
 		Etat();
-		~Etat();
+		virtual ~Etat();
 		virtual void transition(Automate* a, Symbole* s) = 0;
 };
 
-#endif 	
+#endif

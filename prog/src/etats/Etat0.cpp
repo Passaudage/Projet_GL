@@ -12,10 +12,6 @@ Etat0::Etat0()
 
 }
 
-Etat0::~Etat0()
-{
-
-}
 
 void Etat0::transition(Automate* a, Symbole* s)
 {

@@ -5,6 +5,8 @@
 
 #include "symboles/Programme.hpp"
 
+#include "etats/Etat0.hpp"
+
 Automate::Automate(std::string const& fichier_lutin) : _fichier_lutin(fichier_lutin),
 	_lexer(fichier_lutin)
 {
@@ -21,6 +23,19 @@ Programme* Automate::getProgramme()
 
 	// on commence la valse des états
 
+
+	Etat0* etatDebut = new Etat0();
+
+	pushEtat(etatDebut);
+
+	while(!_pileEtats.empty())
+	{
+		etatCourant()->transition(this, _lexer.lireSymboleCourant());
+	}
+
+	delete etatDebut;
+
+
 	return programme;
 }
 
@@ -34,12 +49,12 @@ void Automate::pushSymbole(Symbole* symbole)
 	_pileSymboles.push(symbole);
 }
 
-Etat* Automate::popEtat()
+void Automate::popEtat()
 {
 	Etat* etat = _pileEtats.top();
 	_pileEtats.pop();
 
-	return etat;
+	delete etat;
 }
 
 Symbole* Automate::popSymbole()
@@ -60,7 +75,17 @@ Symbole* Automate::symboleCourant() const
 	return _pileSymboles.top();
 }
 
-Lexer& Automate::getLexer()
+Symbole* Automate::lireSymboleCourant()
 {
-	return _lexer;
+	return _lexer.lireSymboleCourant();
+}
+
+Symbole* Automate::lireSymboleSuivant()
+{
+	return _lexer.lireSymboleSuivant();
+}
+
+bool Automate::decaler()
+{
+	return _lexer.decaler();
 }

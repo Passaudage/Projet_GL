@@ -253,6 +253,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		// ok
 
 		// TODO : vérifier qu'il ne contient pas des caractères interdits
+		// lettres et chiffre et _
 
 		return new Identifiant(identifiant);
 	}
