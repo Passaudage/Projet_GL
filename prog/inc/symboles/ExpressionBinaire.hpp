@@ -27,6 +27,7 @@ class ExpressionBinaire : public Expression
 public:
 //----------------------------------------------------- Méthodes publiques
 	virtual int calculer(Programme &) = 0;
+	virtual void afficher() = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =

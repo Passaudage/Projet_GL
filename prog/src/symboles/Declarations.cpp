@@ -1,4 +1,7 @@
 #include "symboles/Declarations.hpp"
+
+#include <iostream>
+
 bool Declarations::identifiantPris(string const& identifiant) const
 {
 	return _entites.count(identifiant) != 0;
@@ -97,4 +100,26 @@ void Declarations::IDV::ajouterVariable(std::string const& identifiant)
 	Enregistrement enrVariable(identifiant, entite);
 
 	_listEntites.push_front(enrVariable);
+}
+
+void Declarations::affiche()
+{
+	unordered_map<string, Entite>::iterator it; 
+	for(it = _entites.begin(); it != _entites.end(); it++)
+	{
+		string temp = "";
+		Entite e = it->second;
+		if(e.modifiable == true){
+			temp += "var ";
+			temp += it->first;
+			temp += ";";
+		} else{
+			temp += "const ";
+			temp += it->first;
+			temp += "=";
+			temp += e.valeur;
+			temp += ";";
+		}
+		std::cout << temp << std::endl;
+	}
 }

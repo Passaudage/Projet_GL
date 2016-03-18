@@ -32,6 +32,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void ajouteInstruction(Instruction* instruction);
 	void executer(Programme & programme);
+	void affiche();
 
 //------------------------------------------------- Surcharge d'opérateurs
     Instructions& operator=(const Instructions & unInstructions) = delete;
