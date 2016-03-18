@@ -27,12 +27,10 @@ void Etat1::transition(Automate* a, Symbole* s)
 		case Symbole::INSTRUCTIONS:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat2());
-			//a->decaler();
 			break;
 		case Symbole::INSTRUCTION:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat10());
-			a->decaler();
 			break;
 		case Symbole::VARIABLE:
 			a->pushSymbole(s);

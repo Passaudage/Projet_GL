@@ -22,7 +22,6 @@ void Etat3::transition(Automate* a, Symbole* s)
 		case Symbole::DECLARATION_VAR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat12());
-			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			{
