@@ -75,7 +75,17 @@ Symbole* Automate::symboleCourant() const
 	return _pileSymboles.top();
 }
 
-Lexer& Automate::getLexer()
+Symbole* Automate::lireSymboleCourant()
 {
-	return _lexer;
+	return _lexer.lireSymboleCourant();
+}
+
+Symbole* Automate::lireSymboleSuivant()
+{
+	return _lexer.lireSymboleSuivant();
+}
+
+bool Automate::decaler()
+{
+	return _lexer.decaler();
 }

@@ -28,7 +28,10 @@ public:
 	Etat* etatCourant() const;
 	Symbole* symboleCourant() const;
 
-	Lexer& getLexer();
+	Symbole* lireSymboleCourant();
+    Symbole* lireSymboleSuivant();
+
+    bool decaler();
 
 private:
 	std::stack<Symbole*> _pileSymboles;
