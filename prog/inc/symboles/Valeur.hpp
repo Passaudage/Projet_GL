@@ -29,6 +29,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme &);
 	int getValeur() const;
+	void afficher();
 
 //------------------------------------------------- Surcharge d'opérateurs
     Valeur& operator=(const Valeur & unValeur) = delete;
