@@ -26,17 +26,14 @@ void Etat7::transition(Automate* a, Symbole* s)
 		case Symbole::TERME:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
-			a->decaler();
 			break;
 		case Symbole::FACTEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
-			a->decaler();
 			break;
 		case Symbole::EXPRESSION:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat20());
-			a->decaler();
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);

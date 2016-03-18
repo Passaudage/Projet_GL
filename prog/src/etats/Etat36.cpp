@@ -15,6 +15,7 @@ Etat36::~Etat36()
 {
     //dtor
 }
+
 void Etat36::transition(Automate* a, Symbole* ) 
 {
 	a->popSymbole();
