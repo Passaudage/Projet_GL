@@ -10,7 +10,10 @@ Etat30::Etat30()
 
 void Etat30::transition(Automate* a, Symbole* ) //réduction règle 19
 {
-    Symbole* id = a->popSymbole();
+#ifdef MAP
+	std::cout << "Etat30" << std::endl;
+#endif
+    Symbole* id = a->symboleCourant();
     id->setType(Symbole::FACTEUR);
 	a-> popEtat();
 	a->etatCourant()->transition(a, id);
