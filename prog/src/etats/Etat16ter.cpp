@@ -4,10 +4,16 @@
 #include "Symbole.hpp"
 #include "etats/Etat17.hpp"
 
+Etat16ter Etat16ter::m_instance = Etat16ter();
+
 Etat16ter::Etat16ter()
 {
-    //ctor
 }
+
+Etat16ter* Etat16ter::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat16ter::transition(Automate* a, Symbole* s)
 {
@@ -17,7 +23,8 @@ void Etat16ter::transition(Automate* a, Symbole* s)
      switch(*s){
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat17());
+			//~ a->pushEtat(new Etat17());
+			a->pushEtat(Etat17::getInstance());
 			a->decaler();
 			break;
 		default:

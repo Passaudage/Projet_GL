@@ -5,10 +5,16 @@
 #include "symboles/Affichage.hpp"
 #include "etats/Etat22.hpp"
 
+Etat20 Etat20::m_instance = Etat20();
+
 Etat20::Etat20()
 {
-    //ctor
 }
+
+Etat20* Etat20::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat20::transition(Automate* a, Symbole* s)
 {
@@ -18,7 +24,8 @@ void Etat20::transition(Automate* a, Symbole* s)
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat22());
+			//~ a->pushEtat(new Etat22());
+			a->pushEtat(Etat22::getInstance());
 			a->decaler();
 			break;
 		case Symbole::POINT_VIR:

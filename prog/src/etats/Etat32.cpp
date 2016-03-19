@@ -7,10 +7,16 @@
 #include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Expression.hpp"
 
+Etat32 Etat32::m_instance = Etat32();
+
 Etat32::Etat32()
 {
-    //ctor
 }
+
+Etat32* Etat32::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 {

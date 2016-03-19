@@ -6,9 +6,14 @@
 #include "symboles/Declarations.hpp"
 #include "symboles/Identifiant.hpp"
 
+Etat15 Etat15::m_instance = Etat15();
+
 Etat15::Etat15()
 {
+}
 
+Etat15* Etat15::getInstance(){
+	return &m_instance;
 }
 
 void Etat15::transition(Automate* a, Symbole* ) //réduction de la règle 2

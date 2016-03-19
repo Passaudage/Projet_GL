@@ -11,9 +11,16 @@
 #include "etats/Etat20.hpp"
 #include "etats/Etat32.hpp"
 
+Etat7 Etat7::m_instance = Etat7();
+
 Etat7::Etat7()
 {
 }
+
+Etat7* Etat7::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat7::transition(Automate* a, Symbole* s)
 {
@@ -23,26 +30,32 @@ void Etat7::transition(Automate* a, Symbole* s)
 
 	switch(*s){
 		case Symbole::TERME:
-			a->pushEtat(new Etat28());
+			//~ a->pushEtat(new Etat28());
+			a->pushEtat(Etat28::getInstance());
 			break;
 		case Symbole::FACTEUR:
-			a->pushEtat(new Etat24());
+			//~ a->pushEtat(new Etat24());
+			a->pushEtat(Etat24::getInstance());
 			break;
 		case Symbole::EXPRESSION:
-			a->pushEtat(new Etat20());
+			//~ a->pushEtat(new Etat20());
+			a->pushEtat(Etat20::getInstance());
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat31());
+			//~ a->pushEtat(new Etat31());
+			a->pushEtat(Etat31::getInstance());
 			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat30());
+			//~ a->pushEtat(new Etat30());
+			a->pushEtat(Etat30::getInstance());
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:
-			a->pushEtat(new Etat25());
+			//~ a->pushEtat(new Etat25());
+			a->pushEtat(Etat25::getInstance());
 			a->decaler();
 			break;
 		default:

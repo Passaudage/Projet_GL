@@ -6,10 +6,16 @@
 #include "etats/Etat15.hpp"
 #include "etats/Etat14.hpp"
 
+Etat13 Etat13::m_instance = Etat13();
+
 Etat13::Etat13()
 {
-
 }
+
+Etat13* Etat13::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat13::transition(Automate* a, Symbole* s)
 {
@@ -20,12 +26,14 @@ void Etat13::transition(Automate* a, Symbole* s)
 	switch(*s){
 		case Symbole::POINT_VIR:
 		// OK
-			a->pushEtat(new Etat14());
+			//~ a->pushEtat(new Etat14());
+			a->pushEtat(Etat14::getInstance());
 			a->decaler();
 			break;
 		case Symbole::VIRGULE:
 		// OK
-			a->pushEtat(new Etat15());
+			//~ a->pushEtat(new Etat15());
+			a->pushEtat(Etat15::getInstance());
 			a->decaler();
 			break;
 		default:

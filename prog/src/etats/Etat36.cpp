@@ -6,10 +6,16 @@
 #include "symboles/Instructions.hpp"
 #include "symboles/Instruction.hpp"
 
+Etat36 Etat36::m_instance = Etat36();
+
 Etat36::Etat36()
 {
-    //ctor
 }
+
+Etat36* Etat36::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat36::transition(Automate* a, Symbole* ) 
 {

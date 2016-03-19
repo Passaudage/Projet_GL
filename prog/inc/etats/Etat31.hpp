@@ -4,9 +4,13 @@
 
 class Etat31 : public Etat
 {
-    public:
+	public:
+		static Etat31* getInstance();
+
+	private:
+		static Etat31 m_instance;
         Etat31();
-	void transition(Automate* a, Symbole* );
+		void transition(Automate* a, Symbole* );
     protected:
 
     private:

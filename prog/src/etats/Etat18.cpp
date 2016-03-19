@@ -6,9 +6,14 @@
 #include "symboles/Identifiant.hpp"
 #include "symboles/Valeur.hpp"
 
+Etat18 Etat18::m_instance = Etat18();
+
 Etat18::Etat18()
 {
-    //ctor
+}
+
+Etat18* Etat18::getInstance(){
+	return &m_instance;
 }
 
 void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7

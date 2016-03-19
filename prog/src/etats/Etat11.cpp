@@ -6,10 +6,16 @@
 #include "symboles/Instructions.hpp"
 #include "symboles/Instruction.hpp"
 
+Etat11 Etat11::m_instance = Etat11();
+
 Etat11::Etat11()
 {
-
 }
+
+Etat11* Etat11::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat11::transition(Automate* a, Symbole* ) //réduction de la règle 10
 {

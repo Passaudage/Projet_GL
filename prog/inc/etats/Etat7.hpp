@@ -8,6 +8,10 @@
 class Etat7 : public Etat
 {
 	public:
+		static Etat7* getInstance();
+
+	private:
+		static Etat7 m_instance;
 		Etat7();
 		void transition(Automate* a, Symbole* s);
 

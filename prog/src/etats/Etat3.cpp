@@ -6,10 +6,16 @@
 #include "etats/Etat12.hpp"
 #include "symboles/Declarations.hpp"
 
+Etat3 Etat3::m_instance = Etat3();
+
 Etat3::Etat3()
 {
-
 }
+
+Etat3* Etat3::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat3::transition(Automate* a, Symbole* s)
 {

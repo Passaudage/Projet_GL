@@ -4,7 +4,11 @@
 
 class Etat28 : public Etat
 {
-    public:
+	public:
+		static Etat28* getInstance();
+
+	private:
+		static Etat28 m_instance;
         Etat28();
 		void transition(Automate* a, Symbole* s);
 };

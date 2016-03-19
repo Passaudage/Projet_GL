@@ -5,10 +5,16 @@
 #include "Symbole.hpp"
 #include "etats/Etat13.hpp"
 
+Etat12 Etat12::m_instance = Etat12();
+
 Etat12::Etat12()
 {
-
 }
+
+Etat12* Etat12::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat12::transition(Automate* a, Symbole* s)
 {
@@ -20,7 +26,8 @@ void Etat12::transition(Automate* a, Symbole* s)
 		case Symbole::IDENTIFIANT:
 		// OK
 			a->pushSymbole(s);
-			a->pushEtat(new Etat13());
+			//~ a->pushEtat(new Etat13());
+			a->pushEtat(Etat13::getInstance());
 			a->decaler();
 			break;
 		default:

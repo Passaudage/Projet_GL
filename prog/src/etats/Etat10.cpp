@@ -5,10 +5,16 @@
 #include "Symbole.hpp"
 #include "etats/Etat11.hpp"
 
+Etat10 Etat10::m_instance = Etat10();
+
 Etat10::Etat10()
 {
-
 }
+
+Etat10* Etat10::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat10::transition(Automate* a, Symbole* s)
 {
@@ -17,7 +23,8 @@ void Etat10::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::POINT_VIR:
-			a->pushEtat(new Etat11());
+			//~ a->pushEtat(new Etat11());
+			a->pushEtat(Etat11::getInstance());
 			a->decaler();
 			break;
 		default:

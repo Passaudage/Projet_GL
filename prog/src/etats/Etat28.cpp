@@ -5,10 +5,16 @@
 #include "etats/Etat29.hpp"
 #include "symboles/Expression.hpp"
 
+Etat28 Etat28::m_instance = Etat28();
+
 Etat28::Etat28()
 {
-    //ctor
 }
+
+Etat28* Etat28::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat28::transition(Automate* a, Symbole* s)
 {
@@ -18,7 +24,8 @@ void Etat28::transition(Automate* a, Symbole* s)
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat29());
+			//~ a->pushEtat(new Etat29());
+			a->pushEtat(Etat29::getInstance());
 			a->decaler();
 			break;
 

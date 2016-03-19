@@ -6,10 +6,16 @@
 #include "symboles/Lecture.hpp"
 #include "symboles/Identifiant.hpp"
 
+Etat6 Etat6::m_instance = Etat6();
+
 Etat6::Etat6()
 {
-
 }
+
+Etat6* Etat6::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat6::transition(Automate* a, Symbole* ) //réduction de la règle 11
 {

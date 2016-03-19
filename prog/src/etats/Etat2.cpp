@@ -11,11 +11,15 @@
 #include "symboles/Declarations.hpp"
 #include "symboles/Programme.hpp"
 
+Etat2 Etat2::m_instance = Etat2();
+
 Etat2::Etat2()
 {
-
 }
 
+Etat2* Etat2::getInstance(){
+	return &m_instance;
+}
 
 void Etat2::transition(Automate* a, Symbole* s)
 {
@@ -24,19 +28,23 @@ void Etat2::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::INSTRUCTION:
-			a->pushEtat(new Etat35());
+			//~ a->pushEtat(new Etat35());
+			a->pushEtat(Etat35::getInstance());
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat8());
+			//~ a->pushEtat(new Etat8());
+			a->pushEtat(Etat8::getInstance());
 			a->decaler();
 			break;
 		case Symbole::LECTURE:
-			a->pushEtat(new Etat5());
+			//~ a->pushEtat(new Etat5());
+			a->pushEtat(Etat5::getInstance());
 			a->decaler();
 			break;
 		case Symbole::AFFICHAGE:
-			a->pushEtat(new Etat7());
+			//~ a->pushEtat(new Etat7());
+			a->pushEtat(Etat7::getInstance());
 			a->decaler();
 			break;
 		case Symbole::FINDEFLUX:

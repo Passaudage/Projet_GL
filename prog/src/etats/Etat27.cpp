@@ -4,10 +4,16 @@
 #include "Symbole.hpp"
 #include "symboles/ExpressionParenthesee.hpp"
 
+Etat27 Etat27::m_instance = Etat27();
+
 Etat27::Etat27()
 {
-    //ctor
 }
+
+Etat27* Etat27::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat27::transition(Automate* a, Symbole* ) //réduction règle 18
 {

@@ -24,7 +24,8 @@ void Etat0::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::DECLARATIONS:
-			a->pushEtat(new Etat1()); 
+			//~ a->pushEtat(new Etat1()); 
+			a->pushEtat(Etat1::getInstance()); 
 			break;
 		case Symbole::VARIABLE:
 		case Symbole::CONSTANTE:

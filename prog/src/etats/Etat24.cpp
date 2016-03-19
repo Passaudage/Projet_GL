@@ -3,10 +3,16 @@
 #include "Automate.hpp"
 #include "Symbole.hpp"
 
+Etat24 Etat24::m_instance = Etat24();
+
 Etat24::Etat24()
 {
-    //ctor
 }
+
+Etat24* Etat24::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat24::transition(Automate* a, Symbole* ) //réduction règle 17
 {

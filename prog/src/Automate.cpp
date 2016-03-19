@@ -61,7 +61,7 @@ void Automate::pushSymbole(Symbole* symbole)
 
 void Automate::popEtat()
 {
-	Etat* etat = _pileEtats.top();
+	//~ Etat* etat = _pileEtats.top();
 	_pileEtats.pop();
 	//std::cout << "  pile- : " << _pileEtats.size() << std::endl;
 

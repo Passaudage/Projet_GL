@@ -9,10 +9,16 @@
 
 #include <iostream>
 
+Etat29 Etat29::m_instance = Etat29();
+
 Etat29::Etat29()
 {
-    //ctor
 }
+
+Etat29* Etat29::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat29::transition(Automate* a, Symbole* s)
 {
@@ -21,20 +27,24 @@ void Etat29::transition(Automate* a, Symbole* s)
 #endif
     switch(*s){
 		case Symbole::FACTEUR:
-			a->pushEtat(new Etat32());
+			//~ a->pushEtat(new Etat32());
+			a->pushEtat(Etat32::getInstance());
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat31());
+			//~ a->pushEtat(new Etat31());
+			a->pushEtat(Etat31::getInstance());
 			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat30());
+			//~ a->pushEtat(new Etat30());
+			a->pushEtat(Etat30::getInstance());
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:
-			a->pushEtat(new Etat25());
+			//~ a->pushEtat(new Etat25());
+			a->pushEtat(Etat25::getInstance());
 			a->decaler();
 			break;
 		default:

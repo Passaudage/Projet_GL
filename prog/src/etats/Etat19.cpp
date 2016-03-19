@@ -6,10 +6,16 @@
 #include "symboles/Valeur.hpp"
 #include "symboles/Identifiant.hpp"
 
+Etat19 Etat19::m_instance = Etat19();
+
 Etat19::Etat19()
 {
-    //ctor
 }
+
+Etat19* Etat19::getInstance(){
+	return &m_instance;
+}
+
 
 void Etat19::transition(Automate* a, Symbole* )
 {
