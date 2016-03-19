@@ -18,14 +18,18 @@ Etat3::~Etat3()
 
 void Etat3::transition(Automate* a, Symbole* s)
 {
+	// Tout OK
+	std::cout << "Etat3" << std::endl;
 	switch(*s){
 		case Symbole::DECLARATION_VAR:
+		// OK
 			a->pushSymbole(s);
 			a->pushEtat(new Etat12());
 			break;
 		case Symbole::IDENTIFIANT:
+		// OK
 			{
-				Symbole* idv = new Declarations::IDV();
+				Declarations::IDV* idv = new Declarations::IDV();
 				a->etatCourant()->transition(a, idv);
 			}
 			break;

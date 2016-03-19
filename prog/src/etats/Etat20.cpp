@@ -16,18 +16,23 @@ Etat20::~Etat20()
 }
 void Etat20::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat20" << std::endl;
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat22());
 			a->decaler();
 			break;
+
+// FAUX
 		case Symbole::LECTURE:
 		case Symbole::AFFICHAGE:
 		case Symbole::AFFECTATION:
+
+		case Symbole::POINT_VIR:
 			{
-				Expression* expr = (Expression*) a->popSymbole();
-				a->popSymbole();
+				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
+				//a->popSymbole();
 				Symbole* ecriture = new Affichage(*expr);
 				a->popEtat();
 				a->popEtat();

@@ -15,7 +15,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 	Identifiant(std::string const& identifiant);
 protected:
-	std::string const& _identifiant;
+	std::string _identifiant;
 };
 
 #endif

@@ -17,9 +17,10 @@ Etat10::~Etat10()
 
 void Etat10::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat10" << std::endl;
 	switch(*s){
-		case Symbole::INSTRUCTIONS:
-			a->pushSymbole(s);
+		case Symbole::POINT_VIR:
+			//a->pushSymbole(s);
 			a->pushEtat(new Etat11());
 			a->decaler();
 			break;

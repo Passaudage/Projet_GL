@@ -102,7 +102,7 @@ void Declarations::IDV::ajouterVariable(std::string const& identifiant)
 	_listEntites.push_front(enrVariable);
 }
 
-void Declarations::affiche()
+void Declarations::afficher()
 {
 	unordered_map<string, Entite>::iterator it; 
 	for(it = _entites.begin(); it != _entites.end(); it++)
@@ -117,7 +117,7 @@ void Declarations::affiche()
 			temp += "const ";
 			temp += it->first;
 			temp += "=";
-			temp += e.valeur;
+			temp += std::to_string(e.valeur);
 			temp += ";";
 		}
 		std::cout << temp << std::endl;

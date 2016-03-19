@@ -38,12 +38,10 @@ void Etat22::transition(Automate* a, Symbole* s)
         case Symbole::FACTEUR:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
-			a->decaler();
 			break;
         case Symbole::TERME:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
-			a->decaler();
 			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;

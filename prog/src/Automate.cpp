@@ -7,6 +7,8 @@
 
 #include "etats/Etat0.hpp"
 
+#include <iostream>
+
 Automate::Automate(std::string const& fichier_lutin) : _fichier_lutin(fichier_lutin),
 	_lexer(fichier_lutin)
 {
@@ -22,19 +24,18 @@ Programme* Automate::getProgramme()
 	Programme* programme = nullptr;
 
 	// on commence la valse des états
-
-
 	Etat0* etatDebut = new Etat0();
 
 	pushEtat(etatDebut);
 
-	while(!_pileEtats.empty())
-	{
+	while(!_pileEtats.empty()) {
 		etatCourant()->transition(this, _lexer.lireSymboleCourant());
 	}
 
-	delete etatDebut;
+	programme = dynamic_cast<Programme*>(popSymbole());
 
+	//throw "Fini !!";
+	//std::cout << "pile taille : " << _pileEtats.size() << " - " << _pileSymboles.size() << std::endl;
 
 	return programme;
 }
@@ -42,10 +43,12 @@ Programme* Automate::getProgramme()
 void Automate::pushEtat(Etat* etat)
 {
 	_pileEtats.push(etat);
+	//std::cout << "  pile+ : " << _pileEtats.size() << std::endl;
 }
 
 void Automate::pushSymbole(Symbole* symbole)
 {
+	std::cout << "Ajout de : " << int(*symbole) << std::endl;
 	_pileSymboles.push(symbole);
 }
 
@@ -53,6 +56,7 @@ void Automate::popEtat()
 {
 	Etat* etat = _pileEtats.top();
 	_pileEtats.pop();
+	//std::cout << "  pile- : " << _pileEtats.size() << std::endl;
 
 	delete etat;
 }
@@ -61,6 +65,7 @@ Symbole* Automate::popSymbole()
 {
 	Symbole* symbole = _pileSymboles.top();
 	_pileSymboles.pop();
+	std::cout << "depile " << int(*symbole) << std::endl;
 
 	return symbole;
 }

@@ -9,6 +9,7 @@
 #include "etats/Etat24.hpp"
 #include "etats/Etat28.hpp"
 #include "etats/Etat20.hpp"
+#include "etats/Etat32.hpp"
 
 Etat7::Etat7()
 {
@@ -22,14 +23,15 @@ Etat7::~Etat7()
 
 void Etat7::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat7" << std::endl;
 	switch(*s){
 		case Symbole::TERME:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
 			break;
 		case Symbole::FACTEUR:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
+			a->etatCourant()->transition(a, s);
 			break;
 		case Symbole::EXPRESSION:
 			a->pushSymbole(s);
@@ -37,12 +39,12 @@ void Etat7::transition(Automate* a, Symbole* s)
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat31());
+			a->pushEtat(new Etat32());
 			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat30());
+			a->pushEtat(new Etat31());
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:
@@ -51,7 +53,7 @@ void Etat7::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl; 
+			throw "Etat7, lecture non conforme à la grammaire";
 			break;
 	}
 }

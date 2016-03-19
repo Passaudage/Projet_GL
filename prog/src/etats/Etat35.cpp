@@ -16,9 +16,10 @@ Etat35::~Etat35()
 }
 void Etat35::transition(Automate* a, Symbole* s)
 {
+	// OK
+	std::cout << "Etat35" << std::endl;
     switch(*s){
 		case Symbole::POINT_VIR:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat36());
 			a->decaler();
 			break;

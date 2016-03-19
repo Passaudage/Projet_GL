@@ -23,22 +23,25 @@ Etat1::~Etat1()
 
 void Etat1::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat1" << std::endl;
 	switch(*s){
 		case Symbole::INSTRUCTIONS:
+		//OK
 			a->pushSymbole(s);
 			a->pushEtat(new Etat2());
 			break;
 		case Symbole::INSTRUCTION:
+		//OK
 			a->pushSymbole(s);
 			a->pushEtat(new Etat10());
 			break;
 		case Symbole::VARIABLE:
-			a->pushSymbole(s);
+		//OK
 			a->pushEtat(new Etat3());
 			a->decaler();
 			break;
 		case Symbole::CONSTANTE:
-			a->pushSymbole(s);
+		//OK
 			a->pushEtat(new Etat4());
 			a->decaler();
 			break;
@@ -48,12 +51,12 @@ void Etat1::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		case Symbole::LECTURE:
-			a->pushSymbole(s);
+		//OK
 			a->pushEtat(new Etat5());
 			a->decaler();
 			break;
 		case Symbole::AFFICHAGE:
-			a->pushSymbole(s);
+		//OK
 			a->pushEtat(new Etat7());
 			a->decaler();
 			break;

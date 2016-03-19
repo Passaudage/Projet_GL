@@ -18,16 +18,17 @@ Etat19::~Etat19()
 
 void Etat19::transition(Automate* a, Symbole* s)
 {
-    a->popSymbole();
-	Valeur* val = (Valeur*) a->popSymbole();
-	a->popSymbole();
-	Identifiant* id = (Identifiant*) a->popSymbole();
-	Declarations::IDC* idc = (Declarations::IDC*) a->popSymbole();
+	Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
+	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
+	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());
+	
 	idc->ajouterConstante(id->get(), val->getValeur());
+
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
+	
 	a->etatCourant()->transition(a, idc);
 }

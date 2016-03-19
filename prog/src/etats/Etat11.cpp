@@ -18,10 +18,13 @@ Etat11::~Etat11()
 
 void Etat11::transition(Automate* a, Symbole* s) //réduction de la règle 10
 {
-	a->popSymbole();
-	Instruction* instruction = (Instruction*) a->popSymbole();
+	std::cout << "Etat11" << std::endl;
+
+	//a->popSymbole();
+	Instruction* instruction = dynamic_cast<Instruction*> (a->popSymbole());
 	Instructions* instructions = new Instructions();
 	instructions->ajouteInstruction(instruction);
+	
 	a-> popEtat();
 	a-> popEtat();
 	a->etatCourant()->transition(a, instructions);

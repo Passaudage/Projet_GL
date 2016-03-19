@@ -18,12 +18,15 @@ Etat4::~Etat4()
 
 void Etat4::transition(Automate* a, Symbole* s)
 {
+	// Tout OK
 	switch(*s){
 		case Symbole::DECLARATION_CON:
+		// OK
 			a->pushSymbole(s);
 			a->pushEtat(new Etat16());
 			break;
 		case Symbole::IDENTIFIANT:
+		// OK
 			{
 				Symbole* idc = new Declarations::IDC();
 				a->etatCourant()->transition(a, idc);

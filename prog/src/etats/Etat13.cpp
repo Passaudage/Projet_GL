@@ -18,14 +18,16 @@ Etat13::~Etat13()
 
 void Etat13::transition(Automate* a, Symbole* s)
 {
+	// Tout OK
+	std::cout << "Etat13" << std::endl;
 	switch(*s){
 		case Symbole::POINT_VIR:
-			a->pushSymbole(s);
+		// OK
 			a->pushEtat(new Etat14());
 			a->decaler();
 			break;
 		case Symbole::VIRGULE:
-			a->pushSymbole(s);
+		// OK
 			a->pushEtat(new Etat15());
 			a->decaler();
 			break;

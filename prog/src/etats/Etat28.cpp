@@ -16,20 +16,22 @@ Etat28::~Etat28()
 }
 void Etat28::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat28" << std::endl;
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat29());
 			a->decaler();
 			break;
+
 		case Symbole::POINT_VIR:
 		case Symbole::PARENTHESE_FER:
 		case Symbole::OPERATEUR_ADD:
 			{
-				Expression* terme = (Expression*) a->popSymbole();
-				terme->setType(Symbole::EXPRESSION);
+				Symbole* symbole = a->popSymbole();
+				symbole->setType(Symbole::EXPRESSION);
 				a->popEtat();
-				a->etatCourant()->transition(a, terme);
+				a->etatCourant()->transition(a, symbole);
 				break;
 			}
 		default:

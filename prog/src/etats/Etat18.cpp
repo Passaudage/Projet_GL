@@ -17,15 +17,17 @@ Etat18::~Etat18()
 }
 void Etat18::transition(Automate* a, Symbole* s) //réduction de la règle 7
 {
-	a->popSymbole();
-    Valeur* val = (Valeur*) a->popSymbole();
-    a->popSymbole();
-    Identifiant* id = (Identifiant*) a->popSymbole();
-	Declarations::IDC* idc = (Declarations::IDC*) a->popSymbole();
-	a->popSymbole();
-	Declarations* d = (Declarations*) a->popSymbole();
+	// 
+    Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
+    Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
+	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());
+	Declarations* d = dynamic_cast<Declarations*> (a->popSymbole());
+
+	std::cout << "VALEUR : " << val->getValeur() << std::endl;;
+
 	idc->ajouterConstante(id->get(), val->getValeur());
 	d->enregistrerConstantes(*idc);
+
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
@@ -33,5 +35,6 @@ void Etat18::transition(Automate* a, Symbole* s) //réduction de la règle 7
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
+
 	a->etatCourant()->transition(a, d);
 }

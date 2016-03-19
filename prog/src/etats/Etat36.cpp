@@ -17,9 +17,16 @@ Etat36::~Etat36()
 }
 void Etat36::transition(Automate* a, Symbole*) 
 {
-	a->popSymbole();
-	Instruction* instruction = (Instruction*) a->popSymbole();
-	Instructions* instructions = (Instructions*) a->popSymbole();
+	// OK
+	std::cout << "Etat36" << std::endl;
+	
+	std::cout << "---> " << Symbole::Type::INSTRUCTION << std::endl;
+	std::cout << "---> " << Symbole::Type::INSTRUCTIONS << std::endl;
+
+	// récupération de Instruction
+
+	Instruction* instruction = dynamic_cast<Instruction*> (a->popSymbole());
+	Instructions* instructions = dynamic_cast<Instructions*> (a->popSymbole());
 	instructions->ajouteInstruction(instruction);
 
 	a->popEtat();

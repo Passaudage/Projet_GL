@@ -19,7 +19,8 @@ Programme::~Programme()
 
 void Programme::afficher()
 {
-	// TODO
+	_declarations->afficher();
+	_instructions->afficher();
 }
 
 void Programme::transformer()

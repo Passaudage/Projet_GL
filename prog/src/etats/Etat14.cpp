@@ -18,12 +18,14 @@ Etat14::~Etat14()
 
 void Etat14::transition(Automate* a, Symbole* s) //réduction de la règle 6
 {
-	a->popSymbole();
-	Identifiant* id = (Identifiant*) a->popSymbole();
-	Declarations::IDV* idv = (Declarations::IDV*) a->popSymbole();
-	a->popSymbole();
-	Declarations* d = (Declarations*) a->popSymbole();
+	// OK
+	// récupération de l'identifiant
+	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
+	Declarations::IDV* idv = dynamic_cast<Declarations::IDV*> (a->popSymbole());
+	Declarations* d = dynamic_cast<Declarations*> (a->popSymbole());
+
 	idv->ajouterVariable(id->get());
+
 	d->enregistrerVariables(*idv);
 	a-> popEtat();
 	a-> popEtat();

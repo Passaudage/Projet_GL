@@ -3,7 +3,7 @@
 #include "etats/Etat16.hpp"
 #include "Automate.hpp"
 #include "Symbole.hpp"
-#include "etats/Etat33.hpp"
+#include "etats/Etat16bis.hpp"
 
 Etat16::Etat16()
 {
@@ -17,10 +17,12 @@ Etat16::~Etat16()
 
 void Etat16::transition(Automate* a, Symbole* s)
 {
+	// Tout OK
 	switch(*s){
 		case Symbole::IDENTIFIANT:
+		// OK
 			a->pushSymbole(s);
-			a->pushEtat(new Etat33());
+			a->pushEtat(new Etat16bis());
 			a->decaler();
 			break;
 		default:

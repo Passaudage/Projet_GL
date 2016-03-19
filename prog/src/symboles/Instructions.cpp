@@ -1,6 +1,6 @@
 #include "symboles/Instructions.hpp"
-
-void Instructions::affiche()
+#include <iostream>
+void Instructions::afficher()
 {
 	std::list<Instruction*>::iterator it;
 	for (it = _instructions.begin() ; it != _instructions.end() ; it++) {
