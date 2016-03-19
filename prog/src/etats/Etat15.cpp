@@ -19,7 +19,9 @@ Etat15::~Etat15()
 void Etat15::transition(Automate* a, Symbole* ) //réduction de la règle 2
 {
 	// Tout OK
+#ifdef MAP
 	std::cout << "Etat15" << std::endl;
+#endif
 
 	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
 	Declarations::IDV* idv = dynamic_cast<Declarations::IDV*> (a->popSymbole());

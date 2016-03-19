@@ -17,6 +17,8 @@ Etat8::~Etat8()
 
 void Etat8::transition(Automate* a, Symbole* s)
 {
+	std::cout << "Etat8" << std::endl;
+	
 	switch(*s){
 		case Symbole::AFFECTATION:
 			a->pushSymbole(s);
