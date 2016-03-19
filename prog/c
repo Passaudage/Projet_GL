@@ -1,0 +1,3 @@
+const n=8;
+ecrire n;
+ecrire n+1;

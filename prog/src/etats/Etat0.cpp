@@ -7,10 +7,15 @@
 #include "etats/Etat1.hpp"
 #include "symboles/Declarations.hpp"
 
+Etat0 Etat0::m_instance = Etat0();
+
 Etat0::Etat0()
 {
 }
 
+Etat0* Etat0::getInstance(){
+	return &m_instance;
+}
 
 void Etat0::transition(Automate* a, Symbole* s)
 {

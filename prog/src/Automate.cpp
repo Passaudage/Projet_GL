@@ -24,9 +24,9 @@ Programme* Automate::getProgramme()
 	Programme* programme = nullptr;
 
 	// on commence la valse des états
-	Etat0* etatDebut = new Etat0();
-
-	pushEtat(etatDebut);
+	//~ Etat0* etatDebut = new Etat0();
+	
+	pushEtat(Etat0::getInstance());
 
 	while(!_pileEtats.empty()) {
 		etatCourant()->transition(this, _lexer.lireSymboleCourant());

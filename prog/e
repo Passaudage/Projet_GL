@@ -1,0 +1,4 @@
+lire c;
+c:=c+1;
+ecrire c;
+
