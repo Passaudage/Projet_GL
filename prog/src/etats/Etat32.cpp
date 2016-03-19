@@ -12,17 +12,26 @@ Etat32::Etat32()
     //ctor
 }
 
-Etat32::~Etat32()
-{
-    //dtor
-}
-
 void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 {
-	// OK
+#ifdef MAP
 	std::cout << "Etat32" << std::endl;
-	Symbole* val = a->popSymbole();
-    val->setType(Symbole::FACTEUR);
-	a-> popEtat();
-	a->etatCourant()->transition(a, val);
+#endif
+	Expression* droite = dynamic_cast<Expression*> (a->popSymbole());
+	OperateurMult* opM = dynamic_cast<OperateurMult*> (a->popSymbole());
+	Expression* gauche = dynamic_cast<Expression*> (a->popSymbole());
+	Expression* terme;
+	
+	if (opM->estMultiplie())
+		terme = new ExpressionMultiplication(*gauche, *droite);
+	else
+		terme = new ExpressionDivision(*gauche, *droite);
+	
+	terme->setType(Symbole::Type::TERME);
+
+	a->popEtat();
+	a->popEtat();
+	a->popEtat();
+
+	a->etatCourant()->transition(a, terme);
 }

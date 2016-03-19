@@ -76,7 +76,6 @@ endif
 .PHONY: ALL
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
-	$(ECHO) $(SRC)
 	@mkdir -p $(DEPDIR);
 	@mkdir -p $(OBJDIR);
 	@$(MAKEDEPEND); \

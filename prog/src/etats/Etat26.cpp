@@ -10,15 +10,10 @@ Etat26::Etat26()
     //ctor
 }
 
-Etat26::~Etat26()
-{
-    //dtor
-}
 void Etat26::transition(Automate* a, Symbole* s)
 {
      switch(*s){
 		case Symbole::PARENTHESE_FER:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat27());
 			a->decaler();
         case Symbole::OPERATEUR_ADD:

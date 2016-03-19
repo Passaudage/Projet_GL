@@ -10,25 +10,20 @@ Etat20::Etat20()
     //ctor
 }
 
-Etat20::~Etat20()
-{
-    //dtor
-}
 void Etat20::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat20" << std::endl;
+#endif
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat22());
 			a->decaler();
 			break;
-
-// Vérifier les suivants de Instruction
 		case Symbole::POINT_VIR:
 			{
 				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
-				//a->popSymbole();
 				Symbole* ecriture = new Affichage(*expr);
 				a->popEtat();
 				a->popEtat();

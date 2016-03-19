@@ -17,7 +17,10 @@ Etat7::Etat7()
 
 void Etat7::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat7" << std::endl;
+#endif
+
 	switch(*s){
 		case Symbole::TERME:
 			a->pushSymbole(s);
@@ -33,12 +36,12 @@ void Etat7::transition(Automate* a, Symbole* s)
 			break;
 		case Symbole::VALEUR:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat32());
+			a->pushEtat(new Etat31());
 			a->decaler();
 			break;
 		case Symbole::IDENTIFIANT:
 			a->pushSymbole(s);
-			a->pushEtat(new Etat31());
+			a->pushEtat(new Etat30());
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:

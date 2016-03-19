@@ -8,14 +8,13 @@ Etat24::Etat24()
     //ctor
 }
 
-Etat24::~Etat24()
+void Etat24::transition(Automate* a, Symbole*) //réduction règle 17
 {
-    //dtor
-}
-void Etat24::transition(Automate* a, Symbole* s) //réduction règle 17
-{
+#ifdef MAP
 	std::cout << "Etat24" << std::endl;
-	s->setType(Symbole::TERME);
+#endif
+	Symbole* terme = a->popSymbole();
+	terme->setType(Symbole::TERME);
 	a-> popEtat();
-	a->etatCourant()->transition(a, s);
+	a->etatCourant()->transition(a, terme);
 }

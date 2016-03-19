@@ -13,10 +13,6 @@ Etat23::Etat23()
     //ctor
 }
 
-Etat23::~Etat23()
-{
-    //dtor
-}
 void Etat23::transition(Automate* a, Symbole* s)
 {
     switch(*s){
