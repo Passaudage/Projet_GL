@@ -15,6 +15,5 @@ void Etat24::transition(Automate* a, Symbole*) //réduction règle 17
 #endif
 	Symbole* terme = a->popSymbole();
 	terme->setType(Symbole::TERME);
-	a-> popEtat();
 	a->etatCourant()->transition(a, terme);
 }

@@ -13,12 +13,6 @@
 
 Etat1::Etat1()
 {
-
-}
-
-Etat1::~Etat1()
-{
-
 }
 
 void Etat1::transition(Automate* a, Symbole* s)
