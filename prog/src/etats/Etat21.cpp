@@ -24,6 +24,9 @@ void Etat21::transition(Automate* a, Symbole* s)
 			break;
 		case Symbole::POINT_VIR:
 			{
+#ifdef MAP
+				std::cout << "Reduction de Instr -> id := expr" << std::endl;
+#endif
 				Expression* expr = (Expression*) a->popSymbole();
 				Identifiant* id = (Identifiant*) a->popSymbole();
 				Symbole* affect = new Affectation(*expr, *id);

@@ -12,7 +12,6 @@
 
 Etat9::Etat9()
 {
-
 }
 
 void Etat9::transition(Automate* a, Symbole* s)
