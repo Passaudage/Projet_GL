@@ -308,10 +308,7 @@ std::cout << " ------ >" << identifiant << "<----" << std::endl;
 	char premier = *it;
 
 	if(std::isalpha(premier) || premier == '_') {
-		// ok
-
-		bool identifiant_ok = true;
-
+		
 		for(++it ; it != identifiant.end(); ++it) {
 			if(!(std::isalpha(*it) || std::isdigit(*it) || *it == '_')) {
 				throw "L'identifiant comporte des caractères interdits";
