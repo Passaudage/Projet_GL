@@ -13,15 +13,10 @@ Etat25::Etat25()
     //ctor
 }
 
-Etat25::~Etat25()
-{
-    //dtor
-}
 void Etat25::transition(Automate* a, Symbole* s)
 {
      switch(*s){
 		case Symbole::PARENTHESE_OUV:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat25());
 			a->decaler();
 			break;

@@ -8,10 +8,6 @@ Etat30::Etat30()
     //ctor
 }
 
-Etat30::~Etat30()
-{
-    //dtor
-}
 void Etat30::transition(Automate* a, Symbole* ) //réduction règle 19
 {
     Symbole* id = a->popSymbole();

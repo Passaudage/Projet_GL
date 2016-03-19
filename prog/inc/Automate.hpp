@@ -21,6 +21,7 @@ public:
 
 	void pushEtat(Etat* etat);
 	void pushSymbole(Symbole* symbole);
+	Symbole* topSymbole();
 
 	void popEtat();
 	Symbole* popSymbole();

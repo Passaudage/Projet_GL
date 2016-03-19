@@ -6,7 +6,6 @@ class Etat31 : public Etat
 {
     public:
         Etat31();
-        virtual ~Etat31();
 	void transition(Automate* a, Symbole* );
     protected:
 

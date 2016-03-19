@@ -45,24 +45,26 @@ void Etat2::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		case Symbole::FINDEFLUX:
-			// on récupère Instructions
-			Instructions* instructions =
-				dynamic_cast<Instructions*> (a->popSymbole());
+			{
+				// on récupère Instructions
+				Instructions* instructions =
+					dynamic_cast<Instructions*> (a->popSymbole());
 
-			// puis Declarations
-			Declarations* declarations =
-				dynamic_cast<Declarations*> (a->popSymbole());
+				// puis Declarations
+				Declarations* declarations =
+					dynamic_cast<Declarations*> (a->popSymbole());
 
-			// on créé Programme
-			Symbole* programme =
-				(Symbole*) new Programme(declarations, instructions);
+				// on créé Programme
+				Symbole* programme =
+					(Symbole*) new Programme(declarations, instructions);
 
-			a->pushSymbole(programme);
-			a->popEtat();
-			a->popEtat();
-			a->popEtat();
+				a->pushSymbole(programme);
+				a->popEtat();
+				a->popEtat();
+				a->popEtat();
 
-			std::cout << "FIN DE FLUX !!" << std::endl;
+				std::cout << "FIN DE FLUX !!" << std::endl;
+			}
 			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl; 

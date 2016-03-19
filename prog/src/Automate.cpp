@@ -40,6 +40,11 @@ Programme* Automate::getProgramme()
 	return programme;
 }
 
+Symbole* Automate::topSymbole()
+{
+	return _pileSymboles.top();
+}
+
 void Automate::pushEtat(Etat* etat)
 {
 	_pileEtats.push(etat);

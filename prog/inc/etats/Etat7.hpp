@@ -9,7 +9,6 @@ class Etat7 : public Etat
 {
 	public:
 		Etat7();
-		~Etat7();
 		void transition(Automate* a, Symbole* s);
 
 };

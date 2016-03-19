@@ -13,12 +13,6 @@
 
 Etat7::Etat7()
 {
-
-}
-
-Etat7::~Etat7()
-{
-
 }
 
 void Etat7::transition(Automate* a, Symbole* s)
@@ -48,7 +42,6 @@ void Etat7::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat25());
 			a->decaler();
 			break;
