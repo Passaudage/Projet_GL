@@ -23,15 +23,12 @@ void Etat7::transition(Automate* a, Symbole* s)
 
 	switch(*s){
 		case Symbole::TERME:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
 			break;
 		case Symbole::FACTEUR:
 			a->pushEtat(new Etat24());
-			a->etatCourant()->transition(a, s);
 			break;
 		case Symbole::EXPRESSION:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat20());
 			break;
 		case Symbole::VALEUR:

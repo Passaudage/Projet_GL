@@ -15,6 +15,9 @@ Etat22::Etat22()
 
 void Etat22::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat22" << std::endl;
+#endif
     switch(*s){
 		case Symbole::PARENTHESE_OUV:
 			a->pushEtat(new Etat25());
@@ -31,11 +34,9 @@ void Etat22::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
         case Symbole::FACTEUR:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
 			break;
         case Symbole::TERME:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat23());
 			break;
 		default:

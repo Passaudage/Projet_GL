@@ -53,7 +53,9 @@ void Automate::pushEtat(Etat* etat)
 
 void Automate::pushSymbole(Symbole* symbole)
 {
+#ifdef MAP
 	std::cout << "Ajout de : " << int(*symbole) << std::endl;
+#endif
 	_pileSymboles.push(symbole);
 }
 
@@ -70,7 +72,9 @@ Symbole* Automate::popSymbole()
 {
 	Symbole* symbole = _pileSymboles.top();
 	_pileSymboles.pop();
+#ifdef MAP
 	std::cout << "depile " << int(*symbole) << std::endl;
+#endif
 
 	return symbole;
 }

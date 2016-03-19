@@ -28,6 +28,7 @@ void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 		terme = new ExpressionDivision(*gauche, *droite);
 	
 	terme->setType(Symbole::Type::TERME);
+	a->pushSymbole(terme);
 
 	a->popEtat();
 	a->popEtat();

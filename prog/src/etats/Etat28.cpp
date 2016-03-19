@@ -16,7 +16,9 @@ Etat28::~Etat28()
 }
 void Etat28::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat28" << std::endl;
+#endif
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
@@ -28,7 +30,7 @@ void Etat28::transition(Automate* a, Symbole* s)
 		case Symbole::PARENTHESE_FER:
 		case Symbole::OPERATEUR_ADD:
 			{
-				Symbole* symbole = a->popSymbole();
+				Symbole* symbole = a->symboleCourant();
 				symbole->setType(Symbole::EXPRESSION);
 				a->popEtat();
 				a->etatCourant()->transition(a, symbole);

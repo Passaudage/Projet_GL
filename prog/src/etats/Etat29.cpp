@@ -16,9 +16,11 @@ Etat29::Etat29()
 
 void Etat29::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat29" << std::endl;
+#endif
     switch(*s){
 		case Symbole::FACTEUR:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat32());
 			break;
 		case Symbole::VALEUR:

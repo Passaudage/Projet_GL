@@ -17,7 +17,9 @@ Etat1::Etat1()
 
 void Etat1::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat1" << std::endl;
+#endif
 	switch(*s){
 		case Symbole::INSTRUCTIONS:
 		//OK

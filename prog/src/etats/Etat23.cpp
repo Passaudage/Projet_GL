@@ -15,6 +15,9 @@ Etat23::Etat23()
 
 void Etat23::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat23" << std::endl;
+#endif
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
@@ -34,6 +37,8 @@ void Etat23::transition(Automate* a, Symbole* s)
 				} else {
 					expr = new ExpressionSoustraction(*expr_gauche, *expr_droit);
 				}
+				expr->setType(Symbole::EXPRESSION);
+				a->pushSymbole(expr);
 				a->popEtat();
 				a->popEtat();
 				a->popEtat();
