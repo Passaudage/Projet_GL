@@ -17,7 +17,9 @@ Etat5::~Etat5()
 
 void Etat5::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat5" << std::endl;
+#endif
 
 	switch(*s){
 		case Symbole::IDENTIFIANT:

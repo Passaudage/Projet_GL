@@ -16,6 +16,9 @@ Etat16bis::~Etat16bis()
 }
 void Etat16bis::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat16bis" << std::endl;
+#endif
      switch(*s){
 		case Symbole::EGAL:
 			a->pushEtat(new Etat16ter());

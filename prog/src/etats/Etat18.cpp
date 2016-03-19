@@ -17,7 +17,9 @@ Etat18::~Etat18()
 }
 void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
 {
-	// 
+#ifdef MAP
+	std::cout << "Etat18 : Reduction D -> D const IDC id=val;" << std::endl ;
+#endif
     Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
     Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
 	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());

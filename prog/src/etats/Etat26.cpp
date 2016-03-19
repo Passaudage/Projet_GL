@@ -12,6 +12,9 @@ Etat26::Etat26()
 
 void Etat26::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat26" << std::endl;
+#endif
      switch(*s){
 		case Symbole::PARENTHESE_FER:
 			a->pushEtat(new Etat27());

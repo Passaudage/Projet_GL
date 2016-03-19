@@ -19,7 +19,9 @@ Etat3::~Etat3()
 void Etat3::transition(Automate* a, Symbole* s)
 {
 	// Tout OK
+#ifdef MAP
 	std::cout << "Etat3" << std::endl;
+#endif
 	switch(*s){
 		case Symbole::DECLARATION_VAR:
 		// OK

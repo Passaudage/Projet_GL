@@ -19,6 +19,9 @@ Etat17::~Etat17()
 void Etat17::transition(Automate* a, Symbole* s)
 {
 	// Tout OK
+#ifdef MAP
+	std::cout << "Etat17" << std::endl;
+#endif
 	switch(*s){
 		case Symbole::POINT_VIR:
 		// OK

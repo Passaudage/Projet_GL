@@ -15,6 +15,9 @@ Etat25::Etat25()
 
 void Etat25::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat25" << std::endl;
+#endif
      switch(*s){
 		case Symbole::PARENTHESE_OUV:
 			a->pushEtat(new Etat25());

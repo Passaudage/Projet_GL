@@ -18,6 +18,9 @@ Etat19::~Etat19()
 
 void Etat19::transition(Automate* a, Symbole* )
 {
+#ifdef MAP
+	std::cout << "Etat19" << std::endl;
+#endif
 	Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
 	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
 	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());

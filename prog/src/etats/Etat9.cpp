@@ -22,6 +22,9 @@ Etat9::~Etat9()
 
 void Etat9::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat9" << std::endl;
+#endif
 	switch(*s){
 		case Symbole::TERME:
 			a->pushSymbole(s);

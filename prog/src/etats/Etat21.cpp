@@ -16,6 +16,10 @@ Etat21::~Etat21()
 }
 void Etat21::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat21" << std::endl;
+#endif
+
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);

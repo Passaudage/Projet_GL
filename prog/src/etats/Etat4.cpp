@@ -18,6 +18,9 @@ Etat4::~Etat4()
 
 void Etat4::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
+	std::cout << "Etat4" << std::endl;
+#endif
 	// Tout OK
 	switch(*s){
 		case Symbole::DECLARATION_CON:

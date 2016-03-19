@@ -10,7 +10,10 @@ Etat27::Etat27()
 
 void Etat27::transition(Automate* a, Symbole* ) //réduction règle 18
 {
-	Symbole* expr = a->popSymbole();
+#ifdef MAP
+	std::cout << "Etat27 : Reduction F->(Expr)" << std::endl;
+#endif
+	Symbole* expr = a->symboleCourant();
 	expr->setType(Symbole::FACTEUR);
 	a-> popEtat();
 	a-> popEtat();
