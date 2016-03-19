@@ -65,7 +65,7 @@ void Automate::popEtat()
 	_pileEtats.pop();
 	//std::cout << "  pile- : " << _pileEtats.size() << std::endl;
 
-	delete etat;
+	//~ delete etat;
 }
 
 Symbole* Automate::popSymbole()
