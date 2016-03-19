@@ -34,8 +34,8 @@ void Etat28::transition(Automate* a, Symbole* s)
 				symbole->setType(Symbole::EXPRESSION);
 				a->popEtat();
 				a->etatCourant()->transition(a, symbole);
-				break;
 			}
+			break;
 		default:
 			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;
 			break;

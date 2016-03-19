@@ -19,6 +19,7 @@ void Etat26::transition(Automate* a, Symbole* s)
 		case Symbole::PARENTHESE_FER:
 			a->pushEtat(new Etat27());
 			a->decaler();
+			break;
         case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
 			a->pushEtat(new Etat22());

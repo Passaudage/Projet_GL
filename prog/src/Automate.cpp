@@ -101,5 +101,8 @@ Symbole* Automate::lireSymboleSuivant()
 
 bool Automate::decaler()
 {
+#ifdef MAP
+	std::cout << "Decalage de la tête de lecture de l'automate" << std::endl;
+#endif
 	return _lexer.decaler();
 }

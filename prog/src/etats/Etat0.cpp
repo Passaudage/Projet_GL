@@ -19,7 +19,6 @@ void Etat0::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::DECLARATIONS:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat1()); 
 			break;
 		case Symbole::VARIABLE:
@@ -28,6 +27,7 @@ void Etat0::transition(Automate* a, Symbole* s)
 		case Symbole::AFFICHAGE:
 			{
 				Symbole* declarations = new Declarations();			
+				a->pushSymbole(declarations);
 				a->etatCourant()->transition(a, declarations);
 				break;
 			}
