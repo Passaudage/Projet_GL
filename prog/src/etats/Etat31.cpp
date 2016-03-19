@@ -16,6 +16,5 @@ void Etat31::transition(Automate* a, Symbole* ) //réduction règle 20
     Symbole* id = a->symboleCourant();
     id->setType(Symbole::FACTEUR);
 	a-> popEtat();
-	
 	a->etatCourant()->transition(a, id);
 }

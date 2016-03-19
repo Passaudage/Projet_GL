@@ -9,10 +9,6 @@ Etat16ter::Etat16ter()
     //ctor
 }
 
-Etat16ter::~Etat16ter()
-{
-    //dtor
-}
 void Etat16ter::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP

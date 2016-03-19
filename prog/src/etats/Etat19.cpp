@@ -11,11 +11,6 @@ Etat19::Etat19()
     //ctor
 }
 
-Etat19::~Etat19()
-{
-    //dtor
-}
-
 void Etat19::transition(Automate* a, Symbole* )
 {
 #ifdef MAP
@@ -23,7 +18,7 @@ void Etat19::transition(Automate* a, Symbole* )
 #endif
 	Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
 	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
-	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());
+	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->symboleCourant());
 	
 	idc->ajouterConstante(id->get(), val->getValeur());
 

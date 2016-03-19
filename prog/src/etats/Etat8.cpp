@@ -10,11 +10,6 @@ Etat8::Etat8()
 
 }
 
-Etat8::~Etat8()
-{
-
-}
-
 void Etat8::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP
@@ -23,7 +18,6 @@ void Etat8::transition(Automate* a, Symbole* s)
 	
 	switch(*s){
 		case Symbole::AFFECTATION:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat9());
 			a->decaler();
 			break;

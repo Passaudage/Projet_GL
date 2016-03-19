@@ -11,11 +11,6 @@ Etat3::Etat3()
 
 }
 
-Etat3::~Etat3()
-{
-
-}
-
 void Etat3::transition(Automate* a, Symbole* s)
 {
 	// Tout OK
@@ -25,13 +20,13 @@ void Etat3::transition(Automate* a, Symbole* s)
 	switch(*s){
 		case Symbole::DECLARATION_VAR:
 		// OK
-			a->pushSymbole(s);
 			a->pushEtat(new Etat12());
 			break;
 		case Symbole::IDENTIFIANT:
 		// OK
 			{
 				Declarations::IDV* idv = new Declarations::IDV();
+				a->pushSymbole(idv);
 				a->etatCourant()->transition(a, idv);
 			}
 			break;

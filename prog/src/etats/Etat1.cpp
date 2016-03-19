@@ -22,13 +22,10 @@ void Etat1::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::INSTRUCTIONS:
-		//OK
-			a->pushSymbole(s);
 			a->pushEtat(new Etat2());
 			break;
 		case Symbole::INSTRUCTION:
 		//OK
-			a->pushSymbole(s);
 			a->pushEtat(new Etat10());
 			break;
 		case Symbole::VARIABLE:

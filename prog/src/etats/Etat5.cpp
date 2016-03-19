@@ -10,11 +10,6 @@ Etat5::Etat5()
 
 }
 
-Etat5::~Etat5()
-{
-
-}
-
 void Etat5::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP

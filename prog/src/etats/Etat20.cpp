@@ -24,12 +24,14 @@ void Etat20::transition(Automate* a, Symbole* s)
 		case Symbole::POINT_VIR:
 			{
 #ifdef MAP
-	std::cout << "Reduction I -> ecrire expr" << std::endl;
+	std::cout << "Reduction Instr -> ecrire expr" << std::endl;
 #endif
 				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
 				Symbole* ecriture = new Affichage(*expr);
 				a->popEtat();
 				a->popEtat();
+
+				a->pushSymbole(ecriture);
 				a->etatCourant()->transition(a, ecriture);
 			}
 			break;

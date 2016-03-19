@@ -10,11 +10,6 @@ Etat12::Etat12()
 
 }
 
-Etat12::~Etat12()
-{
-
-}
-
 void Etat12::transition(Automate* a, Symbole* s)
 {
 	// Tout OK

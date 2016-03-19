@@ -16,31 +16,25 @@ Etat2::Etat2()
 
 }
 
-Etat2::~Etat2()
-{
-
-}
 
 void Etat2::transition(Automate* a, Symbole* s)
 {
+#ifdef MAP
 	std::cout << "Etat2" << std::endl;
+#endif
 	switch(*s){
 		case Symbole::INSTRUCTION:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat35());
 			break;
 		case Symbole::IDENTIFIANT:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat8());
 			a->decaler();
 			break;
 		case Symbole::LECTURE:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat5());
 			a->decaler();
 			break;
 		case Symbole::AFFICHAGE:
-			//a->pushSymbole(s);
 			a->pushEtat(new Etat7());
 			a->decaler();
 			break;
@@ -63,7 +57,9 @@ void Etat2::transition(Automate* a, Symbole* s)
 				a->popEtat();
 				a->popEtat();
 
+#ifdef MAP
 				std::cout << "FIN DE FLUX !!" << std::endl;
+#endif
 			}
 			break;
 		default:

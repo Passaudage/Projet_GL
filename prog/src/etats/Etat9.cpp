@@ -15,27 +15,19 @@ Etat9::Etat9()
 
 }
 
-Etat9::~Etat9()
-{
-
-}
-
 void Etat9::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP
 	std::cout << "Etat9" << std::endl;
 #endif
-	switch(*s){
+	switch (*s) {
 		case Symbole::TERME:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat28());
 			break;
 		case Symbole::FACTEUR:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat24());
 			break;
 		case Symbole::EXPRESSION:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat21());
 			break;
 		case Symbole::VALEUR:
@@ -49,7 +41,6 @@ void Etat9::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		case Symbole::PARENTHESE_OUV:
-			a->pushSymbole(s);
 			a->pushEtat(new Etat25());
 			a->decaler();
 			break;

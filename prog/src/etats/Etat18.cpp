@@ -11,10 +11,6 @@ Etat18::Etat18()
     //ctor
 }
 
-Etat18::~Etat18()
-{
-    //dtor
-}
 void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
 {
 #ifdef MAP
@@ -23,12 +19,15 @@ void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
     Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
     Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
 	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());
-	Declarations* d = dynamic_cast<Declarations*> (a->popSymbole());
+	Declarations* d = dynamic_cast<Declarations*> (a->symboleCourant());
 
-	std::cout << "VALEUR : " << val->getValeur() << std::endl;;
+#ifdef MAP
+	std::cout << "Valeur : " << val->getValeur() << std::endl;;
+#endif
 
 	idc->ajouterConstante(id->get(), val->getValeur());
 	d->enregistrerConstantes(*idc);
+	delete idc;
 
 	a-> popEtat();
 	a-> popEtat();

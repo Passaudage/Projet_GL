@@ -10,11 +10,6 @@ Etat10::Etat10()
 
 }
 
-Etat10::~Etat10()
-{
-
-}
-
 void Etat10::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP
@@ -22,7 +17,6 @@ void Etat10::transition(Automate* a, Symbole* s)
 #endif
 	switch(*s){
 		case Symbole::POINT_VIR:
-			//a->pushSymbole(s);
 			a->pushEtat(new Etat11());
 			a->decaler();
 			break;

@@ -7,9 +7,7 @@ class Etat18: public Etat
 {
     public:
         Etat18();
-        virtual ~Etat18();
-void transition(Automate* a, Symbole* );
-
+		void transition(Automate* a, Symbole* );
 };
 
 #endif // ETAT18_H

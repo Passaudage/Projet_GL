@@ -11,11 +11,6 @@ Etat17::Etat17()
 
 }
 
-Etat17::~Etat17()
-{
-
-}
-
 void Etat17::transition(Automate* a, Symbole* s)
 {
 	// Tout OK

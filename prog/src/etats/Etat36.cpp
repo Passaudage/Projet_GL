@@ -11,19 +11,16 @@ Etat36::Etat36()
     //ctor
 }
 
-Etat36::~Etat36()
-{
-    //dtor
-}
-
 void Etat36::transition(Automate* a, Symbole* ) 
 {
 	// OK
+#ifdef MAP
 	std::cout << "Etat36" << std::endl;
+#endif
 
 	// récupération de Instruction
 	Instruction* instruction = dynamic_cast<Instruction*> (a->popSymbole());
-	Instructions* instructions = dynamic_cast<Instructions*> (a->popSymbole());
+	Instructions* instructions = dynamic_cast<Instructions*> (a->symboleCourant());
 
 	instructions->ajouteInstruction(instruction);
 

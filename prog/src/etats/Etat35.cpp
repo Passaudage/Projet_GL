@@ -10,14 +10,12 @@ Etat35::Etat35()
     //ctor
 }
 
-Etat35::~Etat35()
-{
-    //dtor
-}
 void Etat35::transition(Automate* a, Symbole* s)
 {
 	// OK
+#ifdef MAP
 	std::cout << "Etat35" << std::endl;
+#endif
     switch(*s){
 		case Symbole::POINT_VIR:
 			a->pushEtat(new Etat36());

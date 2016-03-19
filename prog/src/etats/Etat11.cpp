@@ -11,11 +11,6 @@ Etat11::Etat11()
 
 }
 
-Etat11::~Etat11()
-{
-
-}
-
 void Etat11::transition(Automate* a, Symbole* ) //réduction de la règle 10
 {
 #ifdef MAP
@@ -28,6 +23,7 @@ void Etat11::transition(Automate* a, Symbole* ) //réduction de la règle 10
 	
 	a-> popEtat();
 	a-> popEtat();
+	a->pushSymbole(instructions);
 	a->etatCourant()->transition(a, instructions);
 
 }

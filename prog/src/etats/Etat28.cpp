@@ -10,10 +10,6 @@ Etat28::Etat28()
     //ctor
 }
 
-Etat28::~Etat28()
-{
-    //dtor
-}
 void Etat28::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP

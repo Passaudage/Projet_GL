@@ -9,9 +9,7 @@ class Etat3 : public Etat
 
 	public:
 		Etat3();
-		~Etat3();
 		void transition(Automate* a, Symbole* s);
-
 };
 
 #endif

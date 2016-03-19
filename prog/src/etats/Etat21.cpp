@@ -10,10 +10,6 @@ Etat21::Etat21()
     //ctor
 }
 
-Etat21::~Etat21()
-{
-    //dtor
-}
 void Etat21::transition(Automate* a, Symbole* s)
 {
 #ifdef MAP
@@ -32,6 +28,7 @@ void Etat21::transition(Automate* a, Symbole* s)
 				a->popSymbole();
 				Identifiant* id = (Identifiant*) a->popSymbole();
 				Symbole* affect = new Affectation(*expr, *id);
+				a->pushSymbole(affect);
 				a->popEtat();
 				a->popEtat();
 				a->popEtat();
