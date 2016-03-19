@@ -16,7 +16,7 @@ Etat14::~Etat14()
 
 }
 
-void Etat14::transition(Automate* a, Symbole* s) //réduction de la règle 6
+void Etat14::transition(Automate* a, Symbole* ) //réduction de la règle 6
 {
 	// OK
 	// récupération de l'identifiant

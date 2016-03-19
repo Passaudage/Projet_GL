@@ -12,8 +12,10 @@ Etat31::~Etat31()
 {
     //dtor
 }
-void Etat31::transition(Automate* a, Symbole*) //réduction règle 20
+
+void Etat31::transition(Automate* a, Symbole* ) //réduction règle 20
 {
+	// OK
 	std::cout << "Etat31" << std::endl;
     Symbole* id = a->popSymbole();
     id->setType(Symbole::FACTEUR);

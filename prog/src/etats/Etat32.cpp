@@ -16,8 +16,10 @@ Etat32::~Etat32()
 {
     //dtor
 }
-void Etat32::transition(Automate* a, Symbole*) //réduction règle 16
+
+void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 {
+	// OK
 	std::cout << "Etat32" << std::endl;
 	Symbole* val = a->popSymbole();
     val->setType(Symbole::FACTEUR);

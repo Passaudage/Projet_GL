@@ -12,7 +12,7 @@ Etat27::~Etat27()
 {
     //dtor
 }
-void Etat27::transition(Automate* a, Symbole* s) //réduction règle 18
+void Etat27::transition(Automate* a, Symbole* ) //réduction règle 18
 {
     a->popSymbole();
 	Symbole* expr = a->popSymbole();

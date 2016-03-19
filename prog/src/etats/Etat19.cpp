@@ -16,7 +16,7 @@ Etat19::~Etat19()
     //dtor
 }
 
-void Etat19::transition(Automate* a, Symbole* s)
+void Etat19::transition(Automate* a, Symbole* )
 {
 	Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
 	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());

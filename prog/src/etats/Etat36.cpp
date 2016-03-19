@@ -15,13 +15,11 @@ Etat36::~Etat36()
 {
     //dtor
 }
-void Etat36::transition(Automate* a, Symbole*) 
+
+void Etat36::transition(Automate* a, Symbole* ) 
 {
 	// OK
 	std::cout << "Etat36" << std::endl;
-	
-	std::cout << "---> " << Symbole::Type::INSTRUCTION << std::endl;
-	std::cout << "---> " << Symbole::Type::INSTRUCTIONS << std::endl;
 
 	// récupération de Instruction
 

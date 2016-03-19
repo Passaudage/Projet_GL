@@ -15,7 +15,7 @@ Etat18::~Etat18()
 {
     //dtor
 }
-void Etat18::transition(Automate* a, Symbole* s) //réduction de la règle 7
+void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
 {
 	// 
     Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());

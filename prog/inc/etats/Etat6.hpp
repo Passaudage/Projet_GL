@@ -10,7 +10,7 @@ class Etat6 : public Etat
 	public:
 		Etat6();
 		~Etat6();
-		void transition(Automate* a, Symbole* s);
+		void transition(Automate* a, Symbole* );
 
 };
 

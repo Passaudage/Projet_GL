@@ -12,7 +12,7 @@ Etat30::~Etat30()
 {
     //dtor
 }
-void Etat30::transition(Automate* a, Symbole* s) //réduction règle 19
+void Etat30::transition(Automate* a, Symbole* ) //réduction règle 19
 {
     Symbole* id = a->popSymbole();
     id->setType(Symbole::FACTEUR);
