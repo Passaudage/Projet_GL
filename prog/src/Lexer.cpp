@@ -16,7 +16,7 @@
 
 // #### Constructeur et destructeur #### //
 Lexer::Lexer(std::string const& nomFichier)
-{	
+{
 	_fichierSource.open(nomFichier);
 
 	if(_fichierSource.good()) {
@@ -26,9 +26,17 @@ Lexer::Lexer(std::string const& nomFichier)
 		throw "Bouh, tu es nul, ce n'est pas le bon fichier lutin !";
 	}
 
-	_delimiteurSuivant = nullptr;
+	_nombre_negatif = false;
+	//_delimiteurSuivant = nullptr;
 
-	_symboleSuivant = lire_decaler();
+	Symbole* symbole = lire_decaler();
+
+	if(symbole != nullptr)
+		_fileSymboles.push(symbole);
+	
+	if(_fileSymboles.empty())
+		throw "Le flux est vide";
+	
 	decaler();
 }
 
@@ -54,21 +62,22 @@ Symbole* Lexer::lireSymboleCourant()
 
 Symbole* Lexer::lireSymboleSuivant()
 {
-	return _symboleSuivant;
+	return _fileSymboles.front();
 }
 
 bool Lexer::decaler()
 {
-	_symboleCourant = _symboleSuivant;
-	
-	if(_symboleCourant == nullptr)
+	if(_fileSymboles.empty()) 
 		return false;
 
-	if(_delimiteurSuivant != nullptr) {
-		_symboleSuivant = _delimiteurSuivant;
-		_delimiteurSuivant = nullptr;
-	} else {
-		_symboleSuivant = lire_decaler();
+	_symboleCourant = _fileSymboles.front();
+	_fileSymboles.pop();
+	
+	if(_fileSymboles.empty()) {
+		Symbole* symbole = lire_decaler();
+
+		if(symbole != nullptr)
+			_fileSymboles.push(symbole);
 	}
 
 	return true;
@@ -136,6 +145,10 @@ Symbole* Lexer::lire_decaler()
 	std::string identifiant;
 	sstr >> identifiant;
 
+	if(_nombre_negatif) {
+		identifiant = identifiant.substr(1);
+	}
+
 	if(!identifiant.empty()) {
 		Symbole* delimiteur = symbole;
 
@@ -143,18 +156,28 @@ Symbole* Lexer::lire_decaler()
 
 		symbole = lire_identifiant(identifiant);
 
+		if(symbole != nullptr)
+			_fileSymboles.push(symbole);
+
 		if(delimiteur != nullptr) {
 			// si un délimiteur a été trouvé précédemment
 			// on le met de côté pour un prochain décalage
 			// car il correspond au symbole après le suivant
-			_delimiteurSuivant = delimiteur;
+			_fileSymboles.push(delimiteur);
 		}
 
-		return symbole;
+		return nullptr;
 		
 	} else if(symbole != nullptr) {
 		// on renvoie le délimiteur seulement
 		// car pas d'identifiant/mot clé trouvé avant
+
+		if(_nombre_negatif) {
+			// on rajoute le moins que l'on avait mis en attente
+			_fileSymboles.push(new OperateurAdd(false));
+			_nombre_negatif = false;
+		}
+
 		return symbole;
 	}
 
@@ -185,6 +208,14 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 			delimiteur = new OperateurAdd(true);
 			break;
 		case '-':
+			if(_fichierSource.get(caractere_suivant) &&
+				std::isdigit(caractere_suivant))
+			{
+				_fichierSource.unget();
+				_nombre_negatif = true;
+				break;
+			}
+
 			delimiteur = new OperateurAdd(false);
 			break;
 
@@ -217,22 +248,10 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 Symbole* Lexer::lire_identifiant(std::string& identifiant)
 {
-	// est-ce un mot clé ?
-
-	if(identifiant == "const") {
-		return new Constante();
-	} else if (identifiant == "var") {
-		return new Variable();
-	} else if(identifiant == "lire") {
-		return new Lecture();
-	} else if(identifiant == "ecrire") {
-		return new Affichage();
-	}
-
 	// est-ce une valeur entière ?
 
 	bool valeur = true;
-
+std::cout << " ------ >" << identifiant << "<----" << std::endl;
 	for(std::string::iterator it = identifiant.begin();
 		it != identifiant.end(); ++it) {
 		if(!std::isdigit(*it)) {
@@ -242,18 +261,62 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	}
 
 	if(valeur) {
-		return new Valeur(std::stoi(identifiant));
+
+		int valeur_id = std::stoi(identifiant);
+
+		if(_nombre_negatif)
+		{
+			if(int(*_symboleCourant) != Symbole::Type::VALEUR ||
+				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT) {
+
+				valeur_id *= -1;
+			}
+			_nombre_negatif = false;
+		}
+
+		return new Valeur(valeur_id);
+	}
+
+	if(_nombre_negatif) {
+		// on croyait que ce pouvait être un nombre négatif
+		// mais on s'est finalement trompé :
+		// ce n'est pas une valeur autorisée !
+		throw "Un nombre était attendu, mais la chaîne trouvée n'est pas valide";
+	}
+
+	// est-ce un mot clé ?
+
+	Symbole* keyword = nullptr;
+
+	if(identifiant == "const") {
+		keyword = new Constante();
+	} else if (identifiant == "var") {
+		keyword = new Variable();
+	} else if(identifiant == "lire") {
+		keyword = new Lecture();
+	} else if(identifiant == "ecrire") {
+		keyword = new Affichage();
+	}
+
+	if(keyword != nullptr) {
+		return keyword;
 	}
 
 	// est-ce un identifiant correct ?
 
-	char premier = *identifiant.begin();
+	std::string::iterator it = identifiant.begin();
+	char premier = *it;
 
 	if(std::isalpha(premier) || premier == '_') {
 		// ok
 
-		// TODO : vérifier qu'il ne contient pas des caractères interdits
-		// lettres et chiffre et _
+		bool identifiant_ok = true;
+
+		for(++it ; it != identifiant.end(); ++it) {
+			if(!(std::isalpha(*it) || std::isdigit(*it) || *it == '_')) {
+				throw "L'identifiant comporte des caractères interdits";
+			}
+		}
 
 		return new Identifiant(identifiant);
 	}
