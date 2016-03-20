@@ -11,7 +11,7 @@ void Lecture::afficher()
 
 void Lecture::effectuer(Programme & programme)
 {
-	std::cout << "Saisir la valeur de " << _identifiant.get() << " :" <<std::endl;
+	std::cout << "Saisir la valeur de " << _identifiant.get() << " : ";
 	int value;
 	while (std::cin) {
 		std::string saisie;
