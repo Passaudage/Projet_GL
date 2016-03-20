@@ -251,7 +251,9 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	// est-ce une valeur entière ?
 
 	bool valeur = true;
-std::cout << " ------ >" << identifiant << "<----" << std::endl;
+#ifdef MAP
+	std::cout << " ------ >" << identifiant << "<----" << std::endl;
+#endif
 	for(std::string::iterator it = identifiant.begin();
 		it != identifiant.end(); ++it) {
 		if(!std::isdigit(*it)) {
