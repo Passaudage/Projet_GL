@@ -1,3 +1,7 @@
-const n=8;
-ecrire n;
-ecrire n+1;
+var var1, var2;
+const const1 = -5, const2 = 8;
+ecrire const7 - 5;
+ecrire var1 * (50 - essai);
+lire car;
+var1 := 6;
+var2 := -950/580;

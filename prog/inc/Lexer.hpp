@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <queue>
 
 class Symbole;
 
@@ -26,9 +27,12 @@ private:
     std::ifstream _fichierSource;
 
     Symbole* _symboleCourant;
-    Symbole* _symboleSuivant;
+    //Symbole* _symboleSuivant;
+
+    std::queue<Symbole*> _fileSymboles;
 
     Symbole* _delimiteurSuivant;
+    bool _nombre_negatif;
     
     Symbole* lire_decaler();
     /** Lit le prochain caractère. Si celui-ci correspond à un délimiteur,
