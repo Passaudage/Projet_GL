@@ -43,7 +43,7 @@ void Etat20::transition(Automate* a, Symbole* s)
 			}
 			break;
 		default:
-			std::cerr<<"erreur, lecture non conforme à la grammaire"<< std::endl;
+			throw "Erreur, lecture non conforme à la grammaire ! ";
 			break;
 	}
 }

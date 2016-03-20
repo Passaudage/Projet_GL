@@ -51,8 +51,7 @@ void Etat22::transition(Automate* a, Symbole* s)
 			a->pushEtat(Etat23::getInstance());
 			break;
 		default:
-			std::cerr<<"erreur, lecture non conforme à la grammaire"<<
-				std::endl;
+			throw "Erreur, lecture non conforme à la grammaire !";
 			break;
 		}
 }
