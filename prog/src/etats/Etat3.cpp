@@ -26,7 +26,8 @@ void Etat3::transition(Automate* a, Symbole* s)
 	switch(*s){
 		case Symbole::DECLARATION_VAR:
 		// OK
-			a->pushEtat(new Etat12());
+			//~ a->pushEtat(new Etat12());
+			a->pushEtat(Etat12::getInstance());
 			break;
 		case Symbole::IDENTIFIANT:
 		// OK
