@@ -49,7 +49,9 @@ public:
 protected:
 
 	Type _symboleType;
-	
+
+	int _ligne;
+	int _caractere;
 
 private:
 

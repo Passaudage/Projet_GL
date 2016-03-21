@@ -4,7 +4,8 @@
 #include <iostream>
 #endif
 
-Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType)
+Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType),
+	_ligne(-1), _caractere(-1)
 {
 }
 
