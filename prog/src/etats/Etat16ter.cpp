@@ -28,7 +28,7 @@ void Etat16ter::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			throw "Erreur, lecture non conforme à la grammaire ! ";
+			a->throwLexerError("Symbole non attendu par la grammaire");
 			break;
 	}
 }

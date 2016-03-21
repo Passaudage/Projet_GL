@@ -22,8 +22,11 @@ public:
       * décalage. Sinon, renvoie faux pour indiquer la fin de la lecture des symboles.
       */
     bool decaler();
+    
+    void throwError(std::string message);
 
 private:
+	int m_ligne;
     std::ifstream _fichierSource;
 
     Symbole* _symboleCourant;

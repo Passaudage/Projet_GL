@@ -17,6 +17,7 @@
 // #### Constructeur et destructeur #### //
 Lexer::Lexer(std::string const& nomFichier)
 {
+	m_ligne = 0;
 	_fichierSource.open(nomFichier);
 
 	if(_fichierSource.good()) {
@@ -115,6 +116,7 @@ Symbole* Lexer::lire_decaler()
 		// est-ce un delimiteur ?
 
 		if(caractere == ' ' || caractere == '\n' || caractere == '\r') {
+			m_ligne ++;
 			if(!debut_mot) {
 				// on regarde le prochain caractère
 				continue;
@@ -174,7 +176,8 @@ Symbole* Lexer::lire_decaler()
 
 		if(_nombre_negatif) {
 			// on rajoute le moins que l'on avait mis en attente
-			_fileSymboles.push(new OperateurAdd(false));
+			Symbole * opAdd = new OperateurAdd(false);
+			_fileSymboles.push(opAdd);
 			_nombre_negatif = false;
 		}
 
@@ -234,7 +237,7 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 			if(!_fichierSource.get(caractere_suivant) ||
 				caractere_suivant != '=') { 
-				throw "Symbole \":\" invalide";
+				throwError("Symbole \":\" invalide");
 			}
 
 			delimiteur = new Affectation();
@@ -283,7 +286,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		// on croyait que ce pouvait être un nombre négatif
 		// mais on s'est finalement trompé :
 		// ce n'est pas une valeur autorisée !
-		throw "Un nombre était attendu, mais la chaîne trouvée n'est pas valide";
+		throwError("Un nombre était attendu, mais la chaîne trouvée n'est pas valide");
 	}
 
 	// est-ce un mot clé ?
@@ -313,7 +316,8 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		
 		for(++it ; it != identifiant.end(); ++it) {
 			if(!(std::isalpha(*it) || std::isdigit(*it) || *it == '_')) {
-				throw "L'identifiant comporte des caractères interdits";
+				//~ throw "L'identifiant comporte des caractères interdits";
+				throwError("L'identifiant comporte des caractères interdits");
 			}
 		}
 
@@ -321,4 +325,11 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	}
 
 	return nullptr;
+}
+
+void Lexer::throwError(std::string message)
+{
+	std::ostringstream sstm;
+	sstm << message <<" ligne "<< m_ligne <<" !";
+	throw sstm.str().c_str();
 }

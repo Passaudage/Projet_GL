@@ -106,3 +106,8 @@ bool Automate::decaler()
 #endif
 	return _lexer.decaler();
 }
+
+void Automate::throwLexerError(std::string message)
+{
+	_lexer.throwError(message);
+}

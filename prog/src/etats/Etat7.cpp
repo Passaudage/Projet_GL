@@ -59,7 +59,7 @@ void Etat7::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			throw "Etat7, lecture non conforme à la grammaire";
+			a->throwLexerError("Symbole non attendu par la grammaire");
 			break;
 	}
 }

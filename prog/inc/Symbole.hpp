@@ -44,10 +44,12 @@ public:
 	virtual ~Symbole();
 
 	void setType(Type symboleType);
+	
 
 protected:
 
 	Type _symboleType;
+	
 
 private:
 
