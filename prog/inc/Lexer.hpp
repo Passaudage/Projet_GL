@@ -23,10 +23,13 @@ public:
       */
     bool decaler();
     
+    std::string getLigneColonneCourante();
     void throwError(std::string message);
 
 private:
-	int m_ligne;
+    int _ligneCourante;
+    int _caractereCourant;
+
     std::ifstream _fichierSource;
 
     Symbole* _symboleCourant;

@@ -17,7 +17,6 @@
 // #### Constructeur et destructeur #### //
 Lexer::Lexer(std::string const& nomFichier)
 {
-	m_ligne = 0;
 	_fichierSource.open(nomFichier);
 
 	if(_fichierSource.good()) {
@@ -28,7 +27,8 @@ Lexer::Lexer(std::string const& nomFichier)
 	}
 
 	_nombre_negatif = false;
-	//_delimiteurSuivant = nullptr;
+	_caractereCourant = 0;
+	_ligneCourante = 0;
 
 	Symbole* symbole = lire_decaler();
 
@@ -91,6 +91,7 @@ Symbole* Lexer::lire_decaler()
 	Symbole* symbole = nullptr;
 	char caractere;
 	bool debut_mot = false;
+	bool nouvelleLigne = false;
 
 	std::stringstream sstr;
 
@@ -111,12 +112,23 @@ Symbole* Lexer::lire_decaler()
 			break;
 		}
 
+		_caractereCourant++;
+
 		//std::cout << "-->" << caractere << "<--" << std::endl;
 
 		// est-ce un delimiteur ?
 
-		if(caractere == ' ' || caractere == '\n' || caractere == '\r') {
-			m_ligne ++;
+		if(caractere == ' ' || caractere == '\n') {
+			// On ne prend pas en compte les fins de ligne Windows
+			// || caractere == '\r') {
+
+			// const a
+			// b = 5;
+
+			if(caractere == '\n') {
+				nouvelleLigne = true;
+			}
+
 			if(!debut_mot) {
 				// on regarde le prochain caractère
 				continue;
@@ -166,6 +178,11 @@ Symbole* Lexer::lire_decaler()
 			// on le met de côté pour un prochain décalage
 			// car il correspond au symbole après le suivant
 			_fileSymboles.push(delimiteur);
+		}
+
+		if(nouvelleLigne) {
+			_ligneCourante++;
+			_caractereCourant = 0;
 		}
 
 		return nullptr;
@@ -327,9 +344,14 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	return nullptr;
 }
 
+std::string Lexer::getLigneColonneCourante()
+{
+	// l. 5, c.3 
+}
+
 void Lexer::throwError(std::string message)
 {
 	std::ostringstream sstm;
-	sstm << message <<" ligne "<< m_ligne <<" !";
+	sstm << message <<" ligne "<< _ligneCourante <<" !";
 	throw sstm.str().c_str();
 }
