@@ -25,7 +25,14 @@ void Programme::afficher()
 
 void Programme::transformer()
 {
-	// TODO
+	// TODO :
+	// propager les constantes
+	// éliminer les opérations avec élément neutre
+	// éliminer les parenthèses inutiles ?
+
+	// plusieurs affectations de suite pour une même variable
+	// a:=5;lire b;a:=7; ---> lire b;a:=7;
+	// a:=8;b:=7;lire a; ---> b:=7;lire a;
 }
 
 void Programme::executer()
@@ -35,7 +42,16 @@ void Programme::executer()
 
 void Programme::analyser()
 {
-	// TODO
+	// TODO :
+
+	// variable utilisée sans avoir été déclarée
+	// variable utilisée sans avoir été affectée
+	// variable déclarée jamais utilisée
+	// constante modifiée
+
+	// variables/constantes déclarées avec le même identifiant
+	// => d'ailleurs, que faire dans le mode d'exécution normal ?
+
 }
 
 int Programme::getValeur(std::string const& identifiant) const
