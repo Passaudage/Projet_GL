@@ -4,7 +4,8 @@
 #include <iostream>
 #endif
 
-Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType)
+Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType),
+	_ligne(-1), _caractere(-1)
 {
 }
 
@@ -24,4 +25,20 @@ void Symbole::setType(Type symboleType)
 		std::endl;
 #endif
 	_symboleType = symboleType;
+}
+
+int Symbole::getLigne()
+{
+	return _ligne;
+}
+int Symbole::getCaractere()
+{
+	return _caractere;
+}
+
+
+void Symbole::setPosition(Lexer::Position position)
+{
+	_ligne = position.ligne;
+	_caractere = position.caractere;
 }

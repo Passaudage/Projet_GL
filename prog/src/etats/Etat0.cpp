@@ -39,7 +39,7 @@ void Etat0::transition(Automate* a, Symbole* s)
 				break;
 			}
 		default:
-			throw "Erreur, lecture non conforme à la grammaire !";
+			a->throwLexerError("Symbole non attendu par la grammaire");
 			break;
 	}
 }
