@@ -31,11 +31,11 @@ public:
 
 private:
 
-
     Position positionCourante();
 
     int _ligneCourante;
     int _caractereCourant;
+    Position _lastPosition;
 
     std::ifstream _fichierSource;
 

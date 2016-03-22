@@ -31,6 +31,9 @@ Lexer::Lexer(std::string const& nomFichier)
 	_caractereCourant = 0;
 	_ligneCourante = 1;
 
+	_lastPosition.ligne = -1;
+	_lastPosition.caractere = -1;
+
 	Symbole* symbole = lire_decaler();
 
 	if(symbole != nullptr) {
@@ -79,6 +82,15 @@ bool Lexer::decaler()
 
 	Position posSymbole = _filePositions.front();
 	_filePositions.pop();
+
+	if(_lastPosition.ligne != -1) {
+
+		if(_lastPosition.caractere == posSymbole.caractere) {
+			posSymbole.caractere++;
+		}
+	}
+	_lastPosition = posSymbole;
+	
 	_symboleCourant->setPosition(posSymbole);
 	
 	std::cout << "Symbole " << int(*_symboleCourant) << " : ligne " <<
@@ -218,6 +230,8 @@ Symbole* Lexer::lire_decaler()
 			_fileSymboles.push(delimiteur);
 		}
 
+		_nombre_negatif = false;
+
 		return nullptr;
 		
 	} else if(symbole != nullptr) {
@@ -307,6 +321,8 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 				throw "Symbole \":\" invalide";
 			}
 
+			_caractereCourant++;
+
 			delimiteur = new Affectation();
 			
 			break;
@@ -340,7 +356,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 		if(_nombre_negatif)
 		{
-			_nombre_negatif = false;
+			
 
 			if(int(*_symboleCourant) != Symbole::Type::VALEUR &&
 				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT) {
@@ -362,7 +378,9 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		// on croyait que ce pouvait être un nombre négatif
 		// mais on s'est finalement trompé :
 		// ce n'est pas une valeur autorisée !
-		throw "Un nombre était attendu, mais la chaîne trouvée n'est pas valide";
+		//throw "Un nombre était attendu, mais la chaîne trouvée n'est pas valide";
+		_nombre_negatif = false;
+		return nullptr;
 	}
 
 	// est-ce un mot clé ?
