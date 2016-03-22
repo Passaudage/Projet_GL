@@ -4,6 +4,7 @@
 #include "Symbole.hpp"
 #include "etats/Etat22.hpp"
 #include "symboles/Affectation.hpp"
+#include "symboles/Declarations.hpp"
 
 Etat21 Etat21::m_instance = Etat21();
 
@@ -37,6 +38,10 @@ void Etat21::transition(Automate* a, Symbole* s)
 				Expression* expr = (Expression*) a->popSymbole();
 				Identifiant* id = (Identifiant*) a->popSymbole();
 				Symbole* affect = new Affectation(*expr, *id);
+
+				((Declarations*) a->symboleCourant())->signerUtiliser(expr);
+				((Declarations*) a->symboleCourant())->signerAffecter(id);
+
 				a->pushSymbole(affect);
 				a->popEtat();
 				a->popEtat();

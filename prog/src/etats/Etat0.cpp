@@ -27,6 +27,7 @@ void Etat0::transition(Automate* a, Symbole* s)
 			//~ a->pushEtat(new Etat1()); 
 			a->pushEtat(Etat1::getInstance()); 
 			break;
+		case Symbole::IDENTIFIANT:
 		case Symbole::VARIABLE:
 		case Symbole::CONSTANTE:
 		case Symbole::LECTURE:

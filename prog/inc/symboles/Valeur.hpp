@@ -11,6 +11,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Expression.hpp"
 
+#include <unordered_set>
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -21,6 +22,8 @@
 //
 //------------------------------------------------------------------------ 
 
+class Identifiant;
+
 class Valeur : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
@@ -30,6 +33,7 @@ public:
 	int calculer(Programme &);
 	int getValeur() const;
 	void afficher();
+    std::unordered_set<Identifiant*> getIdentifiants();
 
 //------------------------------------------------- Surcharge d'opérateurs
     Valeur& operator=(const Valeur & unValeur) = delete;

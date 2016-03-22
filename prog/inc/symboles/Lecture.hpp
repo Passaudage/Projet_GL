@@ -27,8 +27,8 @@ class Lecture : public Instruction
 	
 public:
 //----------------------------------------------------- Méthodes publiques
-	void afficher();
-	void effectuer(Programme & programme);
+	virtual void afficher();
+	virtual void effectuer(Programme & programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Lecture& operator=(const Lecture & unLecture) = delete;

@@ -21,6 +21,11 @@ void Instructions::executer(Programme& programme)
 	}
 }
 
+std::list<Instruction*>& Instructions::getInstructions()
+{
+	return _instructions;
+}
+
 Instructions::Instructions():Symbole(Symbole::Type::INSTRUCTIONS)
 {
 }

@@ -11,6 +11,9 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
 #include "symboles/Programme.hpp"
+
+#include <unordered_set>
+
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -21,6 +24,8 @@
 //
 //------------------------------------------------------------------------ 
 
+class Identifiant;
+
 class Expression : public Symbole
 {
 //----------------------------------------------------------------- PUBLIC
@@ -30,6 +35,7 @@ public:
 	//Calcule la valeur de l'expression
 	virtual int calculer(Programme & programme) = 0;
 	virtual void afficher() = 0;
+	virtual std::unordered_set<Identifiant*> getIdentifiants() = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     Expression& operator=(const Expression & unExpression)=delete ;

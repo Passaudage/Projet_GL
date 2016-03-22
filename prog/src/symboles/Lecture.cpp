@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <unordered_set>
+
 const std::string Lecture::_keyword = "lire";
 
 void Lecture::afficher()
@@ -31,8 +33,11 @@ void Lecture::effectuer(Programme & programme)
 	throw "Valeur à saisir manquante";
 }
 
+
+
 Lecture::Lecture(Identifiant& identifiant):_identifiant(identifiant)
 {
+	_varUtilisees.insert(&identifiant);
 }
 
 Lecture::~Lecture()

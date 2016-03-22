@@ -14,11 +14,15 @@
 #include <string>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
 using namespace std;
+
+class Identifiant;
+class Expression;
 
 class Declarations : public Symbole
 {
@@ -30,6 +34,7 @@ public:
 		int valeur;
 		bool initialise;
 		bool modifiable;
+		bool utilise;
 	};
 
 	typedef std::pair<std::string, Entite> Enregistrement; 
@@ -66,7 +71,14 @@ public:
 	void enregistrerVariables(IDV& idv);
 	int getValeur(string const& identifiant) const;
 	void setValeur(string const& identifiant, int valeur);
+
 	void afficher();
+
+	void analyser();
+
+	void signerUtiliser(Expression* expression);
+	void signerUtiliser(Identifiant* identifiant);
+	void signerAffecter(Identifiant* identifiant);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;
@@ -86,7 +98,13 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	unordered_map<string, Entite> _entites;	
+	unordered_map<string, Entite> _entites;
+
+	std::unordered_set<Identifiant*> varUtiliseesNonDeclarees;
+	std::unordered_set<Identifiant*> varUtiliseesNonAffectees;
+
+	std::unordered_set<Identifiant*> varDeclareesNonUtilisees;
+	std::unordered_set<Identifiant*> constModifiees;
 
 private:
 //------------------------------------------------------- Attributs privés

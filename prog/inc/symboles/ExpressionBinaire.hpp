@@ -10,6 +10,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Expression.hpp"
+#include <unordered_set>
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -20,6 +21,8 @@
 //
 //------------------------------------------------------------------------ 
 
+class Identifiant;
+
 class ExpressionBinaire : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
@@ -28,6 +31,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual int calculer(Programme &) = 0;
 	virtual void afficher() = 0;
+    virtual std::unordered_set<Identifiant*> getIdentifiants();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =

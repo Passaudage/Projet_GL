@@ -4,6 +4,7 @@
 #include "Symbole.hpp"
 #include "symboles/Affichage.hpp"
 #include "etats/Etat22.hpp"
+#include "symboles/Declarations.hpp"
 
 Etat20 Etat20::m_instance = Etat20();
 
@@ -35,6 +36,9 @@ void Etat20::transition(Automate* a, Symbole* s)
 #endif
 				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
 				Symbole* ecriture = new Affichage(*expr);
+
+				(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
+				
 				a->popEtat();
 				a->popEtat();
 

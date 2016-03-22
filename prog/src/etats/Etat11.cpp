@@ -5,6 +5,7 @@
 #include "Symbole.hpp"
 #include "symboles/Instructions.hpp"
 #include "symboles/Instruction.hpp"
+#include "symboles/Declarations.hpp"
 
 Etat11 Etat11::m_instance = Etat11();
 

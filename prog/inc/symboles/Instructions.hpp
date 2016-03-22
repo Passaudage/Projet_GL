@@ -34,6 +34,8 @@ public:
 	void executer(Programme & programme);
 	void afficher();
 
+    std::list<Instruction*>& getInstructions();
+
 //------------------------------------------------- Surcharge d'opérateurs
     Instructions& operator=(const Instructions & unInstructions) = delete;
 

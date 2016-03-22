@@ -12,6 +12,9 @@
 #include "Symbole.hpp"
 #include "symboles/Programme.hpp"
 
+#include <unordered_set>
+#include <string>
+
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -22,6 +25,8 @@
 //
 //------------------------------------------------------------------------ 
 
+class Identifiant;
+
 class Instruction : public Symbole
 {
 //----------------------------------------------------------------- PUBLIC
@@ -30,6 +35,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
+	virtual std::unordered_set<Identifiant*> const& getVarUtilisees();
+	virtual std::unordered_set<Identifiant*> const& getVarAffectees();
+
 
 //------------------------------------------------- Surcharge d'opérateurs
     Instruction& operator=(const Instruction & unInstruction) = delete;
@@ -44,13 +52,9 @@ public:
 //------------------------------------------------------------------ PRIVE 
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
-private:
-//------------------------------------------------------- Méthodes privées
-
-protected:
 //----------------------------------------------------- Attributs protégés
+	std::unordered_set<Identifiant*> _varUtilisees;
+	std::unordered_set<Identifiant*> _varAffectees;
 
 private:
 //------------------------------------------------------- Attributs privés

@@ -3,6 +3,13 @@
 #include "symboles/Declarations.hpp"
 #include "symboles/Instructions.hpp"
 
+#include "symboles/Identifiant.hpp"
+
+#include <unordered_set>
+#include <unordered_map>
+#include <string>
+#include <iostream>
+
 Programme::Programme(Declarations* declarations, Instructions* instructions) : 
 	Symbole(PROGRAMME),
 	_declarations(declarations),
@@ -44,11 +51,13 @@ void Programme::analyser()
 {
 	// TODO :
 
+	// Instructions
 	// variable utilisée sans avoir été déclarée
 	// variable utilisée sans avoir été affectée
 	// variable déclarée jamais utilisée
 	// constante modifiée
 
+	// Declarations
 	// variables/constantes déclarées avec le même identifiant
 	// => d'ailleurs, que faire dans le mode d'exécution normal ?
 

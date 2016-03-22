@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "symboles/Identifiant.hpp"
+
 int ExpressionParenthesee::calculer(Programme& programme)
 {
 	return _exprInter.calculer(programme);
@@ -22,4 +24,9 @@ void ExpressionParenthesee::afficher()
 	std::cout << "(";
 	_exprInter.afficher();
 	std::cout << ")";
+}
+
+std::unordered_set<Identifiant*> ExpressionParenthesee::getIdentifiants()
+{
+	return _exprInter.getIdentifiants();
 }

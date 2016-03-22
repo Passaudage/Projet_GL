@@ -1,7 +1,7 @@
 #include "symboles/Valeur.hpp"
 
 #include <iostream>
-
+#include "symboles/Identifiant.hpp"
 
 int Valeur::calculer(Programme &)
 {
@@ -15,6 +15,12 @@ int Valeur::getValeur() const
 
 Valeur::Valeur(int valeur):Expression(VALEUR),_valeur(valeur)
 {
+}
+
+std::unordered_set<Identifiant*> Valeur::getIdentifiants()
+{
+	std::unordered_set<Identifiant*> id;
+	return id;
 }
 
 void Valeur::afficher()

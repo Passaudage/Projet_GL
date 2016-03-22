@@ -11,6 +11,8 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Expression.hpp"
+#include <unordered_set>
+
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -21,6 +23,8 @@
 //
 //------------------------------------------------------------------------ 
 
+class Identifiant;
+
 class ExpressionParenthesee : public Expression
 {
 //----------------------------------------------------------------- PUBLIC
@@ -29,6 +33,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme & programme);
 	void afficher();
+    std::unordered_set<Identifiant*> getIdentifiants();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionParenthesee& operator=(

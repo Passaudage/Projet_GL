@@ -21,3 +21,10 @@ void Identifiant::afficher()
 {
 	std::cout << _identifiant;
 }
+
+std::unordered_set<Identifiant*> Identifiant::getIdentifiants()
+{
+	std::unordered_set<Identifiant*> id;
+	id.insert(this);
+	return id;
+}
