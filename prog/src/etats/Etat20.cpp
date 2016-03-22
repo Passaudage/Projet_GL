@@ -37,8 +37,14 @@ void Etat20::transition(Automate* a, Symbole* s)
 				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
 				Symbole* ecriture = new Affichage(*expr);
 
-				(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
-				
+				if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
+					(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
+				} else {
+					Symbole* temp = a->popSymbole();
+					(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
+					a->pushSymbole(temp);
+				}
+
 				a->popEtat();
 				a->popEtat();
 

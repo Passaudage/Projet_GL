@@ -39,8 +39,18 @@ void Etat21::transition(Automate* a, Symbole* s)
 				Identifiant* id = (Identifiant*) a->popSymbole();
 				Symbole* affect = new Affectation(*expr, *id);
 
-				((Declarations*) a->symboleCourant())->signerUtiliser(expr);
-				((Declarations*) a->symboleCourant())->signerAffecter(id);
+				Declarations* declarations;
+
+				if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
+					declarations = (dynamic_cast<Declarations*> (a->symboleCourant()));
+				} else {
+					Symbole* temp = a->popSymbole();
+					declarations = (dynamic_cast<Declarations*> (a->symboleCourant()));
+					a->pushSymbole(temp);
+				}
+
+				declarations->signerUtiliser(expr);
+				declarations->signerAffecter(id);
 
 				a->pushSymbole(affect);
 				a->popEtat();

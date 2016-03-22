@@ -40,7 +40,6 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 		}
 
 		if(arg_cmd->analyser) {
-			std::cout << "Analyse statique en cours..." << std::endl;
 			programme->analyser();
 		}
 

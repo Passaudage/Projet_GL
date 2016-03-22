@@ -15,6 +15,7 @@
 #include <list>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 
 //------------------------------------------------------------- Constantes 
 
@@ -31,13 +32,23 @@ class Declarations : public Symbole
 public:
 //------------------------------------------------------ Classes publiques
 	struct Entite {
+		enum Type {
+			CONST, VAR
+		};
+
+		Entite(Type type);
+
+		void resetFlags();
+
 		int valeur;
+
+		bool const modifiable;
 		bool initialise;
-		bool modifiable;
 		bool utilise;
 	};
 
-	typedef std::pair<std::string, Entite> Enregistrement; 
+	typedef std::pair<std::string, Entite> Enregistrement;
+	typedef std::pair<std::string, Identifiant*> Entree;
 	typedef std::list<Enregistrement> ListEntites;
 
 	class IDC : public Symbole
@@ -96,15 +107,19 @@ protected:
 private:
 //------------------------------------------------------- Méthodes privées
 
+	void formatterIdentifiants(
+		std::multimap<std::string, Identifiant*>& multimap);
+
 protected:
 //----------------------------------------------------- Attributs protégés
 	unordered_map<string, Entite> _entites;
 
-	std::unordered_set<Identifiant*> varUtiliseesNonDeclarees;
-	std::unordered_set<Identifiant*> varUtiliseesNonAffectees;
+	std::multimap<std::string, Identifiant*> _varUtiliseesNonDeclarees;
+	std::multimap<std::string, Identifiant*> _varUtiliseesNonAffectees;
+	std::multimap<std::string, Identifiant*> _varAffecteesNonDeclarees;
 
-	std::unordered_set<Identifiant*> varDeclareesNonUtilisees;
-	std::unordered_set<Identifiant*> constModifiees;
+	std::unordered_set<std::string> _varUtilisees;
+	std::multimap<std::string, Identifiant*> _constModifiees;
 
 private:
 //------------------------------------------------------- Attributs privés

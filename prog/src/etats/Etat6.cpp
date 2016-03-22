@@ -27,7 +27,13 @@ void Etat6::transition(Automate* a, Symbole* ) //réduction de la règle 11
 	Identifiant* id = (Identifiant*) a->popSymbole();
 	Symbole* lecture = new Lecture(*id);
 
-	((Declarations*) a->symboleCourant())->signerAffecter(id);
+	if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
+		(dynamic_cast<Declarations*> (a->symboleCourant()))->signerAffecter(id);
+	} else {
+		Symbole* temp = a->popSymbole();
+		(dynamic_cast<Declarations*> (a->symboleCourant()))->signerAffecter(id);
+		a->pushSymbole(temp);
+	}
 
 	a-> popEtat();
 	a-> popEtat();

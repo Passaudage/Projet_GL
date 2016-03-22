@@ -5,6 +5,28 @@
 #include "symboles/Identifiant.hpp"
 #include "symboles/Expression.hpp"
 
+Declarations::Entite::Entite(Declarations::Entite::Type type) :
+	modifiable((type == CONST) ? false : true)
+{
+	valeur = 0;
+	utilise = false;
+
+	if(type == CONST) {
+		//modifiable = false;
+		initialise = true;
+		
+	} else {
+		//modifiable = true;
+		initialise = false;
+	}
+}
+
+void Declarations::Entite::resetFlags()
+{
+	utilise = false;
+	initialise =  modifiable ? false : true;
+}
+
 bool Declarations::identifiantPris(string const& identifiant) const
 {
 	return _entites.count(identifiant) != 0;
@@ -48,11 +70,10 @@ void Declarations::setValeur(string const& identifiant, int valeur) {
 		else
 			throw "Tentative de modification d'une valeur déclarée constante !";
 	} else {
-		Entite entite;
+		Entite entite(Entite::Type::VAR);
 		entite.valeur = valeur;
 		entite.initialise = true;
-		entite.modifiable = true;
-		entite.utilise = false;
+
 		_entites.insert(Enregistrement(identifiant, entite));
 	}
 }
@@ -73,12 +94,9 @@ Declarations::ListEntites& Declarations::IDC::getliste()
 
 void Declarations::IDC::ajouterConstante(std::string const& identifiant, int valeur)
 {
-	Entite entite;
+	Entite entite(Entite::Type::CONST);
 
 	entite.valeur = valeur;
-	entite.initialise = true;
-	entite.modifiable = false;
-	entite.utilise = false;
 
 	Enregistrement enrConstante(identifiant, entite);
 
@@ -96,12 +114,7 @@ Declarations::ListEntites& Declarations::IDV::getliste()
 
 void Declarations::IDV::ajouterVariable(std::string const& identifiant)
 {
-	Entite entite;
-
-	entite.valeur = 0;
-	entite.initialise = false;
-	entite.modifiable = true;
-	entite.utilise = false;
+	Entite entite(Entite::Type::VAR);
 
 	Enregistrement enrVariable(identifiant, entite);
 
@@ -133,48 +146,120 @@ void Declarations::afficher()
 void Declarations::signerUtiliser(Expression* expression)
 {
 	std::unordered_set<Identifiant*> setId = expression->getIdentifiants();
-
+	
 	for(Identifiant* identifiant : setId) {
-		//signerUtiliser(identifiant);
-		std::cout << "blabla" << std::endl;
+		signerUtiliser(identifiant);
 	}
-	std::cout << "taille entite : " << _entites.size() << std::endl;
 }
 
 void Declarations::signerUtiliser(Identifiant* identifiant)
 {
-	return;
-	std::cout << "signer utiliser (" << identifiant->get() << ")" << std::endl;
+	//std::cout << "signer utiliser (" << identifiant->get() << ")" << std::endl;
 	unordered_map<string, Entite>::iterator it;
 
-	//unordered_map<string, Entite> map_test = _entites;
-	unordered_map<string, Entite>::iterator it2;
+	it = _entites.find(identifiant->get());
 
-	it2 = _entites.find(identifiant->get());
-
-	//it = _entites.find(identifiant->get());
-
-	return;
 	// est-ce que la variable a déjà été déclarée ?
+	
 	if(it == _entites.end()) {
 		// pas encore declarée
-		//varUtiliseesNonDeclarees.insert(identifiant);
-		std::cout << " -> pas encore déclarée !" << std::endl;
+		_varUtiliseesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
+	//	std::cout << " -> pas encore déclarée !" << std::endl;
 	} else {
 		// déclarée
-		//(*it).second.utilise = true;
-	}
-	std::cout << "la fin" << std::endl;
+		it->second.utilise = true;
+	//	std::cout << " -> déclarée !" << std::endl;
 
+		// est-elle initialisée ?
+
+		if(!it->second.initialise) {
+	//		std::cout << " -> déclarée mais non initialisée !" << std::endl;
+			_varUtiliseesNonAffectees.insert(Entree(identifiant->get(), identifiant));
+		}
+	}
+
+	_varUtilisees.insert(identifiant->get());
 }
 
 void Declarations::signerAffecter(Identifiant* identifiant)
 {
-	std::cout << "signer affecter" << std::endl;
+	//std::cout << "signer affecter" << std::endl;
+	unordered_map<string, Entite>::iterator it;
+
+	it = _entites.find(identifiant->get());
+
+	if(it == _entites.end()) {
+		// variable affectée mais non déclarée
+		_varAffecteesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
+	//	std::cout << " -> affectée mais non déclarée !" << std::endl;
+	} else {
+		if(!it->second.modifiable) {
+			_constModifiees.insert(Entree(identifiant->get(), identifiant));
+	//		std::cout << " -> constante modifiée !" << std::endl;
+		}
+	}
 }
 
 void Declarations::analyser()
 {
-	std::cout << "taille entite : " << std::endl;
 	// faire l'affichage correct en lisant les données précalculées
+
+	std::cout << "Analyse statique du code lutin :" << std::endl;
+
+	if(!_varUtiliseesNonDeclarees.empty()) {
+		std::cout << "Identifiants utilisés non déclarés :" << std::endl;
+		formatterIdentifiants(_varUtiliseesNonDeclarees);
+	}
+
+	if(!_varAffecteesNonDeclarees.empty()) {
+		std::cout << "Identifiants affectés non déclarés :" << std::endl;
+		formatterIdentifiants(_varAffecteesNonDeclarees);
+	}
+
+	if(!_varUtiliseesNonAffectees.empty()) {
+		std::cout << "Identifiants utilisés non initialisés :" << std::endl;
+		formatterIdentifiants(_varUtiliseesNonAffectees);
+	}
+
+	if(_entites.size() > _varUtilisees.size()) {
+		std::cout << "Identifiants déclarés mais inutilisés :" << std::endl;
+		std::unordered_set<std::string>::iterator it;
+
+		for(std::pair<std::string, Entite> pairEntite : _entites) {
+			it = _varUtilisees.find(pairEntite.first);
+
+			if(it == _varUtilisees.end()) {
+				std::cout << "   " << pairEntite.first << std::endl;
+			}
+		}
+	}
+
+	if(!_constModifiees.empty()) {
+		std::cout << "Modifications de constantes : " << std::endl;
+		formatterIdentifiants(_constModifiees);
+	}
+}
+
+void Declarations::formatterIdentifiants(
+	std::multimap<std::string, Identifiant*>& multimap)
+{
+	bool premier = true; // Est-ce vraiment utile ?
+	std::string keyBuffer;
+
+	for(std::pair<std::string, Identifiant*> pairIdentifiant : multimap) {
+		if(keyBuffer != pairIdentifiant.first) {
+			keyBuffer = pairIdentifiant.first;
+
+			if(!premier) {
+				std::cout << std::endl;
+			}
+			std::cout << "   " << keyBuffer << " ";
+		}
+
+		std::cout << "l.x ";
+
+		premier = false;
+	}
+
+	std::cout << std::endl;
 }

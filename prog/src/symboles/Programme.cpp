@@ -60,7 +60,7 @@ void Programme::analyser()
 	// Declarations
 	// variables/constantes déclarées avec le même identifiant
 	// => d'ailleurs, que faire dans le mode d'exécution normal ?
-
+	_declarations->analyser();
 }
 
 int Programme::getValeur(std::string const& identifiant) const
