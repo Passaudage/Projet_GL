@@ -26,7 +26,6 @@ public:
       */
     bool decaler();
     
-    std::string getLigneColonneCourante();
     void throwError(std::string message);
 
 private:

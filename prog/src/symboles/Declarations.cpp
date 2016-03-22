@@ -256,7 +256,7 @@ void Declarations::formatterIdentifiants(
 			std::cout << "   " << keyBuffer << " ";
 		}
 
-		std::cout << "l.x ";
+		std::cout << "l." << pairIdentifiant.second->getLigne() << " ";
 
 		premier = false;
 	}

@@ -40,7 +40,6 @@ Lexer::Lexer(std::string const& nomFichier)
 		_fileSymboles.push(symbole);
 	}
 	
-	
 	if(_fileSymboles.empty())
 		throw "Le flux est vide";
 
@@ -51,14 +50,6 @@ Lexer::~Lexer()
 {
 	_fichierSource.close();
 }
-
-/*
-// #### Surcharge #### //
-std::ostream& operator << (std::ostream& os, const Lexer& lex)  
-{
-    return os;  
-} 
-*/
 
 // #### Publique #### //
 
@@ -93,8 +84,10 @@ bool Lexer::decaler()
 	
 	_symboleCourant->setPosition(posSymbole);
 	
+#ifdef MAP
 	std::cout << "Symbole " << int(*_symboleCourant) << " : ligne " <<
 		posSymbole.ligne << ", carac " << posSymbole.caractere << std::endl;
+#endif
 
 	if(_fileSymboles.empty()) {
 		Symbole* symbole = lire_decaler();
@@ -121,7 +114,6 @@ Symbole* Lexer::lire_decaler()
 {
 	Symbole* symbole = nullptr;
 	char caractere;
-	bool nouvelleLigne = false;
 
 	_debut_mot = false;
 
@@ -418,12 +410,6 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	}
 
 	return nullptr;
-}
-
-std::string Lexer::getLigneColonneCourante()
-{
-	// l. 5, c.3 
-	//return !!
 }
 
 void Lexer::throwError(std::string message)
