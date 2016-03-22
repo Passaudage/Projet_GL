@@ -1,6 +1,8 @@
 #ifndef SYMBOLE_HPP
 #define SYMBOLE_HPP
 
+#include "Lexer.hpp"
+
 class Symbole
 {
 public:
@@ -44,6 +46,10 @@ public:
 	virtual ~Symbole();
 
 	void setType(Type symboleType);
+	void setPosition(Lexer::Position position);
+
+	int getLigne();
+	int getCaractere();
 	
 
 protected:

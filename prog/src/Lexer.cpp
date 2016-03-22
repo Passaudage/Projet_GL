@@ -12,7 +12,7 @@
 #include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Valeur.hpp"
 #include "symboles/Identifiant.hpp"
-
+#include "symboles/SymbolesTerminaux.hpp"
 
 // #### Constructeur et destructeur #### //
 Lexer::Lexer(std::string const& nomFichier)
@@ -27,17 +27,20 @@ Lexer::Lexer(std::string const& nomFichier)
 	}
 
 	_nombre_negatif = false;
+	_renvoie_negatif = false;
 	_caractereCourant = 0;
-	_ligneCourante = 0;
+	_ligneCourante = 1;
 
 	Symbole* symbole = lire_decaler();
 
-	if(symbole != nullptr)
+	if(symbole != nullptr) {
 		_fileSymboles.push(symbole);
+	}
+	
 	
 	if(_fileSymboles.empty())
 		throw "Le flux est vide";
-	
+
 	decaler();
 }
 
@@ -73,7 +76,14 @@ bool Lexer::decaler()
 
 	_symboleCourant = _fileSymboles.front();
 	_fileSymboles.pop();
+
+	Position posSymbole = _filePositions.front();
+	_filePositions.pop();
+	_symboleCourant->setPosition(posSymbole);
 	
+	std::cout << "Symbole " << int(*_symboleCourant) << " : ligne " <<
+		posSymbole.ligne << ", carac " << posSymbole.caractere << std::endl;
+
 	if(_fileSymboles.empty()) {
 		Symbole* symbole = lire_decaler();
 
@@ -86,14 +96,25 @@ bool Lexer::decaler()
 
 // #### Privée #### //
 
+Lexer::Position Lexer::positionCourante()
+{
+	Position position;
+	position.ligne = _ligneCourante;
+	position.caractere = _caractereCourant;
+
+	return position;
+}
+
 Symbole* Lexer::lire_decaler()
 {
 	Symbole* symbole = nullptr;
 	char caractere;
-	bool debut_mot = false;
 	bool nouvelleLigne = false;
 
+	_debut_mot = false;
+
 	std::stringstream sstr;
+	Position positionDelimiteur;
 
 	for(;;) {
 
@@ -103,7 +124,7 @@ Symbole* Lexer::lire_decaler()
 
 			symbole = new FinDeFlux();
 
-			if(!debut_mot) {
+			if(!_debut_mot) {
 				// on renvoie la fin de flux
 				return symbole;
 			}
@@ -113,8 +134,7 @@ Symbole* Lexer::lire_decaler()
 		}
 
 		_caractereCourant++;
-
-		//std::cout << "-->" << caractere << "<--" << std::endl;
+		//std::cout << caractere << std::endl;
 
 		// est-ce un delimiteur ?
 
@@ -122,14 +142,12 @@ Symbole* Lexer::lire_decaler()
 			// On ne prend pas en compte les fins de ligne Windows
 			// || caractere == '\r') {
 
-			// const a
-			// b = 5;
-
 			if(caractere == '\n') {
-				nouvelleLigne = true;
+				_ligneCourante++;
+				_caractereCourant = 0;
 			}
 
-			if(!debut_mot) {
+			if(!_debut_mot) {
 				// on regarde le prochain caractère
 				continue;
 			}
@@ -141,6 +159,8 @@ Symbole* Lexer::lire_decaler()
 			break;
 		}
 
+		positionDelimiteur = positionCourante();
+
 		symbole = lire_delimiteur(caractere);
 
 		if(symbole != nullptr) {
@@ -148,12 +168,24 @@ Symbole* Lexer::lire_decaler()
 			//
 			// il reste à transformer en symbole
 			// ce qui est dans le "buffer"
+
+			_filePositions.push(positionDelimiteur);
+
+			break;
+		}
+
+		if(!_debut_mot) {
+			//std::cout << "position courante " << positionCourante().caractere << std::endl;
+			_filePositions.push(positionCourante());
+		}
+
+		if(_renvoie_negatif) {
 			break;
 		}
 
 		sstr << caractere;
 
-		debut_mot = true;
+		_debut_mot = true;
 	}
 
 	std::string identifiant;
@@ -161,6 +193,12 @@ Symbole* Lexer::lire_decaler()
 
 	if(_nombre_negatif) {
 		identifiant = identifiant.substr(1);
+
+		//std::cout << "position carac " << _filePositions.front().caractere << std::endl;
+	}
+
+	if(_renvoie_negatif) {
+		_renvoie_negatif = false;
 	}
 
 	if(!identifiant.empty()) {
@@ -178,11 +216,6 @@ Symbole* Lexer::lire_decaler()
 			// on le met de côté pour un prochain décalage
 			// car il correspond au symbole après le suivant
 			_fileSymboles.push(delimiteur);
-		}
-
-		if(nouvelleLigne) {
-			_ligneCourante++;
-			_caractereCourant = 0;
 		}
 
 		return nullptr;
@@ -206,6 +239,7 @@ Symbole* Lexer::lire_decaler()
 
 Symbole* Lexer::lire_delimiteur(char& caractere)
 {
+//	std::cout << "carac : " << caractere << std::endl;
 	Symbole* delimiteur = nullptr;
 	char caractere_suivant;
 
@@ -231,10 +265,26 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 			if(_fichierSource.get(caractere_suivant) &&
 				std::isdigit(caractere_suivant))
 			{
-				_fichierSource.unget();
-				_nombre_negatif = true;
+				if(_debut_mot) {
+					_renvoie_negatif = true;
+
+					_fichierSource.unget();
+					_fichierSource.unget();
+
+				} else {
+					_nombre_negatif = true;
+					// si besoin est, on retient 
+					// la position du signe moins
+					_fichierSource.unget();
+					
+					_caractereCourant--;
+					_filePositions.push(positionCourante());
+				}
+				
 				break;
 			}
+
+			_fichierSource.unget();
 
 			delimiteur = new OperateurAdd(false);
 			break;
@@ -254,7 +304,7 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 			if(!_fichierSource.get(caractere_suivant) ||
 				caractere_suivant != '=') { 
-				throwError("Symbole \":\" invalide");
+				throw "Symbole \":\" invalide";
 			}
 
 			delimiteur = new Affectation();
@@ -271,9 +321,11 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	// est-ce une valeur entière ?
 
 	bool valeur = true;
+
 #ifdef MAP
-	std::cout << " ------ >" << identifiant << "<----" << std::endl;
+	std::cout << "------ >" << identifiant << "<----" << std::endl;
 #endif
+
 	for(std::string::iterator it = identifiant.begin();
 		it != identifiant.end(); ++it) {
 		if(!std::isdigit(*it)) {
@@ -288,12 +340,19 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 		if(_nombre_negatif)
 		{
-			if(int(*_symboleCourant) != Symbole::Type::VALEUR ||
+			_nombre_negatif = false;
+
+			if(int(*_symboleCourant) != Symbole::Type::VALEUR &&
 				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT) {
 
 				valeur_id *= -1;
+
+				_filePositions.pop();
+			} else {
+				// il faut rajouter ce délimiteur !
+				_fileSymboles.push(new OperateurAdd(false));
 			}
-			_nombre_negatif = false;
+			
 		}
 
 		return new Valeur(valeur_id);
@@ -303,7 +362,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		// on croyait que ce pouvait être un nombre négatif
 		// mais on s'est finalement trompé :
 		// ce n'est pas une valeur autorisée !
-		throwError("Un nombre était attendu, mais la chaîne trouvée n'est pas valide");
+		throw "Un nombre était attendu, mais la chaîne trouvée n'est pas valide";
 	}
 
 	// est-ce un mot clé ?
@@ -333,8 +392,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 		
 		for(++it ; it != identifiant.end(); ++it) {
 			if(!(std::isalpha(*it) || std::isdigit(*it) || *it == '_')) {
-				//~ throw "L'identifiant comporte des caractères interdits";
-				throwError("L'identifiant comporte des caractères interdits");
+				throw "L'identifiant comporte des caractères interdits";
 			}
 		}
 
@@ -347,6 +405,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 std::string Lexer::getLigneColonneCourante()
 {
 	// l. 5, c.3 
+	//return !!
 }
 
 void Lexer::throwError(std::string message)

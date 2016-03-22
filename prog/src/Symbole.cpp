@@ -26,3 +26,19 @@ void Symbole::setType(Type symboleType)
 #endif
 	_symboleType = symboleType;
 }
+
+int Symbole::getLigne()
+{
+	return _ligne;
+}
+int Symbole::getCaractere()
+{
+	return _caractere;
+}
+
+
+void Symbole::setPosition(Lexer::Position position)
+{
+	_ligne = position.ligne;
+	_caractere = position.caractere;
+}
