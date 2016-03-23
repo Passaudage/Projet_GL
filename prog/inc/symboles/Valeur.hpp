@@ -33,7 +33,9 @@ public:
 	int calculer(Programme &);
 	int getValeur() const;
 	void afficher();
+	Expression* optimiser(Programme& programme);
     std::unordered_set<Identifiant*> getIdentifiants();
+    bool estEvaluable(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Valeur& operator=(const Valeur & unValeur) = delete;

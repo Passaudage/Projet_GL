@@ -82,6 +82,7 @@ public:
 	void enregistrerVariables(IDV& idv);
 	int getValeur(string const& identifiant) const;
 	void setValeur(string const& identifiant, int valeur);
+	bool estModifiable(string const& identifiant);
 
 	void afficher();
 

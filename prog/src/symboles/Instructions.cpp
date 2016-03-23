@@ -21,6 +21,14 @@ void Instructions::executer(Programme& programme)
 	}
 }
 
+void Instructions::optimiser(Programme & programme)
+{
+	std::list<Instruction*>::iterator it;
+	for (it = _instructions.begin() ; it != _instructions.end() ; it++) {
+		(*it)->optimiser(programme);
+	}
+}
+
 std::list<Instruction*>& Instructions::getInstructions()
 {
 	return _instructions;

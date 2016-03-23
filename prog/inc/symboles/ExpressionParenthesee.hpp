@@ -33,7 +33,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme & programme);
 	void afficher();
+	Expression* optimiser(Programme& programme);
     std::unordered_set<Identifiant*> getIdentifiants();
+    bool estEvaluable(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionParenthesee& operator=(
@@ -57,7 +59,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	Expression& _exprInter;
+	Expression* _exprInter;
 
 private:
 //------------------------------------------------------- Attributs privés

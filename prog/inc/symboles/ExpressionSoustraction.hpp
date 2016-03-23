@@ -28,6 +28,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	int calculer(Programme& programme);
 	void afficher();
+	Expression* optimiser(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionSoustraction& operator=(

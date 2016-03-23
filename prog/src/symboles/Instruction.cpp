@@ -21,3 +21,7 @@ Instruction::~Instruction()
 {
 }
 
+void Instruction::optimiser(Programme& programme)
+{
+}
+

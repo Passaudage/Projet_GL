@@ -61,6 +61,13 @@ int Declarations::getValeur(string const& identifiant) const
 	return _entites.find(identifiant)->second.valeur;
 }
 
+bool Declarations::estModifiable(string const& identifiant)
+{
+	if(!identifiantPris(identifiant))
+		return 0;
+	return _entites.find(identifiant)->second.modifiable;
+}
+
 void Declarations::setValeur(string const& identifiant, int valeur) {
 	if (identifiantPris(identifiant)) {
 		unordered_map<string, Entite>::iterator it = _entites.find(identifiant);

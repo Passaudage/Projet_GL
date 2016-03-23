@@ -51,7 +51,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	Expression& _expr;
+	Expression* _expr;
 
 private:
 //------------------------------------------------------- Attributs privés

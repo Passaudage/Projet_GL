@@ -50,6 +50,7 @@ public:
 
 	int getValeur(std::string const& identifiant) const;
     void setValeur(std::string const& identifiant, int valeur);
+    bool estModifiable(std::string const& identifiant);
 
 //------------------------------------------------------------------ PRIVE 
 

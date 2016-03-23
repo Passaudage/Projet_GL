@@ -29,7 +29,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void afficher();
 	void effectuer(Programme& programme);
-
+	void optimiser(Programme& programme);
 //------------------------------------------------- Surcharge d'opérateurs
     Affectation& operator=(const Affectation & unAffectation) = delete;
 

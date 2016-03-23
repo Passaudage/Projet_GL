@@ -29,6 +29,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void afficher();
 	void effectuer(Programme& programme);
+	void optimiser(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Affichage& operator=(const Affichage & unAffichage) = delete;

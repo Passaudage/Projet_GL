@@ -1,4 +1,5 @@
 #include "symboles/Identifiant.hpp"
+#include "symboles/Valeur.hpp"
 
 #include <iostream>
 
@@ -27,4 +28,22 @@ std::unordered_set<Identifiant*> Identifiant::getIdentifiants()
 	std::unordered_set<Identifiant*> id;
 	id.insert(this);
 	return id;
+}
+
+Expression* Identifiant::optimiser(Programme& programme)
+{
+	if(!programme.estModifiable(_identifiant)){ // Si c'est une constante
+		return new Valeur(this->calculer(programme));
+	} else {
+		return this;
+	}
+}
+
+bool Identifiant::estEvaluable(Programme& programme)
+{
+	if(!programme.estModifiable(_identifiant)){ // Si c'est une constante
+		return true;
+	} else {
+		return false;
+	}
 }

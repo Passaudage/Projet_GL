@@ -40,6 +40,8 @@ void Programme::transformer()
 	// plusieurs affectations de suite pour une même variable
 	// a:=5;lire b;a:=7; ---> lire b;a:=7;
 	// a:=8;b:=7;lire a; ---> b:=7;lire a;
+	
+	_instructions->optimiser(*this);
 }
 
 void Programme::executer()
@@ -71,4 +73,9 @@ int Programme::getValeur(std::string const& identifiant) const
 void Programme::setValeur(std::string const& identifiant, int valeur)
 {
 	_declarations->setValeur(identifiant, valeur);
+}
+
+bool Programme::estModifiable(std::string const& identifiant)
+{
+	return _declarations->estModifiable(identifiant);
 }

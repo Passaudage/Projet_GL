@@ -32,6 +32,7 @@ public:
 	virtual int calculer(Programme &) = 0;
 	virtual void afficher() = 0;
     virtual std::unordered_set<Identifiant*> getIdentifiants();
+    bool estEvaluable(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =
@@ -54,8 +55,8 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	Expression& _exprGauche;
-	Expression& _exprDroite;
+	Expression* _exprGauche;
+	Expression* _exprDroite;
 
 private:
 //------------------------------------------------------- Attributs privés

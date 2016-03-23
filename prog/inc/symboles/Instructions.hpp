@@ -33,6 +33,7 @@ public:
 	void ajouteInstruction(Instruction* instruction);
 	void executer(Programme & programme);
 	void afficher();
+	void optimiser(Programme & programme);
 
     std::list<Instruction*>& getInstructions();
 

@@ -36,7 +36,9 @@ public:
 	virtual int calculer(Programme & programme) = 0;
 	virtual void afficher() = 0;
 	virtual std::unordered_set<Identifiant*> getIdentifiants() = 0;
-
+	virtual Expression* optimiser(Programme& programme)=0;
+	virtual bool estEvaluable(Programme& programme) = 0;
+	
 //------------------------------------------------- Surcharge d'opérateurs
     Expression& operator=(const Expression & unExpression)=delete ;
 
