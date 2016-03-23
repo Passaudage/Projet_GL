@@ -107,7 +107,7 @@ protected:
 private:
 //------------------------------------------------------- Méthodes privées
 
-	void formatterIdentifiants(
+	void formaterIdentifiants(
 		std::multimap<std::string, Identifiant*>& multimap);
 
 protected:

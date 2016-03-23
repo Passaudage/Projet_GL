@@ -48,6 +48,8 @@ public:
 	void setType(Type symboleType);
 	void setPosition(Lexer::Position position);
 
+	Lexer::Position getPosition();
+
 	int getLigne();
 	int getCaractere();
 	
@@ -56,8 +58,7 @@ protected:
 
 	Type _symboleType;
 
-	int _ligne;
-	int _caractere;
+	Lexer::Position _position;
 
 private:
 

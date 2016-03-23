@@ -6,6 +6,8 @@
 #include "symboles/Identifiant.hpp"
 #include "symboles/Valeur.hpp"
 
+#include "Erreurs.hpp"
+
 Etat18 Etat18::m_instance = Etat18();
 
 Etat18::Etat18()

@@ -8,6 +8,8 @@
 #include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Expression.hpp"
 
+#include "Erreurs.hpp"
+
 Etat23 Etat23::m_instance = Etat23();
 
 Etat23::Etat23()
@@ -53,7 +55,7 @@ void Etat23::transition(Automate* a, Symbole* s)
 			}
 			break;
 		default:
-			a->throwLexerError("Symbole non attendu par la grammaire");
+			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
 			break;
 		}
 }

@@ -3,6 +3,8 @@
 #include "Automate.hpp"
 #include "Symbole.hpp"
 
+#include "Erreurs.hpp"
+
 Etat24 Etat24::m_instance = Etat24();
 
 Etat24::Etat24()

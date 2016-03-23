@@ -8,6 +8,8 @@
 #include "symboles/Programme.hpp"
 #include "Lexer.hpp"
 
+#include "Erreurs.hpp"
+
 struct arg_cmd_struct {
 	bool afficher;
 	bool analyser;
@@ -48,11 +50,13 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 			programme->executer();
 		}
 
-	} catch(std::exception& e) {
+	} catch(ExceptionFarfadet& e) {
+
+		std::cerr << "Erreur : " << e.getErreur() << std::endl;
+		std::cerr << "Sortie de Farfadet !" << std::endl;
 
 	} catch(char const* message) {
 		std::cerr << "Une erreur est survenue : " << message << std::endl;
-		std::cerr << "Sortie de Farfadet" << std::endl;
 	}
 }
 

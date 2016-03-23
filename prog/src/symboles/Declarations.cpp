@@ -154,7 +154,6 @@ void Declarations::signerUtiliser(Expression* expression)
 
 void Declarations::signerUtiliser(Identifiant* identifiant)
 {
-	//std::cout << "signer utiliser (" << identifiant->get() << ")" << std::endl;
 	unordered_map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
@@ -164,16 +163,13 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 	if(it == _entites.end()) {
 		// pas encore declarée
 		_varUtiliseesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
-	//	std::cout << " -> pas encore déclarée !" << std::endl;
 	} else {
 		// déclarée
 		it->second.utilise = true;
-	//	std::cout << " -> déclarée !" << std::endl;
 
 		// est-elle initialisée ?
 
 		if(!it->second.initialise) {
-	//		std::cout << " -> déclarée mais non initialisée !" << std::endl;
 			_varUtiliseesNonAffectees.insert(Entree(identifiant->get(), identifiant));
 		}
 	}
@@ -183,7 +179,6 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 
 void Declarations::signerAffecter(Identifiant* identifiant)
 {
-	//std::cout << "signer affecter" << std::endl;
 	unordered_map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
@@ -191,11 +186,9 @@ void Declarations::signerAffecter(Identifiant* identifiant)
 	if(it == _entites.end()) {
 		// variable affectée mais non déclarée
 		_varAffecteesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
-	//	std::cout << " -> affectée mais non déclarée !" << std::endl;
 	} else {
 		if(!it->second.modifiable) {
 			_constModifiees.insert(Entree(identifiant->get(), identifiant));
-	//		std::cout << " -> constante modifiée !" << std::endl;
 		}
 	}
 }
@@ -207,40 +200,40 @@ void Declarations::analyser()
 	std::cout << "Analyse statique du code lutin :" << std::endl;
 
 	if(!_varUtiliseesNonDeclarees.empty()) {
-		std::cout << "Identifiants utilisés non déclarés :" << std::endl;
-		formatterIdentifiants(_varUtiliseesNonDeclarees);
+		std::cerr << "Identifiants utilisés non déclarés :" << std::endl;
+		formaterIdentifiants(_varUtiliseesNonDeclarees);
 	}
 
 	if(!_varAffecteesNonDeclarees.empty()) {
-		std::cout << "Identifiants affectés non déclarés :" << std::endl;
-		formatterIdentifiants(_varAffecteesNonDeclarees);
+		std::cerr << "Identifiants affectés non déclarés :" << std::endl;
+		formaterIdentifiants(_varAffecteesNonDeclarees);
 	}
 
 	if(!_varUtiliseesNonAffectees.empty()) {
-		std::cout << "Identifiants utilisés non initialisés :" << std::endl;
-		formatterIdentifiants(_varUtiliseesNonAffectees);
+		std::cerr << "Identifiants utilisés non initialisés :" << std::endl;
+		formaterIdentifiants(_varUtiliseesNonAffectees);
 	}
 
 	if(_entites.size() > _varUtilisees.size()) {
-		std::cout << "Identifiants déclarés mais inutilisés :" << std::endl;
+		std::cerr << "Identifiants déclarés mais inutilisés :" << std::endl;
 		std::unordered_set<std::string>::iterator it;
 
 		for(std::pair<std::string, Entite> pairEntite : _entites) {
 			it = _varUtilisees.find(pairEntite.first);
 
 			if(it == _varUtilisees.end()) {
-				std::cout << "   " << pairEntite.first << std::endl;
+				std::cerr << "   " << pairEntite.first << std::endl;
 			}
 		}
 	}
 
 	if(!_constModifiees.empty()) {
-		std::cout << "Modifications de constantes : " << std::endl;
-		formatterIdentifiants(_constModifiees);
+		std::cerr << "Modifications de constantes : " << std::endl;
+		formaterIdentifiants(_constModifiees);
 	}
 }
 
-void Declarations::formatterIdentifiants(
+void Declarations::formaterIdentifiants(
 	std::multimap<std::string, Identifiant*>& multimap)
 {
 	bool premier = true; // Est-ce vraiment utile ?
@@ -251,15 +244,15 @@ void Declarations::formatterIdentifiants(
 			keyBuffer = pairIdentifiant.first;
 
 			if(!premier) {
-				std::cout << std::endl;
+				std::cerr << std::endl;
 			}
-			std::cout << "   " << keyBuffer << " ";
+			std::cerr << "   " << keyBuffer << " : ";
 		}
 
-		std::cout << "l." << pairIdentifiant.second->getLigne() << " ";
+		std::cerr << "l." << pairIdentifiant.second->getLigne() << " ";
 
 		premier = false;
 	}
 
-	std::cout << std::endl;
+	std::cerr << std::endl;
 }

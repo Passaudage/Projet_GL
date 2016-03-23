@@ -8,6 +8,8 @@
 
 #include "symboles/Declarations.hpp"
 
+#include "Erreurs.hpp"
+
 Etat6 Etat6::m_instance = Etat6();
 
 Etat6::Etat6()

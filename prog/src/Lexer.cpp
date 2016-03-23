@@ -398,7 +398,7 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	std::string::iterator it = identifiant.begin();
 	char premier = *it;
 
-	if(std::isalpha(premier) || premier == '_') {
+	if(std::isalpha(premier)) {
 		
 		for(++it ; it != identifiant.end(); ++it) {
 			if(!(std::isalpha(*it) || std::isdigit(*it) || *it == '_')) {

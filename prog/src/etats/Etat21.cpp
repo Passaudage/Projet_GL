@@ -6,6 +6,8 @@
 #include "symboles/Affectation.hpp"
 #include "symboles/Declarations.hpp"
 
+#include "Erreurs.hpp"
+
 Etat21 Etat21::m_instance = Etat21();
 
 Etat21::Etat21()
@@ -60,7 +62,7 @@ void Etat21::transition(Automate* a, Symbole* s)
 			}
 			break;
 		default:
-			a->throwLexerError("Symbole non attendu par la grammaire");
+			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
 			break;
 		}
 }

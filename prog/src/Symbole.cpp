@@ -4,9 +4,10 @@
 #include <iostream>
 #endif
 
-Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType),
-	_ligne(-1), _caractere(-1)
+Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType)
 {
+	_position.ligne = -1;
+	_position.caractere = -1;
 }
 
 Symbole::operator int()
@@ -29,16 +30,20 @@ void Symbole::setType(Type symboleType)
 
 int Symbole::getLigne()
 {
-	return _ligne;
+	return _position.ligne;
 }
 int Symbole::getCaractere()
 {
-	return _caractere;
+	return _position.caractere;
+}
+
+Lexer::Position Symbole::getPosition()
+{
+	return _position;
 }
 
 
 void Symbole::setPosition(Lexer::Position position)
 {
-	_ligne = position.ligne;
-	_caractere = position.caractere;
+	_position = position;
 }

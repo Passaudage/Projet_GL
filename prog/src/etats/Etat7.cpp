@@ -11,6 +11,8 @@
 #include "etats/Etat20.hpp"
 #include "etats/Etat32.hpp"
 
+#include "Erreurs.hpp"
+
 Etat7 Etat7::m_instance = Etat7();
 
 Etat7::Etat7()
@@ -59,7 +61,7 @@ void Etat7::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			a->throwLexerError("Symbole non attendu par la grammaire");
+			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
 			break;
 	}
 }

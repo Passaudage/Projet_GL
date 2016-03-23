@@ -7,6 +7,8 @@
 #include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Expression.hpp"
 
+#include "Erreurs.hpp"
+
 Etat32 Etat32::m_instance = Etat32();
 
 Etat32::Etat32()
