@@ -1,0 +1,6 @@
+var x,y,z;
+const n=10,m=5;
+x:=5;
+y:=x+1;
+z:=7*y+5;
+ecrire (x+y+z)*(n/m);
