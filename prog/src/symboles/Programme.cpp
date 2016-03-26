@@ -37,6 +37,9 @@ void Programme::transformer()
 	// éliminer les opérations avec élément neutre
 	// éliminer les parenthèses inutiles ?
 
+	// 0*x ; x*0 ; x/1 ; x+0 ; 0+x
+	// ERREUR : x/0
+
 	// plusieurs affectations de suite pour une même variable
 	// a:=5;lire b;a:=7; ---> lire b;a:=7;
 	// a:=8;b:=7;lire a; ---> b:=7;lire a;

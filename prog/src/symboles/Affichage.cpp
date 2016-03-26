@@ -22,6 +22,7 @@ Affichage::Affichage(Expression& expr) : InstructionExpression(expr)
 
 void Affichage::optimiser(Programme& programme)
 {
-	//~ std::cout <<"Affection optimisation"<<std::endl;
-	_expr = _expr->optimiser(programme);
+	_expr = _expr->enleverParentheses()->
+		optimiser(programme).first->
+		simplifier(programme);
 }

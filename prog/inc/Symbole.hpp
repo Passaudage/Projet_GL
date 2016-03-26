@@ -21,7 +21,7 @@ public:
 		// Symboles terminaux
 		PARENTHESE_OUV,
 		PARENTHESE_FER,
-		OPERATEUR_MUL,	
+		OPERATEUR_MUL,
 		OPERATEUR_ADD,
 		POINT_VIR,
 		VIRGULE,
@@ -52,11 +52,14 @@ public:
 
 	int getLigne();
 	int getCaractere();
+
+	int getInitType();
 	
 
 protected:
 
 	Type _symboleType;
+	Type _initType;
 
 	Lexer::Position _position;
 

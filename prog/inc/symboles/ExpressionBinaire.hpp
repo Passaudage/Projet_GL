@@ -11,6 +11,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/Expression.hpp"
 #include <unordered_set>
+
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
@@ -29,10 +30,23 @@ class ExpressionBinaire : public Expression
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	virtual int calculer(Programme &) = 0;
+	virtual int calculer(Programme &);
 	virtual void afficher() = 0;
     virtual std::unordered_set<Identifiant*> getIdentifiants();
     bool estEvaluable(Programme& programme);
+
+    Expression* enleverParentheses();
+
+    Expression* getGauche();
+    Expression* getDroite();
+
+    bool commutatif();
+    Symbole::Type getOperation();
+
+    virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false);
+
+    virtual ExpressionBinaire* construireExpression(Expression* exprGauche,
+        Expression* exprDroite, bool oppose = false) = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionBinaire& operator=(const ExpressionBinaire & unExpressionBinaire) =
@@ -41,9 +55,12 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     ExpressionBinaire(const ExpressionBinaire & unExpressionBinaire) = delete;
 
-    ExpressionBinaire(Expression& exprGauche, Expression& exprDroite);
+    ExpressionBinaire(Expression& exprGauche, Expression& exprDroite,
+        bool commutatif, int element_neutre, Symbole::Type operation);
 
     virtual ~ExpressionBinaire();
+
+
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -57,6 +74,15 @@ protected:
 //----------------------------------------------------- Attributs protégés
 	Expression* _exprGauche;
 	Expression* _exprDroite;
+
+    bool const _commutatif;
+    int const _element_neutre;
+    Symbole::Type const _operation;
+
+    virtual int operation(int a, int b, bool oppose = false) = 0;
+
+    bool estValeurConstante(Expression* expr, Programme& programme);
+    Expression* simplifierElementNeutre(Programme& programme);
 
 private:
 //------------------------------------------------------- Attributs privés

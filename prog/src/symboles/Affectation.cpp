@@ -28,6 +28,8 @@ Affectation::~Affectation()
 
 void Affectation::optimiser(Programme& programme)
 {
-	//~ std::cout <<"Affection optimisation"<<std::endl;
-	_expr = _expr->optimiser(programme);
+	_expr = _expr->enleverParentheses()->
+		optimiser(programme).first->
+		simplifier(programme);
 }
+

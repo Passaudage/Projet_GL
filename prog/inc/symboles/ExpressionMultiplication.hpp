@@ -26,9 +26,12 @@ class ExpressionMultiplication : public ExpressionBinaire
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	int calculer(Programme& programme);
 	void afficher();
-	Expression* optimiser(Programme& programme);
+
+    virtual ExpressionBinaire* construireExpression(Expression* exprGauche,
+        Expression* exprDroite, bool oppose = false);
+
+    virtual Expression* simplifier(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionMultiplication& operator=(
@@ -45,6 +48,8 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+    int operation(int a, int b, bool oppose = false);
+    
 private:
 //------------------------------------------------------- Méthodes privées
 

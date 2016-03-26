@@ -348,10 +348,11 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 		if(_nombre_negatif)
 		{
-			
-
+			// symboles pouvant précéder un signe soustraction
+			// pour le différencier d'un nombre négatif
 			if(int(*_symboleCourant) != Symbole::Type::VALEUR &&
-				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT) {
+				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT &&
+				int(*_symboleCourant) != Symbole::Type::PARENTHESE_FER) {
 
 				valeur_id *= -1;
 

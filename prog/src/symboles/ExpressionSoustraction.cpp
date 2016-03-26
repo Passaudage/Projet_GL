@@ -3,26 +3,64 @@
 
 #include <iostream>
 
+#include "symboles/ExpressionAddition.hpp"
 
-int ExpressionSoustraction::calculer(Programme& programme)
-{
-	return _exprGauche->calculer(programme) - _exprDroite->calculer(programme);
-}
 
 ExpressionSoustraction::ExpressionSoustraction(
 		Expression& exprGauche,
 		Expression& exprDroite
-	):ExpressionBinaire(exprGauche, exprDroite)
+	):ExpressionBinaire(exprGauche, exprDroite, false, 0, Symbole::Type::OPERATEUR_ADD)
 {
 }
 
 void ExpressionSoustraction::afficher()
 {
-	_exprGauche->afficher();
+	// permet d'éviter l'affichage "0-variable"
+	if(!(_exprGauche->getInitType() == Symbole::Type::VALEUR &&
+		((Valeur*)_exprGauche)->getValeur() == 0)) {
+		_exprGauche->afficher();
+	}
+
 	std::cout << "-";
 	_exprDroite->afficher();
 }
 
+int ExpressionSoustraction::operation(int a, int b, bool oppose)
+{
+	if(oppose) {
+		return a + b;
+	}
+	return a - b;
+}
+
+Expression* ExpressionSoustraction::simplifier(Programme& programme)
+{
+	Expression* expr = simplifierElementNeutre(programme);
+
+	if(expr != this) {
+		return expr;
+	}
+
+	if(_exprDroite->getInitType() == Symbole::Type::VALEUR &&
+		((Valeur*)_exprDroite)->getValeur() < 0) {
+		return new ExpressionAddition(*_exprGauche, 
+			* new Valeur(-((Valeur*)_exprDroite)->getValeur() ));
+	}
+
+	return this;
+}
+
+ExpressionBinaire* ExpressionSoustraction::construireExpression(
+	Expression* exprGauche, Expression* exprDroite, bool oppose)
+{
+	if(oppose) {
+		return new ExpressionAddition(*exprGauche, *exprDroite);
+	}
+
+	return new ExpressionSoustraction(*exprGauche, *exprDroite);
+}
+
+/*
 Expression* ExpressionSoustraction::optimiser(Programme& programme)
 {
 	//~ std::cout << "Expression Soustraction optimisation "<<std::endl;
@@ -46,3 +84,4 @@ Expression* ExpressionSoustraction::optimiser(Programme& programme)
 		return new ExpressionSoustraction(*left,*right);
 	}
 }
+*/

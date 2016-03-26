@@ -3,16 +3,12 @@
 
 #include <iostream>
 
-
-int ExpressionDivision::calculer(Programme& programme)
-{
-	return _exprGauche->calculer(programme) / _exprDroite->calculer(programme);
-}
+#include "symboles/ExpressionMultiplication.hpp"
 
 ExpressionDivision::ExpressionDivision(
 		Expression& exprGauche,
 		Expression& exprDroite
-	):ExpressionBinaire(exprGauche, exprDroite)
+	):ExpressionBinaire(exprGauche, exprDroite, false, 1, Symbole::Type::OPERATEUR_MUL)
 {
 }
 
@@ -23,6 +19,41 @@ void ExpressionDivision::afficher()
 	_exprDroite->afficher();
 }
 
+int ExpressionDivision::operation(int a, int b, bool oppose)
+{
+	if(oppose) {
+		return a * b;
+	}
+	return a / b;
+}
+
+ExpressionBinaire* ExpressionDivision::construireExpression(
+	Expression* exprGauche, Expression* exprDroite, bool oppose)
+{
+	if(!oppose) {
+		return new ExpressionDivision(*exprGauche, *exprDroite);
+	}
+
+	return new ExpressionMultiplication(*exprGauche, *exprDroite);
+}
+
+Expression* ExpressionDivision::simplifier(Programme& programme)
+{
+	Expression* expr = simplifierElementNeutre(programme);
+
+	if(expr != this) {
+		return expr;
+	}
+
+	if((_exprGauche->estEvaluable(programme) &&
+		_exprGauche->calculer(programme) == 0))  {
+		return new Valeur(0);
+	}
+
+	return this;
+}
+
+/*
 Expression* ExpressionDivision::optimiser(Programme& programme)
 {
 	//~ std::cout << "Expression Division optimisation "<<std::endl;
@@ -45,4 +76,4 @@ Expression* ExpressionDivision::optimiser(Programme& programme)
 		}
 		return new ExpressionDivision(*left,*right);
 	}	
-}
+}*/

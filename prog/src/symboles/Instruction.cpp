@@ -23,5 +23,6 @@ Instruction::~Instruction()
 
 void Instruction::optimiser(Programme& programme)
 {
+	// Comportement par défaut : ne pas optimiser
 }
 

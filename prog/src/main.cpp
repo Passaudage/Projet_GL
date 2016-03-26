@@ -36,18 +36,20 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 		}
 		
 		if(arg_cmd->transformer) {
-			std::cout << "Transformation du code..." << std::endl;
+			//std::cout << "Transformation du code..." << std::endl;
 			programme->transformer();
 		}
 
 		if(arg_cmd->afficher) {
-			std::cout << "Voici l'affichage du code..." << std::endl;
+			//std::cout << "Voici l'affichage du code..." << std::endl;
 			programme->afficher();
 		}
 
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
+			std::cout << "---" << std::endl;
 			programme->executer();
+			std::cout << "---" << std::endl;
 		}
 
 	} catch(ExceptionFarfadet& e) {

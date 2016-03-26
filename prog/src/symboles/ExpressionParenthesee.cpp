@@ -27,16 +27,32 @@ void ExpressionParenthesee::afficher()
 	std::cout << ")";
 }
 
+Expression* ExpressionParenthesee::horsParenthese()
+{
+	return _exprInter->horsParenthese();
+}
+
+Expression* ExpressionParenthesee::enleverParentheses()
+{
+	return _exprInter->enleverParentheses();
+}
+
 std::unordered_set<Identifiant*> ExpressionParenthesee::getIdentifiants()
 {
 	return _exprInter->getIdentifiants();
 }
 
-Expression* ExpressionParenthesee::optimiser(Programme& programme)
+std::pair<Expression*, Expression*> ExpressionParenthesee::optimiser(Programme& programme, bool remonter)
 {
-	Expression * expr = _exprInter->optimiser(programme);
+	std::pair<Expression*, Expression*> paire;
+	paire = _exprInter->optimiser(programme, remonter);
 	
-	return expr;
+	return paire;
+}
+
+Expression* ExpressionParenthesee::simplifier(Programme& programme)
+{
+	return _exprInter->simplifier(programme);
 }
 
 bool ExpressionParenthesee::estEvaluable(Programme& programme)

@@ -34,7 +34,6 @@ void Lecture::effectuer(Programme & programme)
 }
 
 
-
 Lecture::Lecture(Identifiant& identifiant):_identifiant(identifiant)
 {
 	_varUtilisees.insert(&identifiant);

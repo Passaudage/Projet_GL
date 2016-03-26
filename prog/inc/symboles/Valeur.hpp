@@ -33,7 +33,7 @@ public:
 	int calculer(Programme &);
 	int getValeur() const;
 	void afficher();
-	Expression* optimiser(Programme& programme);
+	virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false);
     std::unordered_set<Identifiant*> getIdentifiants();
     bool estEvaluable(Programme& programme);
 
