@@ -47,7 +47,7 @@ private:
     bool _nombre_negatif;
     bool _renvoie_negatif;
     bool _debut_mot;
-    
+
     Symbole* lire_decaler();
     /** Lit le prochain caractère. Si celui-ci correspond à un délimiteur,
       * le symbole correspondant est retourné, 

@@ -34,9 +34,16 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     SymboleTerminal(const SymboleTerminal & unSymboleTerminal) = delete;
 
+	static SymboleTerminal* getSymbole() {
+		return &_singleton;
+	}
+
+	virtual ~SymboleTerminal(){};
+protected:
     SymboleTerminal():Symbole(S){};
 	
-	virtual ~SymboleTerminal(){};
+	static SymboleTerminal<S> _singleton;
+
 //------------------------------------------------------------------ PRIVE 
 };
 
