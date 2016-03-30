@@ -9,7 +9,7 @@
 
 #include "Erreurs.hpp"
 
-Etat32 Etat32::m_instance = Etat32();
+Etat32 Etat32::m_instance;
 
 Etat32::Etat32()
 {

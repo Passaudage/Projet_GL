@@ -10,7 +10,7 @@
 
 #include "Erreurs.hpp"
 
-Etat23 Etat23::m_instance = Etat23();
+Etat23 Etat23::m_instance;
 
 Etat23::Etat23()
 {
