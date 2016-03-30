@@ -19,13 +19,8 @@ ExpressionBinaire::ExpressionBinaire(Expression& exprGauche, Expression& exprDro
 
 ExpressionBinaire::~ExpressionBinaire()
 {
-	if(_propagerDestruction) {
-		if(_exprDroite != nullptr)
-			delete _exprDroite;
-
-		if(_exprGauche != nullptr)
-			delete _exprGauche;
-	}
+	delete _exprDroite;
+	delete _exprGauche;
 }
 
 int ExpressionBinaire::calculer(Programme& programme)
@@ -74,7 +69,10 @@ Expression* ExpressionBinaire::enleverParentheses()
 		std::cout << "On peut simplifier à gauche !" << std::endl;
 #endif
 
+		//_exprGauche = new ExpressionParenthesee(*(_exprGauche->enleverParentheses()));
 		_exprGauche = _exprGauche->enleverParentheses();
+
+		// memleak
 	}
 
 	if(exprBinaireDroite != nullptr &&
@@ -86,16 +84,23 @@ Expression* ExpressionBinaire::enleverParentheses()
 
 		exprBinaireDroite->enleverParentheses();
 
+		/*
+		Expression* interieur = new ExpressionParenthesee(*(construireExpression(
+			_exprGauche, exprBinaireDroite->getGauche())));
+
+		Expression* exterieur = new ExpressionParenthesee(*(exprBinaireDroite->construireExpression(
+			interieur, exprBinaireDroite->getDroite(), oppose)));
+		*/
+
 		Expression* interieur = (construireExpression(
 			_exprGauche, exprBinaireDroite->getGauche()));
 		Expression* exterieur = (exprBinaireDroite->construireExpression(
 			interieur, exprBinaireDroite->getDroite(), !_commutatif));
 
-		setPropagerDestruction(false);
-
 		return exterieur->enleverParentheses();
 	} else {
 		if(_exprDroite->getInitType() != Symbole::Type::VALEUR) {
+			//_exprDroite = new ExpressionParenthesee(*exprDroite->enleverParentheses());
 			_exprDroite = exprDroite->enleverParentheses();
 		} else
 			_exprDroite = exprDroite->enleverParentheses();

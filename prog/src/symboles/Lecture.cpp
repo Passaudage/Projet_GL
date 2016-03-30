@@ -41,6 +41,5 @@ Lecture::Lecture(Identifiant& identifiant):_identifiant(identifiant)
 
 Lecture::~Lecture()
 {
-	if(&_identifiant != nullptr)
-		delete &_identifiant;
+	delete &_identifiant;
 }

@@ -23,10 +23,7 @@ Affectation::Affectation(Expression& expr, Identifiant& identifiant) :
 
 Affectation::~Affectation()
 {
-	if(&_identifiant != nullptr)
-		delete &_identifiant;
-	if(&_expr != nullptr)
-		delete &_expr;
+	delete &_identifiant;
 }
 
 void Affectation::optimiser(Programme& programme)
