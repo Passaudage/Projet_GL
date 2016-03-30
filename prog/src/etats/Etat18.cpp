@@ -8,7 +8,7 @@
 
 #include "Erreurs.hpp"
 
-Etat18 Etat18::m_instance = Etat18();
+Etat18 Etat18::m_instance;
 
 Etat18::Etat18()
 {

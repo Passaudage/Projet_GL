@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-Etat29 Etat29::m_instance = Etat29();
+Etat29 Etat29::m_instance;
 
 Etat29::Etat29()
 {

@@ -7,7 +7,7 @@
 
 #include "Erreurs.hpp"
 
-Etat35 Etat35::m_instance = Etat35();
+Etat35 Etat35::m_instance;
 
 Etat35::Etat35()
 {
