@@ -29,6 +29,7 @@ void Etat15::transition(Automate* a, Symbole* ) //réduction de la règle 2
 	Declarations::IDV* idv = dynamic_cast<Declarations::IDV*> (a->symboleCourant());
 	
 	idv->ajouterVariable(id->get());
+	delete id;
 	
 	a->popEtat();
 	a->popEtat();

@@ -34,6 +34,8 @@ void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
 
 	idc->ajouterConstante(id->get(), val->getValeur());
 	d->enregistrerConstantes(*idc);
+	delete val;
+	delete id;
 	delete idc;
 
 	a-> popEtat();

@@ -30,6 +30,9 @@ void Etat19::transition(Automate* a, Symbole* )
 	
 	idc->ajouterConstante(id->get(), val->getValeur());
 
+	delete val;
+	delete id;
+
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();

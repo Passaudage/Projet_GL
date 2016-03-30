@@ -33,7 +33,10 @@ void Etat14::transition(Automate* a, Symbole* ) //réduction de la règle 6
 	idv->ajouterVariable(id->get());
 
 	d->enregistrerVariables(*idv);
+
+	delete id;
 	delete idv;
+	
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();
