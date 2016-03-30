@@ -39,6 +39,8 @@ public:
 
     Affichage(Expression& expr);
 
+    virtual ~Affichage();
+
 //------------------------------------------------------------------ PRIVE 
 
 protected:

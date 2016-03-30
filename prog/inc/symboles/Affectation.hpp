@@ -38,7 +38,7 @@ public:
 
     Affectation(Expression& expr, Identifiant& identifiant);
 	
-	~Affectation();
+	virtual ~Affectation();
 
 //------------------------------------------------------------------ PRIVE 
 
