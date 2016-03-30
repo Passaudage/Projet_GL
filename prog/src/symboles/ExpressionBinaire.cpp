@@ -19,8 +19,11 @@ ExpressionBinaire::ExpressionBinaire(Expression& exprGauche, Expression& exprDro
 
 ExpressionBinaire::~ExpressionBinaire()
 {
-	delete _exprDroite;
-	delete _exprGauche;
+	if(_exprDroite != nullptr)
+		delete _exprDroite;
+
+	if(_exprGauche != nullptr)
+		delete _exprGauche;
 }
 
 int ExpressionBinaire::calculer(Programme& programme)
@@ -47,6 +50,11 @@ bool ExpressionBinaire::estEvaluable(Programme& programme)
 Symbole::Type ExpressionBinaire::getOperation()
 {
 	return _operation;
+}
+
+void ExpressionBinaire::invaliderExpression()
+{
+	_exprDroite = _exprGauche = nullptr;
 }
 
 Expression* ExpressionBinaire::enleverParentheses()
@@ -84,14 +92,6 @@ Expression* ExpressionBinaire::enleverParentheses()
 
 		exprBinaireDroite->enleverParentheses();
 
-		/*
-		Expression* interieur = new ExpressionParenthesee(*(construireExpression(
-			_exprGauche, exprBinaireDroite->getGauche())));
-
-		Expression* exterieur = new ExpressionParenthesee(*(exprBinaireDroite->construireExpression(
-			interieur, exprBinaireDroite->getDroite(), oppose)));
-		*/
-
 		Expression* interieur = (construireExpression(
 			_exprGauche, exprBinaireDroite->getGauche()));
 		Expression* exterieur = (exprBinaireDroite->construireExpression(
@@ -100,7 +100,6 @@ Expression* ExpressionBinaire::enleverParentheses()
 		return exterieur->enleverParentheses();
 	} else {
 		if(_exprDroite->getInitType() != Symbole::Type::VALEUR) {
-			//_exprDroite = new ExpressionParenthesee(*exprDroite->enleverParentheses());
 			_exprDroite = exprDroite->enleverParentheses();
 		} else
 			_exprDroite = exprDroite->enleverParentheses();
@@ -163,14 +162,24 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 #endif
 
 	std::pair<Expression*, Expression*> paireResultat;
+	Expression* exprDroite;
+	Expression* exprGauche;
 
 	if(_exprDroite->estEvaluable(programme)) {
-		_exprDroite = new Valeur(_exprDroite->calculer(programme));
+		exprDroite = new Valeur(_exprDroite->calculer(programme));
+
+		delete _exprDroite;
+		_exprDroite = exprDroite;
+
 		droite = true;
 	}
 
 	if(_exprGauche->estEvaluable(programme)) {
-		_exprGauche = new Valeur(_exprGauche->calculer(programme));
+		exprGauche = new Valeur(_exprGauche->calculer(programme));
+
+		delete _exprGauche;
+		_exprGauche = exprGauche;
+
 		gauche = true;
 	}
 
@@ -184,7 +193,6 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 		return paireResultat;
 	}
 
-	//std::pair<Expression*, Expression*> paireDroite;
 	std::pair<Expression*, Expression*> paireGauche;
 
 	// optimisation de la partie de droite
@@ -248,7 +256,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 				paireGauche.first = paireGauche.first->simplifier(programme);
 
 				if(paireGauche.second != nullptr) {
-					
+
 					Expression* tempExprDroite = construireExpression(paireGauche.second, _exprDroite);
 
 					tempExprDroite = tempExprDroite->optimiser(programme).first;
@@ -276,11 +284,15 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 						else
 							paireResultat.second = globalExpr->getDroite();
 
+						invaliderExpression();
+
 						return paireResultat;
 					}
 
 					paireResultat.first = globalExpr;
 					paireResultat.second = nullptr;
+
+					invaliderExpression();
 
 					return paireResultat;
 				}
@@ -294,6 +306,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 					if(!_commutatif) {
 						paireResultat.second = construireExpression(
 							new Valeur(_element_neutre), _exprDroite)->simplifier(programme);
+						invaliderExpression();
 					} else {
 						paireResultat.second = _exprDroite;
 					}	
@@ -338,6 +351,8 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 			paireResultat.first = newExprGauche;
 			paireResultat.second = _exprGauche;
 
+			invaliderExpression();
+
 			return paireResultat;
 		}
 
@@ -350,12 +365,20 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 	// Check si constantes !!
 
 	if(_exprDroite->estEvaluable(programme)) {
-		_exprDroite = new Valeur(_exprDroite->calculer(programme));
+		exprDroite = new Valeur(_exprDroite->calculer(programme));
+
+		delete _exprDroite;
+		_exprDroite = exprDroite;
+
 		droite = true;
 	}
 
 	if(_exprGauche->estEvaluable(programme)) {
-		_exprGauche = new Valeur(_exprGauche->calculer(programme));
+		exprGauche = new Valeur(_exprGauche->calculer(programme));
+
+		delete _exprGauche;
+		_exprGauche = exprGauche;
+
 		gauche = true;
 	}
 

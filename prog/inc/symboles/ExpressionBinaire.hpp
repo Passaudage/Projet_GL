@@ -32,7 +32,11 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual int calculer(Programme &);
 	virtual void afficher() = 0;
+
+    // Renvoie l'ensemble non ordonné des identifiants présents
+    // dans l'expression
     virtual std::unordered_set<Identifiant*> getIdentifiants();
+
     bool estEvaluable(Programme& programme);
 
     Expression* enleverParentheses();
@@ -41,10 +45,17 @@ public:
     Expression* getGauche();
     Expression* getDroite();
 
+    // Renvoie vrai si l'opérateur considéré est commutatif, faux sinon.
     bool commutatif();
     Symbole::Type getOperation();
 
-    virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false);
+    // Attention : associe nullptr aux expressions
+    // gauche et droite de manière à éviter la propagation
+    // d'éventuels delete
+    void invaliderExpression();
+
+    virtual std::pair<Expression*, Expression*> optimiser(Programme& programme,
+        bool remonter = false);
 
     virtual ExpressionBinaire* construireExpression(Expression* exprGauche,
         Expression* exprDroite, bool oppose = false) = 0;
@@ -61,8 +72,6 @@ public:
 
     virtual ~ExpressionBinaire();
 
-
-
 //------------------------------------------------------------------ PRIVE 
 
 protected:
@@ -76,10 +85,10 @@ protected:
 	Expression* _exprGauche;
 	Expression* _exprDroite;
 
-    bool _uneFois;
     bool const _commutatif;
     int const _element_neutre;
     Symbole::Type const _operation;
+    bool _uneFois;
 
     virtual int operation(int a, int b, bool oppose = false) = 0;
 
