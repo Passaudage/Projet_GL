@@ -26,8 +26,6 @@ public:
       */
     bool decaler();
     
-    void throwError(std::string message);
-
 private:
 
     Position positionCourante();

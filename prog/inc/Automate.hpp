@@ -33,8 +33,6 @@ public:
     Symbole* lireSymboleSuivant();
 
     bool decaler();
-    
-    void throwLexerError(std::string message);
 
 private:
 	std::stack<Symbole*> _pileSymboles;

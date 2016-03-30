@@ -411,10 +411,3 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 	return nullptr;
 }
-
-void Lexer::throwError(std::string message)
-{
-	std::ostringstream sstm;
-	sstm << message <<" ligne "<< _ligneCourante <<" !";
-	throw sstm.str().c_str();
-}
