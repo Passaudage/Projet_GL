@@ -41,7 +41,7 @@ public:
 	virtual Expression* horsParenthese();
 	virtual Expression* enleverParentheses();
 
-	virtual Expression* simplifier(Programme& programme);
+	virtual Expression* simplifier(Programme&);
 	virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false) = 0;
 
 	// renvoie vrai si la sous-expression "correspond" à une constante
