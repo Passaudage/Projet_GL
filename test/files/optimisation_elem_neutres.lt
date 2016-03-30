@@ -1,0 +1,7 @@
+var a;
+a := 4;
+a := a*1;
+a := a/1;
+a := a+0;
+a := a-0;
+ecrire a;

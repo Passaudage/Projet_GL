@@ -1,0 +1,26 @@
+Transformation du code...
+Voici l'affichage du code...
+var a;
+var b;
+var c;
+var d;
+var e;
+var multi;
+a : = 1;
+b : = 1;
+c : = 1;
+d : = 1;
+e : = 1;
+multi : = 1;
+a := 7+a+3;
+b := 6+b-2;
+c := c-5;
+d := 3+d*2;
+e := 3+e+5;
+multi := 13-multi;
+ecrire a;
+ecrire b;
+ecrire c;
+ecrire d;
+ecrire e;
+ecrire multi;
