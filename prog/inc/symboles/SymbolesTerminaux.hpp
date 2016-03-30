@@ -35,15 +35,13 @@ public:
     SymboleTerminal(const SymboleTerminal & unSymboleTerminal) = delete;
 
 	static SymboleTerminal* getSymbole() {
-		return &_singleton;
+		static SymboleTerminal singleton;
+		return &singleton;
 	}
 
 	virtual ~SymboleTerminal(){};
 protected:
     SymboleTerminal():Symbole(S){};
-	
-	static SymboleTerminal<S> _singleton;
-
 //------------------------------------------------------------------ PRIVE 
 };
 
