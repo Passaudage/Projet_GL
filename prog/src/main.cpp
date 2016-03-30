@@ -47,9 +47,7 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
-			std::cout << "---" << std::endl;
 			programme->executer();
-			std::cout << "---" << std::endl;
 		}
 
 	} catch(ExceptionFarfadet& e) {
