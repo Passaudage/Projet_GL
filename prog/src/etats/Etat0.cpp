@@ -9,7 +9,7 @@
 
 #include "Erreurs.hpp"
 
-Etat0 Etat0::m_instance = Etat0();
+Etat0 Etat0::m_instance;
 
 Etat0::Etat0()
 {

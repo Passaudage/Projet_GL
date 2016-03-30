@@ -35,6 +35,7 @@ void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 	else
 		terme = new ExpressionDivision(*gauche, *droite);
 	
+	delete opM;
 	terme->setType(Symbole::Type::TERME);
 	a->pushSymbole(terme);
 

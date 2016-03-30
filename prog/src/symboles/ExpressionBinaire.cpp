@@ -19,8 +19,8 @@ ExpressionBinaire::ExpressionBinaire(Expression& exprGauche, Expression& exprDro
 
 ExpressionBinaire::~ExpressionBinaire()
 {
-	delete &_exprDroite;
-	delete &_exprGauche;
+	delete _exprDroite;
+	delete _exprGauche;
 }
 
 int ExpressionBinaire::calculer(Programme& programme)

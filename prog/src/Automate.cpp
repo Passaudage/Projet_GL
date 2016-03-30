@@ -16,6 +16,10 @@ Automate::Automate(std::string const& fichier_lutin) : _fichier_lutin(fichier_lu
 
 Automate::~Automate()
 {
+	while (!_pileSymboles.empty()) {
+		delete _pileSymboles.top();
+		_pileSymboles.pop();
+	}
 }
 
 
@@ -23,9 +27,6 @@ Programme* Automate::getProgramme()
 {
 	Programme* programme = nullptr;
 
-	// on commence la valse des états
-	//~ Etat0* etatDebut = new Etat0();
-	
 	pushEtat(Etat0::getInstance());
 
 	while(!_pileEtats.empty()) {
@@ -33,9 +34,6 @@ Programme* Automate::getProgramme()
 	}
 
 	programme = dynamic_cast<Programme*>(popSymbole());
-
-	//throw "Fini !!";
-	//std::cout << "pile taille : " << _pileEtats.size() << " - " << _pileSymboles.size() << std::endl;
 
 	return programme;
 }
@@ -48,7 +46,6 @@ Symbole* Automate::topSymbole()
 void Automate::pushEtat(Etat* etat)
 {
 	_pileEtats.push(etat);
-	//std::cout << "  pile+ : " << _pileEtats.size() << std::endl;
 }
 
 void Automate::pushSymbole(Symbole* symbole)

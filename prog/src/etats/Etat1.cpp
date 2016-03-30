@@ -17,7 +17,7 @@ Etat1::Etat1()
 {
 }
 
-Etat1 Etat1::m_instance = Etat1();
+Etat1 Etat1::m_instance; 
 
 Etat1* Etat1::getInstance(){
 	return &m_instance;

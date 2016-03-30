@@ -17,7 +17,7 @@ ExpressionParenthesee::ExpressionParenthesee(Expression& exprInter):
 
 ExpressionParenthesee::~ExpressionParenthesee()
 {
-	delete &_exprInter;
+	delete _exprInter;
 }
 
 void ExpressionParenthesee::afficher()

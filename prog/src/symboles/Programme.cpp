@@ -23,7 +23,6 @@ Programme::~Programme()
 	delete _instructions;
 }
 
-
 void Programme::afficher()
 {
 	_declarations->afficher();

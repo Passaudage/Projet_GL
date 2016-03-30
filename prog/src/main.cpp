@@ -24,13 +24,13 @@ struct arg_cmd_struct {
 
 void traiter_lutin(arg_cmd_struct* arg_cmd)
 {
+	Programme* programme = nullptr;
 	try {
-
 		Automate automate(arg_cmd->fichier_lutin);
 
 		// récupération du programme
 
-		Programme* programme = automate.getProgramme();
+		programme = automate.getProgramme();
 
 		if(arg_cmd->analyser) {
 			programme->analyser();
@@ -51,17 +51,20 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 			programme->executer();
 		}	
 
-		return;
-
 	} catch(ExceptionFarfadet& e) {
 
 		std::cerr << "Erreur : " << e.getErreur() << std::endl;
 		std::cerr << "Sortie de Farfadet !" << std::endl;
+		arg_cmd->return_code = 1;
 
 	} catch(char const* message) {
 		std::cerr << "Une erreur est survenue : " << message << std::endl;
+		arg_cmd->return_code = 1;
+	} 
+
+	if (programme != nullptr) {
+		delete programme;
 	}
-	arg_cmd->return_code = 1;
 }
 
 int parse_opt(int key, char *arg, struct argp_state *state)

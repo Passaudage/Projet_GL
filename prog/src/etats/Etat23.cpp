@@ -46,6 +46,7 @@ void Etat23::transition(Automate* a, Symbole* s)
 				} else {
 					expr = new ExpressionSoustraction(*expr_gauche, *expr_droit);
 				}
+				delete operateur;
 				expr->setType(Symbole::EXPRESSION);
 				a->pushSymbole(expr);
 				a->popEtat();
