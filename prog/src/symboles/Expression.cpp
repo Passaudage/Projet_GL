@@ -16,7 +16,7 @@ Expression* Expression::enleverParentheses()
 {
 	return horsParenthese();
 }
-Expression* Expression::simplifier(Programme& programme)
+Expression* Expression::simplifier(Programme&)
 {
 	return this;
 }

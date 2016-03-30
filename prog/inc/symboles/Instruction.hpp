@@ -35,7 +35,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
-	virtual void optimiser(Programme& programme);
+	virtual void optimiser(Programme&);
 	virtual std::unordered_set<Identifiant*> const& getVarUtilisees();
 	virtual std::unordered_set<Identifiant*> const& getVarAffectees();
 
