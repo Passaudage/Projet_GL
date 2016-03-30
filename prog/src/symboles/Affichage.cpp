@@ -26,3 +26,9 @@ void Affichage::optimiser(Programme& programme)
 		optimiser(programme).first->
 		simplifier(programme);
 }
+
+Affichage::~Affichage()
+{
+	if(&_expr != nullptr)
+		delete _expr;
+}

@@ -46,6 +46,8 @@ public:
 
 	// renvoie vrai si la sous-expression "correspond" à une constante
 	virtual bool estEvaluable(Programme& programme) = 0;
+
+	void setPropagerDestruction(bool propager);
 	
 //------------------------------------------------- Surcharge d'opérateurs
     Expression& operator=(const Expression & unExpression)=delete ;
@@ -58,6 +60,8 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+
+	bool _propagerDestruction;
 
 private:
 //------------------------------------------------------- Méthodes privées

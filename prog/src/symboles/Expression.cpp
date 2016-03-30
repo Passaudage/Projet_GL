@@ -1,7 +1,9 @@
 #include "symboles/Expression.hpp"
 
 //Initialisation par défaut d'un symbole facteur car c'est 
-Expression::Expression(Symbole::Type symboleType):Symbole(symboleType)
+Expression::Expression(Symbole::Type symboleType):
+	Symbole(symboleType),
+	_propagerDestruction(true)
 {
 
 }
@@ -16,7 +18,13 @@ Expression* Expression::enleverParentheses()
 {
 	return horsParenthese();
 }
+
 Expression* Expression::simplifier(Programme& programme)
 {
 	return this;
+}
+
+void Expression::setPropagerDestruction(bool propager)
+{
+	_propagerDestruction = propager;
 }
