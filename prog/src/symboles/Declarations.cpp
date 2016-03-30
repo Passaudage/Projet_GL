@@ -263,3 +263,17 @@ void Declarations::formaterIdentifiants(
 
 	std::cerr << std::endl;
 }
+
+void Declarations::viderConstantes()
+{
+	std::unordered_set<std::string> aDetruire;
+
+	for(std::pair<std::string, Entite> paire : _entites) {
+		if(!paire.second.modifiable)
+			aDetruire.insert(paire.first);
+	}
+
+	for(std::string id : aDetruire) {
+		_entites.erase(id);
+	}
+}

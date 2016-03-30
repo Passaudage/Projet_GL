@@ -20,3 +20,8 @@ Expression* Expression::simplifier(Programme&)
 {
 	return this;
 }
+
+void Expression::ajouterParentheses()
+{
+	// vide	
+}

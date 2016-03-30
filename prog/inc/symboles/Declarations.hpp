@@ -92,6 +92,8 @@ public:
 	void signerUtiliser(Identifiant* identifiant);
 	void signerAffecter(Identifiant* identifiant);
 
+	void viderConstantes();
+
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;
 

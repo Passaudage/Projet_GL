@@ -1,10 +1,7 @@
 var a;
-var b;
 const b=2;
 const c=3;
 const d=4;
-a := (b+c)-d;
-b := 6*3;
-a := b*3 + d/b;
-a := c*b +a;
-ecrire a;
+a := ((b+c)+d)/9;
+a := b*3 + d/b + b;
+a := c*b + a*d;

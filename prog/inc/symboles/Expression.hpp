@@ -40,6 +40,7 @@ public:
 
 	virtual Expression* horsParenthese();
 	virtual Expression* enleverParentheses();
+	virtual void ajouterParentheses();
 
 	virtual Expression* simplifier(Programme&);
 	virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false) = 0;

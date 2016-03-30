@@ -44,6 +44,8 @@ void Programme::transformer()
 	// a:=8;b:=7;lire a; ---> b:=7;lire a;
 	
 	_instructions->optimiser(*this);
+
+	_declarations->viderConstantes();
 }
 
 void Programme::executer()

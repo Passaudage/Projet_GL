@@ -27,10 +27,10 @@ class ExpressionDivision : public ExpressionBinaire
 public:
 //----------------------------------------------------- Méthodes publiques
 	void afficher();
-    virtual Expression* simplifier(Programme& programme);
 
     virtual ExpressionBinaire* construireExpression(Expression* exprGauche,
         Expression* exprDroite, bool oppose = false);
+    virtual Expression* simplifier(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionDivision& operator=(

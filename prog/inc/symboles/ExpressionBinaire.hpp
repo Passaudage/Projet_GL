@@ -36,6 +36,7 @@ public:
     bool estEvaluable(Programme& programme);
 
     Expression* enleverParentheses();
+    virtual void ajouterParentheses();
 
     Expression* getGauche();
     Expression* getDroite();
@@ -75,6 +76,7 @@ protected:
 	Expression* _exprGauche;
 	Expression* _exprDroite;
 
+    bool _uneFois;
     bool const _commutatif;
     int const _element_neutre;
     Symbole::Type const _operation;

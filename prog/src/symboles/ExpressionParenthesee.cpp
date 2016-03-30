@@ -37,6 +37,11 @@ Expression* ExpressionParenthesee::enleverParentheses()
 	return _exprInter->enleverParentheses();
 }
 
+void ExpressionParenthesee::ajouterParentheses()
+{
+	_exprInter->ajouterParentheses();
+}
+
 std::unordered_set<Identifiant*> ExpressionParenthesee::getIdentifiants()
 {
 	return _exprInter->getIdentifiants();

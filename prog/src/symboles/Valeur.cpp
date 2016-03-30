@@ -30,7 +30,6 @@ void Valeur::afficher()
 
 std::pair<Expression*, Expression*> Valeur::optimiser(Programme&, bool)
 {
-	std::cout << "On optimise :" << _valeur << std::endl;
 	return std::pair<Expression*, Expression*>(this, nullptr);
 }
 

@@ -10,11 +10,11 @@ Test ID;Return code validation;Out result;StdErr result;File creation result;Glo
 02.04-Modification_d_une_constante;Ok;Ok;Non testé;Non testé;Ok
 02.05-Lecture_d_un_chiffre;Ok;Non testé;Non testé;Non testé;Ok
 02.06-Lecture_d_un_chiffre_erreur;Ok;Ok;Non testé;Non testé;Ok
-03.01-Optimisation_operations;Ok;Echec;Non testé;Non testé;Echec
-03.02-Optimisation_constantes;Echec;Echec;Non testé;Non testé;Echec
-03.03-Optimisation_elements_neutres;Ok;Echec;Non testé;Non testé;Echec
-05.01-Double_declaration_constante;Echec;Non testé;Ok;Non testé;Echec
-05.02-Double_declaration_variable;Echec;Non testé;Ok;Non testé;Echec
+03.01-Optimisation_operations;Ok;Ok;Non testé;Non testé;Ok
+03.02-Optimisation_constantes;Ok;Ok;Non testé;Non testé;Ok
+03.03-Optimisation_elements_neutres;Ok;Ok;Non testé;Non testé;Ok
+05.01-Double_declaration_constante;Ok;Non testé;Ok;Non testé;Ok
+05.02-Double_declaration_variable;Ok;Non testé;Ok;Non testé;Ok
 06.01-Calcul_expression_+;Ok;Ok;Non testé;Non testé;Ok
 06.02-Calcul_expression_-;Ok;Ok;Non testé;Non testé;Ok
 06.03-Calcul_expression_mult;Ok;Ok;Non testé;Non testé;Ok

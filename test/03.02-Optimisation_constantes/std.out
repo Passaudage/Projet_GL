@@ -1,12 +1,4 @@
-Transformation du code...
-Voici l'affichage du code...
-const b=2;
-const c=3;
-const d=4;
 var a;
-var b;
 a := 1;
-b := 18;
-a := b*3+2;
-a := 6+a;
-ecrire a;
+a := 10;
+a := 6+a*4;

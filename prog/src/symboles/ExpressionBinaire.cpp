@@ -11,7 +11,7 @@
 ExpressionBinaire::ExpressionBinaire(Expression& exprGauche, Expression& exprDroite,
 	bool commutatif, int element_neutre, Symbole::Type operation):
 	Expression(FACTEUR), _commutatif(commutatif), _element_neutre(element_neutre),
-	_operation(operation)
+	_operation(operation), _uneFois(false)
 {
 	_exprDroite = &exprDroite;
 	_exprGauche = &exprGauche;
@@ -125,6 +125,29 @@ Expression* ExpressionBinaire::getDroite()
 }
 
 
+void ExpressionBinaire::ajouterParentheses()
+{
+	ExpressionBinaire* exprBinaireGauche;
+	ExpressionBinaire* exprBinaireDroite;
+
+	exprBinaireGauche = dynamic_cast<ExpressionBinaire*>(_exprGauche);
+	exprBinaireDroite = dynamic_cast<ExpressionBinaire*>(_exprDroite);
+
+	if(_operation == Symbole::Type::OPERATEUR_MUL) {
+		if(exprBinaireGauche != nullptr &&
+			exprBinaireGauche->getOperation() == Symbole::Type::OPERATEUR_ADD) {
+			_exprGauche = new ExpressionParenthesee(* _exprGauche);
+		}
+		if(exprBinaireDroite != nullptr &&
+			exprBinaireDroite->getOperation() == Symbole::Type::OPERATEUR_ADD) {
+			_exprDroite = new ExpressionParenthesee(* _exprDroite);
+		}
+	}
+
+	_exprGauche->ajouterParentheses();
+	_exprDroite->ajouterParentheses();
+}
+
 std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& programme, bool remonter)
 {
 	bool gauche = false;
@@ -188,6 +211,19 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 			_exprGauche = _exprGauche->optimiser(programme).first;
 			_exprGauche = _exprGauche->simplifier(programme);
 
+			// réoptimisation si besoin est
+			if(!_uneFois) {
+				_uneFois = true;
+
+				paireResultat = enleverParentheses()->optimiser(programme);
+
+				paireResultat.first = paireResultat.first->simplifier(programme);
+
+				return paireResultat;
+			} else {
+				_uneFois = false;
+			}
+
 		} else {
 			// l'expression de droite est évaluable donc on peut
 			// faire potentiellement remonter des informations
@@ -200,6 +236,8 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 
 			// vérification des opérateurs
 
+			_exprGauche = _exprGauche->simplifier(programme);
+
 			ExpressionBinaire* exprBinaireGauche =
 				dynamic_cast<ExpressionBinaire*>(_exprGauche->horsParenthese());
 
@@ -207,22 +245,10 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 				// on peut faire remonter l'information
 
 				paireGauche = _exprGauche->optimiser(programme, true);
-				/*
-				std::cout << "Je viens d'optimiser :";
-				_exprGauche->afficher();
-				std::cout << std::endl;
-*/
 				paireGauche.first = paireGauche.first->simplifier(programme);
 
 				if(paireGauche.second != nullptr) {
-/*
-					paireGauche.first->afficher();
-					std::cout << std::endl;
-					paireGauche.second->afficher();
-					std::cout << std::endl << "dans :";
-					afficher();
-					std::cout << std::endl;
-*/
+					
 					Expression* tempExprDroite = construireExpression(paireGauche.second, _exprDroite);
 
 					tempExprDroite = tempExprDroite->optimiser(programme).first;
@@ -345,6 +371,8 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 
 		return paireResultat;
 	}
+
+	
 
 	paireResultat.first = this;
 	paireResultat.second = nullptr;

@@ -40,6 +40,7 @@ public:
 
     virtual Expression* horsParenthese();
     virtual Expression* enleverParentheses();
+    virtual void ajouterParentheses();
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionParenthesee& operator=(

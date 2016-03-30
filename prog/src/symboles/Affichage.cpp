@@ -25,4 +25,5 @@ void Affichage::optimiser(Programme& programme)
 	_expr = _expr->enleverParentheses()->
 		optimiser(programme).first->
 		simplifier(programme);
+	_expr->ajouterParentheses();
 }
