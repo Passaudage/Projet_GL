@@ -19,6 +19,7 @@ struct arg_cmd_struct {
 	std::string fichier_lutin;
 
 	int arg_count;
+	int return_code;
 };
 
 void traiter_lutin(arg_cmd_struct* arg_cmd)
@@ -48,7 +49,9 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
 			programme->executer();
-		}
+		}	
+
+		return;
 
 	} catch(ExceptionFarfadet& e) {
 
@@ -58,6 +61,7 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 	} catch(char const* message) {
 		std::cerr << "Une erreur est survenue : " << message << std::endl;
 	}
+	arg_cmd->return_code = 1;
 }
 
 int parse_opt(int key, char *arg, struct argp_state *state)
@@ -136,8 +140,9 @@ int main(int argc, char* argv[])
 	arg_cmd.analyser = false;
 	arg_cmd.transformer = false;
 	arg_cmd.executer = false;
+	arg_cmd.return_code = 0;
 
 	argp_parse(&argp, argc, argv, 0, 0, &arg_cmd);
 
-	return 0;
+	return arg_cmd.return_code;
 }

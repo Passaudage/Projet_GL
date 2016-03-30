@@ -7,7 +7,7 @@ Test ID;Return code validation;Out result;StdErr result;File creation result;Glo
 02.01-Declaration_d_une_constante;Ok;Ok;Non testé;Non testé;Ok
 02.02-Declaration_d_une_variable;Ok;Ok;Non testé;Non testé;Ok
 02.03-Initialisation_d_une_variable;Ok;Ok;Non testé;Non testé;Ok
-02.04-Modification_d_une_constante;Echec;Ok;Non testé;Non testé;Echec
+02.04-Modification_d_une_constante;Ok;Ok;Non testé;Non testé;Ok
 02.05-Lecture_d_un_chiffre;Ok;Non testé;Non testé;Non testé;Ok
 02.06-Lecture_d_un_chiffre_erreur;Ok;Ok;Non testé;Non testé;Ok
 06.01-Calcul_expression_+;Ok;Ok;Non testé;Non testé;Ok
