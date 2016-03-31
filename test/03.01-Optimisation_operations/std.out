@@ -1,5 +1,5 @@
-var b;
 var a;
+var b;
 a := a+10;
 ecrire a;
 b := 1/(b+5);
