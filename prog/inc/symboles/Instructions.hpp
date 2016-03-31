@@ -37,6 +37,8 @@ public:
 
     std::list<Instruction*>& getInstructions();
 
+    void optimiserInstructions();
+
 //------------------------------------------------- Surcharge d'opérateurs
     Instructions& operator=(const Instructions & unInstructions) = delete;
 

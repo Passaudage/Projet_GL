@@ -46,6 +46,8 @@ void Programme::transformer()
 	_instructions->optimiser(*this);
 
 	_declarations->viderConstantes();
+
+	
 }
 
 void Programme::executer()
