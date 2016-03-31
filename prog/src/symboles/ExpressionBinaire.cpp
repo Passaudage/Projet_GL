@@ -306,16 +306,15 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 
 						invaliderExpression();
 
+						delete this;
 						return paireResultat;
 					}
 
 					paireResultat.first = globalExpr;
-					_exprGauche = nullptr;
-					_exprDroite = nullptr;
-					delete this;
 					paireResultat.second = nullptr;
 
 					invaliderExpression();
+					delete this;
 
 					return paireResultat;
 				}
