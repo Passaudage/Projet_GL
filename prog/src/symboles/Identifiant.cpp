@@ -33,7 +33,9 @@ std::unordered_set<Identifiant*> Identifiant::getIdentifiants()
 std::pair<Expression*, Expression*> Identifiant::optimiser(Programme& programme, bool)
 {
 	if(!programme.estModifiable(_identifiant)){ // Si c'est une constante
-		return std::pair<Expression*, Expression*>(new Valeur(this->calculer(programme)), nullptr);
+		std::pair<Expression*, Expression*> retour(new Valeur(this->calculer(programme)), nullptr);
+		delete this;
+		return retour;
 	} else {
 		return std::pair<Expression*, Expression*>(this, nullptr);
 	}

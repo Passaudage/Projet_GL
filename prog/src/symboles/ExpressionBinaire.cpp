@@ -80,7 +80,7 @@ Expression* ExpressionBinaire::enleverParentheses()
 		//_exprGauche = new ExpressionParenthesee(*(_exprGauche->enleverParentheses()));
 		_exprGauche = _exprGauche->enleverParentheses();
 
-		// memleak
+		// memleak ?
 	}
 
 	if(exprBinaireDroite != nullptr &&
@@ -132,11 +132,11 @@ void ExpressionBinaire::ajouterParentheses()
 	if(_operation == Symbole::Type::OPERATEUR_MUL) {
 		if(exprBinaireGauche != nullptr &&
 			exprBinaireGauche->getOperation() == Symbole::Type::OPERATEUR_ADD) {
-			_exprGauche = new ExpressionParenthesee(* _exprGauche);
+			_exprGauche = new ExpressionParenthesee(*_exprGauche);
 		}
 		if(exprBinaireDroite != nullptr &&
 			exprBinaireDroite->getOperation() == Symbole::Type::OPERATEUR_ADD) {
-			_exprDroite = new ExpressionParenthesee(* _exprDroite);
+			_exprDroite = new ExpressionParenthesee(*_exprDroite);
 		}
 	}
 
@@ -359,7 +359,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 
 		if(remonter) {
 			// on remonte les infos
-			// on doit inverse les cotes
+			// on doit inverse les côtés
 
 			Expression* newExprGauche = _exprDroite;
 
@@ -377,7 +377,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 		}
 
 		paireResultat.first = this;
-		paireResultat.second = new Valeur(_element_neutre);
+		paireResultat.second = nullptr;
 		return paireResultat;
 		
 	}
