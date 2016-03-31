@@ -50,7 +50,7 @@ ELFLAGS=
 #dossier pour les tests
 TESTDIR=../test
 TESTCMD=./mktest.sh
-TESTLINK=../test/lut
+TESTLINK=$(TESTDIR)/lut
 TEST=test
 
 ifeq ($(OS),Windows_NT)
@@ -98,7 +98,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 ALL: $(PROGNAME)
 
 $(TESTLINK): $(PROGNAME)
-	ln -s $(PROGNAME) $(TESTLINK)
+	ln -fs `pwd`/$(PROGNAME) $(TESTLINK)
 
 $(TEST): $(TESTLINK)
 	$(ECHO) "Batterie de test lancée"
