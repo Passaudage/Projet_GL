@@ -39,7 +39,17 @@ void Etat17::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
-			break;
+			switch(*(a->lireSymboleCourant())) {
+				case Symbole::Type::AFFICHAGE:
+				case Symbole::Type::LECTURE:
+				case Symbole::Type::CONSTANTE:
+				case Symbole::Type::VARIABLE:
+
+					a->pushEtat(Etat18::getInstance());
+					break;
+				default:
+					throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+					break;
+			}
 	}
 }

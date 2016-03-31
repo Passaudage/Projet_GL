@@ -1,0 +1,9 @@
+var c;
+var b;
+var a;
+lire a;
+ecrire a;
+b := a * 10;
+ecrire b;
+c := a * b;
+ecrire c;
