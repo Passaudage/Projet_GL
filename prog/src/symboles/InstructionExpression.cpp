@@ -10,3 +10,8 @@ InstructionExpression::~InstructionExpression()
 {
 	delete _expr;
 }
+
+std::unordered_set<Identifiant*> const InstructionExpression::getVarUtilisees()
+{
+	return _expr->getIdentifiants();
+}

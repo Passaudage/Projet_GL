@@ -3,6 +3,9 @@
 #include <iostream>
 
 const std::string Affichage::_keyword = "ecrire";
+std::unordered_set<Affichage*> Affichage::affichages;
+
+
 
 void Affichage::afficher()
 {
@@ -18,6 +21,12 @@ void Affichage::effectuer(Programme& programme)
 
 Affichage::Affichage(Expression& expr) : InstructionExpression(expr)
 {
+	affichages.insert(this);
+}
+
+Affichage::~Affichage()
+{
+	affichages.erase(this);
 }
 
 void Affichage::optimiser(Programme& programme)
@@ -26,4 +35,14 @@ void Affichage::optimiser(Programme& programme)
 		optimiser(programme).first->
 		simplifier(programme);
 	_expr->ajouterParentheses();
+}
+
+std::unordered_set<Affichage*> const & Affichage::getAffichages()
+{
+	return affichages;
+}
+
+Identifiant const * Affichage::getVarAffectees()
+{
+	return nullptr;	
 }

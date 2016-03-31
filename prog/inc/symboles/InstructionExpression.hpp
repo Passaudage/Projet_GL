@@ -30,9 +30,12 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
+	virtual std::unordered_set<Identifiant*> const getVarUtilisees();
+	virtual Identifiant const * getVarAffectees() = 0;
 
 //------------------------------------------------- Surcharge d'opérateurs
-    InstructionExpression& operator=(const InstructionExpression & unInstructionExpression) = delete;
+    InstructionExpression& operator=(
+			const InstructionExpression & unInstructionExpression) = delete;
 
 //-------------------------------------------- Constructeurs - destructeur
     InstructionExpression(const InstructionExpression & unInstructionExpression) = delete;

@@ -34,3 +34,7 @@ void Affectation::optimiser(Programme& programme)
 	_expr->ajouterParentheses();
 }
 
+Identifiant const * Affectation::getVarAffectees()
+{
+	return &_identifiant;
+}
