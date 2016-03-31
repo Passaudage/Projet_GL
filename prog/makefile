@@ -85,7 +85,7 @@ endif
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
 	@mkdir -p $(dir $(DEPDIR)/$(df:$(OBJDIR)/%=%));
 	@mkdir -p $(@D);
-	$(MAKEDEPEND); \
+	@$(MAKEDEPEND); \
 		cp $(DEPDIR)/$(df:$(OBJDIR)/%=%).d $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\
 		sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	            -e '/^$$/ d' -e 's/$$/ :/' < $(DEPDIR)/$(df:$(OBJDIR)/%=%).d >> $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\

@@ -29,7 +29,6 @@ void Etat23::transition(Automate* a, Symbole* s)
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
-			//~ a->pushEtat(new Etat29());
 			a->pushEtat(Etat29::getInstance());
 			a->decaler();
 			break;

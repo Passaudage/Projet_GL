@@ -17,7 +17,8 @@ ExpressionParenthesee::ExpressionParenthesee(Expression& exprInter):
 
 ExpressionParenthesee::~ExpressionParenthesee()
 {
-	delete _exprInter;
+	if (_exprInter != nullptr) 
+		delete _exprInter;
 }
 
 void ExpressionParenthesee::afficher()
@@ -34,7 +35,10 @@ Expression* ExpressionParenthesee::horsParenthese()
 
 Expression* ExpressionParenthesee::enleverParentheses()
 {
-	return _exprInter->enleverParentheses();
+	Expression* retour = _exprInter->enleverParentheses();
+	_exprInter = nullptr;
+	delete this;
+	return retour;
 }
 
 void ExpressionParenthesee::ajouterParentheses()
