@@ -328,10 +328,11 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 					if(!_commutatif) {
 						paireResultat.second = construireExpression(
 							new Valeur(_element_neutre), _exprDroite)->simplifier(programme);
-						invaliderExpression();
 					} else {
 						paireResultat.second = _exprDroite;
 					}	
+					invaliderExpression();
+					delete this;
 				} else {
 					this->simplifier(programme);
 					paireResultat.first = this;
