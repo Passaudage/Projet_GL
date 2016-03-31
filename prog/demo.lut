@@ -1,0 +1,19 @@
+var a,b,Cunused;
+var Gunused;
+var x,y,z,t;
+const n=2,m=3;
+
+ecrire n;
+ecrire m;
+lire a;
+lire b;
+lire d;
+ecrire a+b+d;
+lire e;
+ecrire 1+z+3;
+lire x;
+lire y;
+z:=(x*x+5*x*4)-3*y*6;
+ecrire z;
+t:=3;
+t:=z;
