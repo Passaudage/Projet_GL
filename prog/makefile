@@ -27,7 +27,7 @@ OBJDIR=.obj
 
 # Dossier où sont mises les dépendances
 DEPDIR=.dep
-df=$(DEPDIR)/$(*F)
+df=$(@D)/$(*F)
 
 ALLSRC=$(shell find $(SRCDIR) -type f -name *.cpp)
 SRC=$(ALLSRC:$(SRCDIR)/%=%)
@@ -37,7 +37,7 @@ OBJ=$(SRC:.cpp=.o)
 
 CLEAR=clean
 
-MAKEDEPEND = g++ $(addprefix -I, $(EXTINCDIR)) -I$(INCDIR) -o $(df).d -std=c++11 -MM $< #Pour calculer les dépendances
+MAKEDEPEND = g++ $(addprefix -I, $(EXTINCDIR)) -I$(INCDIR) -o $(DEPDIR)/$(df:$(OBJDIR)/%=%).d -std=c++11 -MM $< #Pour calculer les dépendances
 
 #Compilateur
 CC=g++
@@ -83,14 +83,14 @@ endif
 .PHONY: ALL
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
-	@mkdir -p $(DEPDIR);
-	@mkdir -p $(OBJDIR);
-	@$(MAKEDEPEND); \
-		cp $(df).d $(df).P;\
+	@mkdir -p $(dir $(DEPDIR)/$(df:$(OBJDIR)/%=%));
+	@mkdir -p $(@D);
+	$(MAKEDEPEND); \
+		cp $(DEPDIR)/$(df:$(OBJDIR)/%=%).d $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\
 		sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	            -e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P;\
-        	sed -i '1s/^/$(OBJDIR)\//' $(df).P;
-		@rm -f $(df).d
+	            -e '/^$$/ d' -e 's/$$/ :/' < $(DEPDIR)/$(df:$(OBJDIR)/%=%).d >> $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\
+		    sed -i '1s/^/$(subst /,\/,$(@D))\//' $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;
+		@rm -f $(DEPDIR)/$(df:$(OBJDIR)/%=%).d
 	$(ECHO) "Compilation de $<"
 	@mkdir -p $(dir $@)
 	$(CC) $(CCFLAGS) -o $@ $<

@@ -13,7 +13,6 @@
 
 #include <string>
 #include <list>
-#include <unordered_map>
 #include <unordered_set>
 #include <map>
 
@@ -124,7 +123,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	unordered_map<string, Entite> _entites;
+	map<string, Entite> _entites;
 
 	std::multimap<std::string, Identifiant*> _varUtiliseesNonDeclarees;
 	std::multimap<std::string, Identifiant*> _varUtiliseesNonAffectees;

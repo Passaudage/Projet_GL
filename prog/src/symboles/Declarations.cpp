@@ -70,7 +70,7 @@ bool Declarations::estModifiable(string const& identifiant)
 
 void Declarations::setValeur(string const& identifiant, int valeur) {
 	if (identifiantPris(identifiant)) {
-		unordered_map<string, Entite>::iterator it = _entites.find(identifiant);
+		map<string, Entite>::iterator it = _entites.find(identifiant);
 		Entite& entite = it->second;
 		if (entite.modifiable) 
 			entite.valeur = valeur; 
@@ -130,7 +130,7 @@ void Declarations::IDV::ajouterVariable(std::string const& identifiant)
 
 void Declarations::afficher()
 {
-	unordered_map<string, Entite>::iterator it; 
+	map<string, Entite>::iterator it; 
 	for(it = _entites.begin(); it != _entites.end(); it++)
 	{
 		string temp = "";
@@ -161,7 +161,7 @@ void Declarations::signerUtiliser(Expression* expression)
 
 void Declarations::signerUtiliser(Identifiant* identifiant)
 {
-	std::unordered_map<string, Entite>::iterator it;
+	std::map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
 
@@ -186,7 +186,7 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 
 void Declarations::signerAffecter(Identifiant* identifiant)
 {
-	unordered_map<string, Entite>::iterator it;
+	map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
 
