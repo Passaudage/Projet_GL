@@ -2,3 +2,4 @@ var a
 const b  5
 lire a
 ecrire a;
+a  4;

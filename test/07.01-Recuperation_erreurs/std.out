@@ -2,3 +2,4 @@ const b=5;
 var a;
 lire a;
 ecrire a;
+a := 4;
