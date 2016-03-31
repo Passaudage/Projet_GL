@@ -47,6 +47,11 @@ CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDI
 EL=g++ #Éditeur de liens
 ELFLAGS=
 
+#dossier pour les tests
+TESTDIR=../test
+TESTCMD=./mktest.sh
+TEST=test
+
 ifeq ($(OS),Windows_NT)
     ELFLAGS+= -largp
 endif
@@ -73,6 +78,7 @@ endif
 
 
 .PHONY: $(CLEAR)
+.PHONY: $(TEST)
 .PHONY: ALL
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
@@ -84,12 +90,17 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	            -e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P;\
         	sed -i '1s/^/$(OBJDIR)\//' $(df).P;
 		@rm -f $(df).d
-	@$(ECHO) "Compilation de $<"
+	$(ECHO) "Compilation de $<"
 	@mkdir -p $(dir $@)
 	$(CC) $(CCFLAGS) -o $@ $<
 
 
 ALL: $(PROGNAME)
+
+$(TEST): $(PROGNAME)
+	$(ECHO) "Batterie de test lancée"
+	cd $(TESTDIR); \
+		$(TESTCMD)
 	
 $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ)) 
 	$(ECHO) "Fabrication de l'executable"
