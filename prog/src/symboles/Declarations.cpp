@@ -200,11 +200,29 @@ void Declarations::signerAffecter(Identifiant* identifiant)
 	}
 }
 
+void Declarations::intersecterIdentifiants(
+	std::unordered_set<std::string>& identifiants)
+{
+	std::unordered_set<std::string> aDetruire;
+
+	for(std::pair<std::string, Entite> paire : _entites) {
+		std::unordered_set<std::string>::iterator itId =
+			identifiants.find(paire.first);
+
+			if(itId == identifiants.end())
+				aDetruire.insert(paire.first);
+	}
+
+	for(std::string identifiant : aDetruire) {
+		_entites.erase(identifiant);
+	}
+}
+
 void Declarations::analyser()
 {
 	// faire l'affichage correct en lisant les données précalculées
 
-	std::cout << "Analyse statique du code lutin :" << std::endl;
+	//std::cout << "Analyse statique du code lutin :" << std::endl;
 
 	if(!_varUtiliseesNonDeclarees.empty()) {
 		std::cerr << "Identifiants utilisés non déclarés :" << std::endl;

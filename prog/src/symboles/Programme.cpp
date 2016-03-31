@@ -47,7 +47,12 @@ void Programme::transformer()
 
 	_declarations->viderConstantes();
 
-	
+	_instructions->optimiserInstructions();
+
+	std::unordered_set<std::string> identifiants =
+		_instructions->getIdentifiantsUtilises();
+
+	_declarations->intersecterIdentifiants(identifiants);
 }
 
 void Programme::executer()

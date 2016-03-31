@@ -93,6 +93,10 @@ public:
 	void signerAffecter(Identifiant* identifiant);
 
 	void viderConstantes();
+	// Effectue l'intersection de l'ensemble des identifiants présents
+	// dans la classe avec l'ensemble passé en argument
+	void intersecterIdentifiants(
+		std::unordered_set<std::string>& identifiants);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Declarations& operator=(const Declarations & unDeclarations) = delete;

@@ -36,6 +36,7 @@ public:
 	void optimiser(Programme & programme);
 
     std::list<Instruction*>& getInstructions();
+    std::unordered_set<std::string> getIdentifiantsUtilises();
 
     void optimiserInstructions();
 
