@@ -289,7 +289,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 					globalExpr = (ExpressionBinaire*) globalExpr->simplifier(programme);
 
 #ifdef MAP
-					std::cout << "Apres avoir enlever les parentheses" << std::endl;
+					std::cout << "Apres avoir enlevé les parentheses" << std::endl;
 					globalExpr->afficher();
 					std::cout << std::endl;
 #endif
@@ -310,6 +310,9 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 					}
 
 					paireResultat.first = globalExpr;
+					_exprGauche = nullptr;
+					_exprDroite = nullptr;
+					delete this;
 					paireResultat.second = nullptr;
 
 					invaliderExpression();
