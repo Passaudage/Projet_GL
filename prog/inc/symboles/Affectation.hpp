@@ -27,6 +27,7 @@ class Affectation : public InstructionExpression
 
 public:
 //----------------------------------------------------- Méthodes publiques
+	virtual bool estSansEffet();
 	void afficher();
 	void effectuer(Programme& programme);
 	void optimiser(Programme& programme);

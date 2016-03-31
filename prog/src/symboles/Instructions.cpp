@@ -23,9 +23,15 @@ void Instructions::executer(Programme& programme)
 
 void Instructions::optimiser(Programme & programme)
 {
-	std::list<Instruction*>::iterator it;
-	for (it = _instructions.begin() ; it != _instructions.end() ; it++) {
+	std::list<Instruction*>::iterator it = _instructions.begin();
+	while (it != _instructions.end()) {
 		(*it)->optimiser(programme);
+		if ((*it)->estSansEffet()) {
+			delete *it;
+			_instructions.erase(it++);
+		} else {
+			it++;
+		}
 	}
 }
 

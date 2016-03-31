@@ -33,6 +33,7 @@ class Instruction : public Symbole
 
 public:
 //----------------------------------------------------- Méthodes publiques
+	virtual bool estSansEffet();
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
 	virtual void optimiser(Programme&);
