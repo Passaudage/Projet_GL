@@ -43,6 +43,8 @@ void Programme::transformer()
 	// a:=5;lire b;a:=7; ---> lire b;a:=7;
 	// a:=8;b:=7;lire a; ---> b:=7;lire a;
 	
+	_declarations->declarerVarNonDeclarees();
+
 	_instructions->optimiser(*this);
 
 	_declarations->viderConstantes();

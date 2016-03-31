@@ -1,5 +1,7 @@
-var a;
 var b;
+var a;
 a := a+10;
-b := b*5+3+a;
-c := 1/(b+5);
+ecrire a;
+b := 1/(b+5);
+a := b*5+3+a;
+ecrire a;

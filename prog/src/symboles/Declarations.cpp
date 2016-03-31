@@ -10,14 +10,14 @@ Declarations::Entite::Entite(Declarations::Entite::Type type) :
 {
 	valeur = 0;
 	utilise = false;
+	static_utilise = false;
 
 	if(type == CONST) {
-		//modifiable = false;
 		initialise = true;
-		
+		static_initialise = true;
 	} else {
-		//modifiable = true;
 		initialise = false;
+		static_initialise = false;
 	}
 }
 
@@ -161,7 +161,7 @@ void Declarations::signerUtiliser(Expression* expression)
 
 void Declarations::signerUtiliser(Identifiant* identifiant)
 {
-	unordered_map<string, Entite>::iterator it;
+	std::unordered_map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
 
@@ -172,11 +172,11 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 		_varUtiliseesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
 	} else {
 		// déclarée
-		it->second.utilise = true;
+		it->second.static_utilise = true;
 
 		// est-elle initialisée ?
 
-		if(!it->second.initialise) {
+		if(!it->second.static_initialise) {
 			_varUtiliseesNonAffectees.insert(Entree(identifiant->get(), identifiant));
 		}
 	}
@@ -194,6 +194,9 @@ void Declarations::signerAffecter(Identifiant* identifiant)
 		// variable affectée mais non déclarée
 		_varAffecteesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
 	} else {
+		it->second.static_utilise = true;
+		it->second.static_initialise = true;
+
 		if(!it->second.modifiable) {
 			_constModifiees.insert(Entree(identifiant->get(), identifiant));
 		}
@@ -216,6 +219,26 @@ void Declarations::intersecterIdentifiants(
 	for(std::string identifiant : aDetruire) {
 		_entites.erase(identifiant);
 	}
+}
+
+void Declarations::declarerVarNonDeclarees()
+{
+	std::unordered_set<std::string> varNonDeclarees;
+
+	for(Entree entree : _varUtiliseesNonDeclarees) {
+		varNonDeclarees.insert(entree.first);
+	}
+
+	for(Entree entree : _varAffecteesNonDeclarees) {
+		varNonDeclarees.insert(entree.first);
+	}
+
+	for(std::string variable : varNonDeclarees) {
+		Entite entite(Entite::Type::VAR);
+
+		_entites.insert(Enregistrement(variable, entite));
+	}
+
 }
 
 void Declarations::analyser()

@@ -1,4 +1,7 @@
 var a;
 a := 1;
+ecrire a;
 a := 10;
+ecrire a;
 a := 6+a*4;
+ecrire a;

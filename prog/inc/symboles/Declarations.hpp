@@ -45,6 +45,9 @@ public:
 		bool const modifiable;
 		bool initialise;
 		bool utilise;
+
+		bool static_initialise;
+		bool static_utilise;
 	};
 
 	typedef std::pair<std::string, Entite> Enregistrement;
@@ -91,6 +94,8 @@ public:
 	void signerUtiliser(Expression* expression);
 	void signerUtiliser(Identifiant* identifiant);
 	void signerAffecter(Identifiant* identifiant);
+
+	void declarerVarNonDeclarees();
 
 	void viderConstantes();
 	// Effectue l'intersection de l'ensemble des identifiants présents

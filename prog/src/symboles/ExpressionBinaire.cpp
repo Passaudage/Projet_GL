@@ -162,6 +162,10 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 #endif
 
 	std::pair<Expression*, Expression*> paireResultat;
+
+	paireResultat.first = nullptr;
+	paireResultat.second = nullptr;
+
 	Expression* exprDroite;
 	Expression* exprGauche;
 
@@ -215,17 +219,34 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(Programme& prog
 #ifdef MAP
 			std::cout << "expr a droite" << std::endl;
 #endif
-			// on ne peut pas faire remonter l'information
-			_exprGauche = _exprGauche->optimiser(programme).first;
-			_exprGauche = _exprGauche->simplifier(programme);
+			//std::cout << "blabla" << std::endl;
+
+			if(remonter) {
+				paireResultat = _exprGauche->optimiser(programme, true);
+
+				if(!paireResultat.second->estEvaluable(programme))
+					paireResultat.second = nullptr;
+
+				_exprGauche = paireResultat.first->simplifier(programme);
+			} else {
+				// on ne peut pas faire remonter l'information
+				_exprGauche = _exprGauche->optimiser(programme).first;
+				_exprGauche = _exprGauche->simplifier(programme);
+			}
 
 			// réoptimisation si besoin est
 			if(!_uneFois) {
 				_uneFois = true;
 
+				Expression* valeur = paireResultat.second;
+
 				paireResultat = enleverParentheses()->optimiser(programme);
 
 				paireResultat.first = paireResultat.first->simplifier(programme);
+
+				if(remonter) {
+					paireResultat.second = valeur;
+				}
 
 				return paireResultat;
 			} else {

@@ -156,8 +156,13 @@ void Instructions::optimiserInstructions()
 
 		// s'il les dépendances ont toutes
 		// été résolues
-		if(paire.second.empty())
+		// ou que l'on a parcouru l'ensemble des instructions
+		// avant l'instruction courante, sans les résoudre
+		if(paire.second.empty() ||
+			itInstr == _instructions.begin()) {
+			// on garde l'instruction
 			instructionsADetruire.erase(*itInstrInit);
+		}
 
 		instructionsATraiter.erase(paire.first);
 	}
