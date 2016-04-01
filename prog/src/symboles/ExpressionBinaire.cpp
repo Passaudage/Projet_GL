@@ -304,11 +304,15 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 						// on peut remonter l'information
 
 						paireResultat.first = globalExpr->getGauche();
+							//delete paireResultat.second;
 						if(!globalExpr->commutatif())
 							paireResultat.second = construireExpression(
 								new Valeur(_element_neutre), globalExpr->getDroite())->simplifier(programme);
 						else
 							paireResultat.second = globalExpr->getDroite();
+
+						globalExpr->invaliderExpression();
+						delete globalExpr;
 
 						invaliderExpression();
 
@@ -374,7 +378,9 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 
 			if(!_commutatif) {
 				newExprGauche = construireExpression(
-					new Valeur(_element_neutre), _exprDroite)->simplifier(programme);
+						new Valeur(_element_neutre), _exprDroite
+					)->
+					simplifier(programme);
 			}
 
 			paireResultat.first = newExprGauche;
@@ -428,7 +434,7 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 
 	
 
-	paireResultat.first = this;
+	paireResultat.first = this;	
 	paireResultat.second = nullptr;
 
 	return paireResultat;
