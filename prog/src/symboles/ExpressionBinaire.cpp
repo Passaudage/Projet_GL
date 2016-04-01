@@ -441,13 +441,22 @@ Expression* ExpressionBinaire::simplifierElementNeutre(Programme& programme)
 {
 	if(_commutatif) {
 		if(_exprGauche->estEvaluable(programme) && 
-			_exprGauche->calculer(programme) == _element_neutre)
-			return _exprDroite;
+			_exprGauche->calculer(programme) == _element_neutre) {
+			Expression* retour = _exprDroite;
+			invaliderExpression();
+			delete this;
+			return retour;
+		}
 	}
 
 	if(_exprDroite->estEvaluable(programme) && 
-		_exprDroite->calculer(programme) == _element_neutre)
-		return _exprGauche;
+		_exprDroite->calculer(programme) == _element_neutre) {
+			Expression* retour = _exprGauche;
+			invaliderExpression();
+			delete this;
+			return retour;
+		}
+
 
 	return this;
 }
