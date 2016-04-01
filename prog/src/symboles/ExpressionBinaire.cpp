@@ -443,8 +443,7 @@ Expression* ExpressionBinaire::simplifierElementNeutre(Programme& programme)
 		if(_exprGauche->estEvaluable(programme) && 
 			_exprGauche->calculer(programme) == _element_neutre) {
 			Expression* retour = _exprDroite;
-			invaliderExpression();
-			delete this;
+			delete _exprGauche;
 			return retour;
 		}
 	}
@@ -452,8 +451,7 @@ Expression* ExpressionBinaire::simplifierElementNeutre(Programme& programme)
 	if(_exprDroite->estEvaluable(programme) && 
 		_exprDroite->calculer(programme) == _element_neutre) {
 			Expression* retour = _exprGauche;
-			invaliderExpression();
-			delete this;
+			delete _exprDroite;
 			return retour;
 		}
 

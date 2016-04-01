@@ -42,6 +42,8 @@ Expression* ExpressionMultiplication::simplifier(Programme& programme)
 	Expression* expr = simplifierElementNeutre(programme);
 
 	if(expr != this) {
+		invaliderExpression();
+		delete this;
 		return expr;
 	}
 
@@ -49,6 +51,7 @@ Expression* ExpressionMultiplication::simplifier(Programme& programme)
 		_exprDroite->calculer(programme) == 0) ||
 		(_exprGauche->estEvaluable(programme) &&
 		_exprGauche->calculer(programme) == 0))  {
+		delete this;
 		return new Valeur(0);
 	}
 

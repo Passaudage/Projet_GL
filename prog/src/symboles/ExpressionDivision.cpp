@@ -39,14 +39,18 @@ ExpressionBinaire* ExpressionDivision::construireExpression(
 
 Expression* ExpressionDivision::simplifier(Programme& programme)
 {
+
 	Expression* expr = simplifierElementNeutre(programme);
 
 	if(expr != this) {
+		invaliderExpression();
+		delete this;
 		return expr;
 	}
 
 	if((_exprGauche->estEvaluable(programme) &&
 		_exprGauche->calculer(programme) == 0))  {
+		delete this;
 		return new Valeur(0);
 	}
 
