@@ -77,7 +77,6 @@ Expression* ExpressionBinaire::enleverParentheses()
 		std::cout << "On peut simplifier à gauche !" << std::endl;
 #endif
 
-		//_exprGauche = new ExpressionParenthesee(*(_exprGauche->enleverParentheses()));
 		_exprGauche = _exprGauche->enleverParentheses();
 
 		// memleak ?
@@ -90,7 +89,7 @@ Expression* ExpressionBinaire::enleverParentheses()
 		std::cout << "On peut simplifier à droite !" << std::endl;
 #endif
 
-		exprBinaireDroite->enleverParentheses();
+		exprBinaireDroite = (ExpressionBinaire*) exprBinaireDroite->enleverParentheses();
 
 		Expression* interieur = (construireExpression(
 			_exprGauche, exprBinaireDroite->getGauche()));
@@ -99,7 +98,7 @@ Expression* ExpressionBinaire::enleverParentheses()
 
 		return exterieur->enleverParentheses();
 	} else {
-			_exprDroite = exprDroite->enleverParentheses();
+			_exprDroite = _exprDroite->enleverParentheses();
 	}
 
 	return this;
@@ -285,8 +284,8 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 					ExpressionBinaire* globalExpr = construireExpression(paireGauche.first, tempExprDroite,
 						!_commutatif);
 
-					globalExpr = (ExpressionBinaire*) globalExpr->enleverParentheses();
-					globalExpr = (ExpressionBinaire*) globalExpr->simplifier(programme);
+					globalExpr = (ExpressionBinaire*) globalExpr->enleverParentheses()
+						->simplifier(programme);
 
 #ifdef MAP
 					std::cout << "Apres avoir enlevé les parentheses" << std::endl;
@@ -375,6 +374,8 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 			paireResultat.second = _exprGauche;
 
 			invaliderExpression();
+
+			delete this;
 
 			return paireResultat;
 		}

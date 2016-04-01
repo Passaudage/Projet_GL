@@ -55,13 +55,17 @@ std::pair<Expression*, Expression*> ExpressionParenthesee::optimiser(Programme& 
 {
 	std::pair<Expression*, Expression*> paire;
 	paire = _exprInter->optimiser(programme, remonter);
-	
+	_exprInter = nullptr;
+	delete this;
 	return paire;
 }
 
 Expression* ExpressionParenthesee::simplifier(Programme& programme)
 {
-	return _exprInter->simplifier(programme);
+	Expression* retour = _exprInter->simplifier(programme);
+	_exprInter = nullptr;
+	delete this;
+	return retour;
 }
 
 bool ExpressionParenthesee::estEvaluable(Programme& programme)
