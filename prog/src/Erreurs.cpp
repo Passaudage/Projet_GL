@@ -4,6 +4,8 @@
 
 std::string ExceptionSymbole::symbole_non_attendu = "symbole non attendu par la grammaire";
 
+std::string ExceptionFarfadet::declaration_const_double = "Déclaration d'une constante dont l'identifiant est déjà pris !!!";
+std::string ExceptionFarfadet::declaration_var_double = "Déclaration d'une variable dont l'identifiant est déjà pris !!!";
 
 ExceptionFarfadet::ExceptionFarfadet(std::string message) :
 	_message(message)

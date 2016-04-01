@@ -1,6 +1,7 @@
 #include "symboles/SymbolesTerminaux.hpp"
 
-OperateurAdd::OperateurAdd(bool addition):_addition(addition)
+OperateurAdd::OperateurAdd(bool addition):Symbole(Symbole::Type::OPERATEUR_ADD),
+	_addition(addition)
 {
 }
 

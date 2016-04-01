@@ -32,11 +32,16 @@ void Etat14::transition(Automate* a, Symbole* ) //réduction de la règle 6
 
 	idv->ajouterVariable(id->get());
 
-	d->enregistrerVariables(*idv);
-
+	try {
+		d->enregistrerVariables(*idv);
+	} catch (ExceptionFarfadet e) {
+		delete id;
+		throw e;
+	}
+	
 	delete id;
 	delete idv;
-	
+
 	a-> popEtat();
 	a-> popEtat();
 	a-> popEtat();

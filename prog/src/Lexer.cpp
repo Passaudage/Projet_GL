@@ -48,6 +48,14 @@ Lexer::Lexer(std::string const& nomFichier)
 Lexer::~Lexer()
 {
 	_fichierSource.close();
+	if (_symboleCourant != nullptr) {
+		_symboleCourant->deletePropre();
+	}
+
+	while(!_fileSymboles.empty()) {
+		_fileSymboles.front()->deletePropre();
+		_fileSymboles.pop();
+	}
 }
 
 // #### Publique #### //

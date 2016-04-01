@@ -34,6 +34,11 @@ int Symbole::getLigne()
 {
 	return _position.ligne;
 }
+
+void Symbole::deletePropre() {
+	delete this;
+}
+
 int Symbole::getCaractere()
 {
 	return _position.caractere;

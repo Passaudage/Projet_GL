@@ -41,7 +41,6 @@ private:
     std::queue<Symbole*> _fileSymboles;
     std::queue<Position> _filePositions;
 
-    Symbole* _delimiteurSuivant;
     bool _nombre_negatif;
     bool _renvoie_negatif;
     bool _debut_mot;

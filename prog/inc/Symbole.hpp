@@ -47,6 +47,7 @@ public:
 
 	void setType(Type symboleType);
 	void setPosition(Lexer::Position position);
+	virtual void deletePropre();
 
 	Lexer::Position getPosition();
 

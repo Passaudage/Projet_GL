@@ -4,6 +4,7 @@
 
 #include "symboles/Identifiant.hpp"
 #include "symboles/Expression.hpp"
+#include "Erreurs.hpp"
 
 Declarations::Entite::Entite(Declarations::Entite::Type type) :
 	modifiable((type == CONST) ? false : true)
@@ -38,7 +39,10 @@ void Declarations::enregistrerConstantes(IDC& idc)
 	Declarations::ListEntites& liste = idc.getliste();
 	for (it = liste.begin() ; it != liste.end() ; it++) {
 		if (identifiantPris(it->first))
-			throw "Déclaration d'une constante dont l'identifiant est déjà pris !!!";
+		{
+			delete &idc;
+			throw ExceptionFarfadet(ExceptionFarfadet::declaration_const_double);
+		}
 		_entites.insert(*it);	
 	}
 }
@@ -49,7 +53,10 @@ void Declarations::enregistrerVariables(IDV& idv)
 	Declarations::ListEntites& liste = idv.getliste();
 	for (it = liste.begin() ; it != liste.end() ; it++) {
 		if (identifiantPris(it->first))
-			throw "Déclaration d'une variable dont l'identifiant est déjà pris !!!";
+		{
+			delete &idv;
+			throw ExceptionFarfadet(ExceptionFarfadet::declaration_var_double);
+		}
 		_entites.insert(*it);	
 	}
 }

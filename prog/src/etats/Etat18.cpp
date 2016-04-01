@@ -33,7 +33,14 @@ void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
 #endif
 
 	idc->ajouterConstante(id->get(), val->getValeur());
-	d->enregistrerConstantes(*idc);
+	try {
+		d->enregistrerConstantes(*idc);
+	} catch (ExceptionFarfadet e) {
+		delete val;
+		delete id;
+		throw e;
+	}
+
 	delete val;
 	delete id;
 	delete idc;

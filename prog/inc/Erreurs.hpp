@@ -14,6 +14,9 @@ public:
 
 	virtual std::string const& getErreur();
 
+	static std::string declaration_const_double;
+	static std::string declaration_var_double;
+
 protected:
 	std::string _message;
 
