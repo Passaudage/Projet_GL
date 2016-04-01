@@ -45,9 +45,9 @@ Expression* ExpressionSoustraction::simplifier(Programme& programme)
 
 	if(_exprDroite->getInitType() == Symbole::Type::VALEUR &&
 		((Valeur*)_exprDroite)->getValeur() < 0) {
-		Expression* retour = new ExpressionAddition(
-				*_exprGauche,  *new Valeur(-((Valeur*)_exprDroite)->
-					getValeur() ));
+		Expression* retour = 
+			new ExpressionAddition(*_exprGauche,
+					*new Valeur(-((Valeur*)_exprDroite)-> getValeur()));
 		delete _exprDroite;
 		invaliderExpression();
 		delete this;

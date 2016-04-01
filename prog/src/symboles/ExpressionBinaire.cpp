@@ -89,12 +89,17 @@ Expression* ExpressionBinaire::enleverParentheses()
 		std::cout << "On peut simplifier à droite !" << std::endl;
 #endif
 
-		exprBinaireDroite = (ExpressionBinaire*) exprBinaireDroite->enleverParentheses();
+		exprBinaireDroite = (ExpressionBinaire*) _exprDroite->enleverParentheses();
 
 		Expression* interieur = (construireExpression(
 			_exprGauche, exprBinaireDroite->getGauche()));
 		Expression* exterieur = (exprBinaireDroite->construireExpression(
 			interieur, exprBinaireDroite->getDroite(), !_commutatif));
+		
+		exprBinaireDroite->invaliderExpression();
+		delete exprBinaireDroite;
+		invaliderExpression();
+		delete this;
 
 		return exterieur->enleverParentheses();
 	} else {
@@ -276,13 +281,15 @@ std::pair<Expression*, Expression*> ExpressionBinaire::optimiser(
 
 				if(paireGauche.second != nullptr) {
 
+
 					Expression* tempExprDroite = 
 						construireExpression(paireGauche.second, _exprDroite)->
 						optimiser(programme).first;
 
 					// Donne forcément l'opérateur commutatif correspondant
-					ExpressionBinaire* globalExpr = construireExpression(paireGauche.first, tempExprDroite,
-						!_commutatif);
+					ExpressionBinaire* globalExpr = 
+						construireExpression(paireGauche.first, tempExprDroite,
+							!_commutatif);
 
 					globalExpr = (ExpressionBinaire*) globalExpr->enleverParentheses()
 						->simplifier(programme);
