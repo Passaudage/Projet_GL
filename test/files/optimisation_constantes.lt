@@ -9,3 +9,5 @@ a := b*3 + d/b + b;
 ecrire a;
 a := c*b + a*d;
 ecrire a;
+lire a;
+ecrire a;
