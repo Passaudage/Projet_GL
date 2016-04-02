@@ -1,5 +1,7 @@
 var a;
 var b;
+lire a;
+lire b;
 a := a+10;
 ecrire a;
 b := 1/(b+5);

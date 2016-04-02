@@ -36,7 +36,7 @@ public:
 	virtual bool estSansEffet();
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
-	virtual void optimiser(Programme&);
+	virtual void optimiser(Programme&) = 0;
 	virtual std::unordered_set<Identifiant*> const getVarUtilisees() = 0;
 	virtual Identifiant const * getVarAffectees() = 0;
 

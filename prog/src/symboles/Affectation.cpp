@@ -32,6 +32,12 @@ void Affectation::optimiser(Programme& programme)
 		optimiser(programme).first->
 		simplifier(programme);
 	_expr->ajouterParentheses();
+	if (_expr->estEvaluable(programme)) {
+		programme.rendPropre(_identifiant.get());
+		programme.setValeur(_identifiant.get(), _expr->calculer(programme));
+	} else {
+		programme.rendSale(_identifiant.get());
+	}
 }
 
 Identifiant const * Affectation::getVarAffectees()

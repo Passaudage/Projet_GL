@@ -12,6 +12,7 @@ Declarations::Entite::Entite(Declarations::Entite::Type type) :
 	valeur = 0;
 	utilise = false;
 	static_utilise = false;
+	optim_sale = false;
 
 	if(type == CONST) {
 		initialise = true;
@@ -71,8 +72,33 @@ int Declarations::getValeur(string const& identifiant) const
 bool Declarations::estModifiable(string const& identifiant)
 {
 	if(!identifiantPris(identifiant))
-		return 0;
+		return true;
 	return _entites.find(identifiant)->second.modifiable;
+}
+
+bool Declarations::estSale(string const& identifiant)
+{
+	if(!identifiantPris(identifiant))
+		return false;
+	return _entites.find(identifiant)->second.optim_sale;	
+}
+
+void Declarations::rendSale(string const& identifiant)
+{
+	if(!identifiantPris(identifiant)) {
+		Entite entite(Entite::Type::VAR);
+		entite.optim_sale = true;
+		_entites.insert(Enregistrement(identifiant, entite));
+	} else {
+		_entites.find(identifiant)->second.optim_sale = true;
+	}
+}
+
+void Declarations::rendPropre(string const& identifiant)
+{
+	if(identifiantPris(identifiant)) {
+		_entites.find(identifiant)->second.optim_sale = false;
+	} 
 }
 
 void Declarations::setValeur(string const& identifiant, int valeur) {

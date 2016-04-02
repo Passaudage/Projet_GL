@@ -77,7 +77,6 @@ ifneq ($(PROF),FALSE)
     ELFLAGS+= -pg
 endif
 
-
 .PHONY: $(CLEAR)
 .PHONY: $(TEST)
 .PHONY: ALL

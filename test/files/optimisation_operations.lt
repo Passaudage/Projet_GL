@@ -1,5 +1,7 @@
 var a;
 var b;
+lire a;
+lire b;
 a := 3+4+a+1+2;
 ecrire a;
 b := (4-3)/(b-(1-6));

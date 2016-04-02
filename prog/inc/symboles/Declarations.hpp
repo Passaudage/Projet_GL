@@ -41,6 +41,9 @@ public:
 		bool initialise;
 		bool utilise;
 
+		//Dit si la valeur dépend de la saisie de l'utilisateur
+		bool optim_sale;
+
 		bool static_initialise;
 		bool static_utilise;
 	};
@@ -103,6 +106,9 @@ public:
 	int getValeur(string const& identifiant) const;
 	void setValeur(string const& identifiant, int valeur);
 	bool estModifiable(string const& identifiant);
+	bool estSale(string const& identifiant);
+	void rendSale(string const& identifiant);
+	void rendPropre(string const& identifiant);
 
 	void afficher();
 

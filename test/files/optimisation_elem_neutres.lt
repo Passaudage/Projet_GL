@@ -1,4 +1,5 @@
 var a;
+lire a;
 a := a*1 + 1;
 ecrire a;
 a := a/1 + 2;

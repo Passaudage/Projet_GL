@@ -11,11 +11,6 @@ Instruction::~Instruction()
 {
 }
 
-void Instruction::optimiser(Programme&)
-{
-	// Comportement par défaut : ne pas optimiser
-}
-
 bool Instruction::estSansEffet() {
 	//comportement par defaut pleutre : l'instruction est utile sauf si elle
 	//prouve le contraire

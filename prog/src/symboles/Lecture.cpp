@@ -38,6 +38,11 @@ Lecture::Lecture(Identifiant& identifiant):_identifiant(identifiant)
 {
 }
 
+void Lecture::optimiser(Programme& programme)
+{
+	programme.rendSale(_identifiant.get());	
+}
+
 Lecture::~Lecture()
 {
 	delete &_identifiant;

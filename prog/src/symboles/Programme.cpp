@@ -92,3 +92,18 @@ bool Programme::estModifiable(std::string const& identifiant)
 {
 	return _declarations->estModifiable(identifiant);
 }
+
+bool Programme::estSale(std::string const & identifiant)
+{
+	return _declarations->estSale(identifiant);
+}
+
+void Programme::rendSale(std::string const & identifiant)
+{
+	return _declarations->rendSale(identifiant);
+}
+
+void Programme::rendPropre(std::string const & identifiant)
+{
+	return _declarations->rendPropre(identifiant);
+}
