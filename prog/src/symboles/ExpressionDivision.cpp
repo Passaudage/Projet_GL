@@ -5,6 +5,8 @@
 
 #include "symboles/ExpressionMultiplication.hpp"
 
+#include "Erreurs.hpp"
+
 ExpressionDivision::ExpressionDivision(
 		Expression& exprGauche,
 		Expression& exprDroite
@@ -24,6 +26,11 @@ int ExpressionDivision::operation(int a, int b, bool oppose)
 	if(oppose) {
 		return a * b;
 	}
+
+	if(b == 0) {
+		throw ExceptionFarfadet(ExceptionFarfadet::division_zero);
+	}
+
 	return a / b;
 }
 
@@ -56,28 +63,3 @@ Expression* ExpressionDivision::simplifier(Programme& programme)
 
 	return this;
 }
-
-/*
-Expression* ExpressionDivision::optimiser(Programme& programme)
-{
-	//~ std::cout << "Expression Division optimisation "<<std::endl;
-	Expression* left = _exprGauche->optimiser(programme);
-	Expression* right = _exprDroite->optimiser(programme);
-
-	if(left->estEvaluable(programme) && right->estEvaluable(programme)) {
-		return new Valeur(left->calculer(programme)/right->calculer(programme));
-	}
-	else {
-		if(left->estEvaluable(programme)) {
-			if(left->calculer(programme) == 1) {
-				return right;
-			}
-		}
-		else if(right->estEvaluable(programme)) {
-			if(right->calculer(programme) == 1) {
-				return left;
-			}
-		}
-		return new ExpressionDivision(*left,*right);
-	}	
-}*/

@@ -16,6 +16,7 @@ public:
 
 	static std::string declaration_const_double;
 	static std::string declaration_var_double;
+	static std::string division_zero;
 
 protected:
 	std::string _message;
