@@ -35,7 +35,7 @@ void Etat28::transition(Automate* a, Symbole* s)
 		case Symbole::PARENTHESE_FER:
 		case Symbole::OPERATEUR_ADD:
 			{
-				Symbole* symbole = a->symboleCourant();
+				Symbole* symbole = a->topSymbole();
 				symbole->setType(Symbole::EXPRESSION);
 				a->popEtat();
 				a->etatCourant()->transition(a, symbole);

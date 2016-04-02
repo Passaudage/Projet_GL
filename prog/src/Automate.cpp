@@ -7,9 +7,12 @@
 
 #include "etats/Etat0.hpp"
 
+#ifdef MAP
 #include <iostream>
+#endif
 
-Automate::Automate(std::string const& fichier_lutin) : _fichier_lutin(fichier_lutin),
+Automate::Automate(std::string const& fichier_lutin) :
+	_fichier_lutin(fichier_lutin),
 	_lexer(fichier_lutin)
 {
 }
@@ -38,42 +41,15 @@ Programme* Automate::getProgramme()
 	return programme;
 }
 
-Symbole* Automate::topSymbole()
-{
-	return _pileSymboles.top();
-}
 
 void Automate::pushEtat(Etat* etat)
 {
 	_pileEtats.push(etat);
 }
 
-void Automate::pushSymbole(Symbole* symbole)
-{
-#ifdef MAP
-	std::cout << "Ajout de : " << int(*symbole) << std::endl;
-#endif
-	_pileSymboles.push(symbole);
-}
-
 void Automate::popEtat()
 {
-	//~ Etat* etat = _pileEtats.top();
 	_pileEtats.pop();
-	//std::cout << "  pile- : " << _pileEtats.size() << std::endl;
-
-	//~ delete etat;
-}
-
-Symbole* Automate::popSymbole()
-{
-	Symbole* symbole = _pileSymboles.top();
-	_pileSymboles.pop();
-#ifdef MAP
-	std::cout << "depile " << int(*symbole) << std::endl;
-#endif
-
-	return symbole;
 }
 
 Etat* Automate::etatCourant() const
@@ -81,10 +57,25 @@ Etat* Automate::etatCourant() const
 	return _pileEtats.top();
 }
 
-Symbole* Automate::symboleCourant() const
+
+void Automate::pushSymbole(Symbole* symbole)
+{
+	_pileSymboles.push(symbole);
+}
+
+Symbole* Automate::popSymbole()
+{
+	Symbole* symbole = _pileSymboles.top();
+	_pileSymboles.pop();
+
+	return symbole;
+}
+
+Symbole* Automate::topSymbole()
 {
 	return _pileSymboles.top();
 }
+
 
 Symbole* Automate::lireSymboleCourant()
 {

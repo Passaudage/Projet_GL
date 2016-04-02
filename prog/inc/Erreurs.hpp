@@ -5,6 +5,10 @@
 
 class Symbole;
 
+/*
+ * Classe permettant de gérer les erreurs.
+ * Prend en charge un message personnalisé.
+ */
 class ExceptionFarfadet
 {
 public:
@@ -23,6 +27,11 @@ protected:
 
 };
 
+/*
+ * Classe permettant de gérer les erreurs relatives à un symbole.
+ * Le numéro de ligne et la position du symbole dans la ligne
+ * est automatique ajoutée avant le message personnalisé.
+ */
 class ExceptionSymbole : public ExceptionFarfadet
 {
 public:

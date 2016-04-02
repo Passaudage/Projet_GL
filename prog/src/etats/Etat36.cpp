@@ -14,21 +14,21 @@ Etat36::Etat36()
 {
 }
 
-Etat36* Etat36::getInstance(){
+Etat36* Etat36::getInstance()
+{
 	return &m_instance;
 }
 
 
 void Etat36::transition(Automate* a, Symbole* ) 
 {
-	// OK
 #ifdef MAP
 	std::cout << "Etat36" << std::endl;
 #endif
 
 	// récupération de Instruction
 	Instruction* instruction = dynamic_cast<Instruction*> (a->popSymbole());
-	Instructions* instructions = dynamic_cast<Instructions*> (a->symboleCourant());
+	Instructions* instructions = dynamic_cast<Instructions*> (a->topSymbole());
 
 	instructions->ajouteInstruction(instruction);
 

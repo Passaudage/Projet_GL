@@ -1,12 +1,12 @@
 #include "symboles/ExpressionBinaire.hpp"
 
-#include <iostream>
-
 #include "symboles/Identifiant.hpp"
 
 #include "symboles/ExpressionParenthesee.hpp"
 #include "symboles/ExpressionAddition.hpp"
 #include "symboles/Valeur.hpp"
+
+#include <iostream>
 
 ExpressionBinaire::ExpressionBinaire(Expression& exprGauche, Expression& exprDroite,
 	bool commutatif, int element_neutre, Symbole::Type operation):
@@ -78,8 +78,6 @@ Expression* ExpressionBinaire::enleverParentheses()
 #endif
 
 		_exprGauche = _exprGauche->enleverParentheses();
-
-		// memleak ?
 	}
 
 	if(exprBinaireDroite != nullptr &&

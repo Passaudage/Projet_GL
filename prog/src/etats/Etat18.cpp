@@ -14,7 +14,8 @@ Etat18::Etat18()
 {
 }
 
-Etat18* Etat18::getInstance(){
+Etat18* Etat18::getInstance()
+{
 	return &m_instance;
 }
 
@@ -26,7 +27,7 @@ void Etat18::transition(Automate* a, Symbole* ) //réduction de la règle 7
     Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
     Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
 	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->popSymbole());
-	Declarations* d = dynamic_cast<Declarations*> (a->symboleCourant());
+	Declarations* d = dynamic_cast<Declarations*> (a->topSymbole());
 
 #ifdef MAP
 	std::cout << "Valeur : " << val->getValeur() << std::endl;;

@@ -1,79 +1,54 @@
-/*************************************************************************
-                           Instructions  -  description
-                             -------------------
-    début                : jeu. 17 mars 2016
-*************************************************************************/
-
-//--------- Interface de la classe <Instructions> (fichier Instructions.hpp) ------
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 
-//--------------------------------------------------- Interfaces utilisées
 #include "Symbole.hpp"
 #include "symboles/Instruction.hpp"
 #include "symboles/Programme.hpp"
 #include <list>
 
-//------------------------------------------------------------- Constantes 
 
-//------------------------------------------------------------------ Types 
-
-//------------------------------------------------------------------------ 
-// Rôle de la classe <Instructions>
-//
-//
-//------------------------------------------------------------------------ 
-
+/*
+ * Cette classe stocke l'ensemble des instructions du programme.
+ * Elle permet également d'effectuer l'exécution du programme,
+ * ainsi que son optimisation.
+ */
 class Instructions : public Symbole
 {
-//----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+
+    Instructions& operator=(const Instructions & unInstructions) = delete;
+    Instructions(const Instructions & unInstructions) = delete;
+
+    Instructions();
+    virtual ~Instructions();
+
+
 	void ajouteInstruction(Instruction* instruction);
 	void executer(Programme & programme);
 	void afficher();
 	void optimiser(Programme & programme);
 
     std::list<Instruction*>& getInstructions();
+    /*
+     * Retourne l'ensemble des identifiants utilisés par les instructions.
+     * Un identifiant utilisé correspond à un identifiant dont sa valeur
+     * est nécessaire pour exécuter correctement au moins une instruction.
+     * (présence en partie droite d'un affectation ou dans une instruction
+     * d'affichage)
+     */
     std::unordered_set<std::string> getIdentifiantsUtilises();
 
+    /*
+     * Optimise spécifiquement les dépendances entre les instructions.
+     */
     void optimiserInstructions();
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Instructions& operator=(const Instructions & unInstructions) = delete;
-
-//-------------------------------------------- Constructeurs - destructeur
-    Instructions(const Instructions & unInstructions) = delete;
-
-    Instructions();
-
-    virtual ~Instructions();
-
-//------------------------------------------------------------------ PRIVE 
-
 protected:
-//----------------------------------------------------- Méthodes protégées
 
-private:
-//------------------------------------------------------- Méthodes privées
-
-protected:
-//----------------------------------------------------- Attributs protégés
 	std::list<Instruction*> _instructions;
 
-private:
-//------------------------------------------------------- Attributs privés
-
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privées
-
-//----------------------------------------------------------- Types privés
-
 };
-
-//----------------------------------------- Types dépendants de <Instructions>
 
 #endif // INSTRUCTIONS_H
 

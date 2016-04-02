@@ -10,6 +10,10 @@
 
 #include "Erreurs.hpp"
 
+/*
+ * Cette structure stocke les informations utiles à la récupération
+ * et la gestion des arguments du programme.
+ */
 struct arg_cmd_struct {
 	bool afficher;
 	bool analyser;
@@ -22,6 +26,9 @@ struct arg_cmd_struct {
 	int return_code;
 };
 
+/*
+ * Coeur du programme Lutin.
+ */
 void traiter_lutin(arg_cmd_struct* arg_cmd)
 {
 	Programme* programme = nullptr;
@@ -67,6 +74,9 @@ void traiter_lutin(arg_cmd_struct* arg_cmd)
 	}
 }
 
+/*
+ * Procédure appelée à chaque fois qu'un argument est détecté par argp.
+ */
 int parse_opt(int key, char *arg, struct argp_state *state)
 {
 	arg_cmd_struct* arg_cmd = (arg_cmd_struct*) state->input;
@@ -110,6 +120,7 @@ int parse_opt(int key, char *arg, struct argp_state *state)
 
 int main(int argc, char* argv[])
 {
+	// On définit les arguments de la ligne commande.
 	struct argp_option options[5];
 
 	options[0] = {};

@@ -14,7 +14,8 @@ Etat21::Etat21()
 {
 }
 
-Etat21* Etat21::getInstance(){
+Etat21* Etat21::getInstance()
+{
 	return &m_instance;
 }
 
@@ -28,7 +29,6 @@ void Etat21::transition(Automate* a, Symbole* s)
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
-			//~ a->pushEtat(new Etat22());
 			a->pushEtat(Etat22::getInstance());
 			a->decaler();
 			break;
@@ -43,11 +43,11 @@ void Etat21::transition(Automate* a, Symbole* s)
 
 				Declarations* declarations;
 
-				if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
-					declarations = (dynamic_cast<Declarations*> (a->symboleCourant()));
+				if(int(*(a->topSymbole())) == Symbole::Type::DECLARATIONS) {
+					declarations = (dynamic_cast<Declarations*> (a->topSymbole()));
 				} else {
 					Symbole* temp = a->popSymbole();
-					declarations = (dynamic_cast<Declarations*> (a->symboleCourant()));
+					declarations = (dynamic_cast<Declarations*> (a->topSymbole()));
 					a->pushSymbole(temp);
 				}
 

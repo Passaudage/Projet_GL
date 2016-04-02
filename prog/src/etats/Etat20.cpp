@@ -14,7 +14,8 @@ Etat20::Etat20()
 {
 }
 
-Etat20* Etat20::getInstance(){
+Etat20* Etat20::getInstance()
+{
 	return &m_instance;
 }
 
@@ -24,6 +25,7 @@ void Etat20::transition(Automate* a, Symbole* s)
 #ifdef MAP
 	std::cout << "Etat20" << std::endl;
 #endif
+
     switch(*s){
 		case Symbole::OPERATEUR_ADD:
 			a->pushSymbole(s);
@@ -39,11 +41,11 @@ void Etat20::transition(Automate* a, Symbole* s)
 				Expression* expr = dynamic_cast<Expression*> (a->popSymbole());
 				Symbole* ecriture = new Affichage(*expr);
 
-				if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
-					(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
+				if(int(*(a->topSymbole())) == Symbole::Type::DECLARATIONS) {
+					(dynamic_cast<Declarations*> (a->topSymbole()))->signerUtiliser(expr);
 				} else {
 					Symbole* temp = a->popSymbole();
-					(dynamic_cast<Declarations*> (a->symboleCourant()))->signerUtiliser(expr);
+					(dynamic_cast<Declarations*> (a->topSymbole()))->signerUtiliser(expr);
 					a->pushSymbole(temp);
 				}
 
