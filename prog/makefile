@@ -25,13 +25,21 @@ SRCDIR=src
 # Dossier objets
 OBJDIR=.obj
 
+#Nom de l'archive :
+ARCHIVE=H4313.zip
+
+#Dossiers des documents
+DOCDIR=docs
+ALLDOC=$(shell find $(DOCDIR) -type f -name *.pdf)
+
 # Dossier où sont mises les dépendances
 DEPDIR=.dep
 df=$(@D)/$(*F)
 
 ALLSRC=$(shell find $(SRCDIR) -type f -name *.cpp)
 SRC=$(ALLSRC:$(SRCDIR)/%=%)
-INC=$(shell find $(INCDIR) -type f \( -name *.hpp -o -name *.h -o -name *.tpp \) | sed -e "s/$(INCDIR)\///")
+ALLINC=$(shell find $(INCDIR) -type f \( -name *.hpp -o -name *.h -o -name *.tpp \))
+INC=$(ALLINC:$(INCDIR)/%=%)
 
 OBJ=$(SRC:.cpp=.o)
 
@@ -48,7 +56,7 @@ EL=g++ #Éditeur de liens
 ELFLAGS=
 
 #dossier pour les tests
-TESTDIR=../test
+TESTDIR=tests
 TESTCMD=bash mktest.sh
 TESTLINK=$(TESTDIR)/lut
 TEST=test
@@ -113,3 +121,7 @@ $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ))
 
 $(CLEAR):
 	$(RM) $(RMFLAGS) $(OBJDIR)/* $(DEPDIR)/* $(PROGNAME)
+
+$(ARCHIVE): $(ALLSRC) $(ALLDOC) $(ALLINC) $(TESTDIR) makefile
+	$(ECHO) "Archivage du projet" 	
+	zip -r $@ $^
