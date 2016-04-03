@@ -6,6 +6,9 @@
 class Symbole
 {
 public:
+	/*
+	 * Regroupe l'ensemble des types de symboles existants.
+	 */
 	enum Type {
 		// Symboles non terminaux
 		PROGRAMME,
@@ -21,7 +24,7 @@ public:
 		// Symboles terminaux
 		PARENTHESE_OUV,
 		PARENTHESE_FER,
-		OPERATEUR_MUL,	
+		OPERATEUR_MUL,
 		OPERATEUR_ADD,
 		POINT_VIR,
 		VIRGULE,
@@ -38,30 +41,51 @@ public:
 	};
 
 	Symbole(Type symboleType);
-
-	// Surcharge permettant de faire un switch
-	// sur un objet Symbole
-	operator int();
-
 	virtual ~Symbole();
 
-	void setType(Type symboleType);
-	void setPosition(Lexer::Position position);
+	/*
+	 * Permet la destruction correcte du symbole,
+	 * utile pour éviter les memleaks.
+	 */
+	virtual void deletePropre();
 
+	/*
+	 * Surcharge permettant l'application d'un switch au symbole.
+	 * Renvoie le type courant du symbole.
+	 * Attention : ce type peut diférer de celui attribué lors de
+	 * la construction de l'objet.
+	 * cf : Symbole::setType et Symbole::getInitType()
+	 */
+	operator int();
+
+	/*
+	 * Utile lors du parcours des états pour changer
+	 * le type du symbole.
+	 */
+	void setType(Type symboleType);
+
+	/*
+	 * Renvoie le type du symbole tel qu'il était à sa construction.
+	 */
+	int getInitType();
+
+	/*
+	 * Gère la position du symbole.
+	 */
+	void setPosition(Lexer::Position position);
 	Lexer::Position getPosition();
 
 	int getLigne();
 	int getCaractere();
+
 	
 
 protected:
 
 	Type _symboleType;
+	Type _initType;
 
 	Lexer::Position _position;
-
-private:
-
 };
 
 #endif

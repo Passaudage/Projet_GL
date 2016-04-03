@@ -4,20 +4,22 @@
 
 #include "symboles/Identifiant.hpp"
 #include "symboles/Expression.hpp"
+#include "Erreurs.hpp"
 
 Declarations::Entite::Entite(Declarations::Entite::Type type) :
 	modifiable((type == CONST) ? false : true)
 {
 	valeur = 0;
 	utilise = false;
+	static_utilise = false;
+	optim_sale = false;
 
 	if(type == CONST) {
-		//modifiable = false;
 		initialise = true;
-		
+		static_initialise = true;
 	} else {
-		//modifiable = true;
 		initialise = false;
+		static_initialise = false;
 	}
 }
 
@@ -38,7 +40,10 @@ void Declarations::enregistrerConstantes(IDC& idc)
 	Declarations::ListEntites& liste = idc.getliste();
 	for (it = liste.begin() ; it != liste.end() ; it++) {
 		if (identifiantPris(it->first))
-			throw "Déclaration d'une constante dont l'identifiant est déjà pris !!!";
+		{
+			delete &idc;
+			throw ExceptionFarfadet(ExceptionFarfadet::declaration_const_double);
+		}
 		_entites.insert(*it);	
 	}
 }
@@ -49,7 +54,10 @@ void Declarations::enregistrerVariables(IDV& idv)
 	Declarations::ListEntites& liste = idv.getliste();
 	for (it = liste.begin() ; it != liste.end() ; it++) {
 		if (identifiantPris(it->first))
-			throw "Déclaration d'une variable dont l'identifiant est déjà pris !!!";
+		{
+			delete &idv;
+			throw ExceptionFarfadet(ExceptionFarfadet::declaration_var_double);
+		}
 		_entites.insert(*it);	
 	}
 }
@@ -61,9 +69,41 @@ int Declarations::getValeur(string const& identifiant) const
 	return _entites.find(identifiant)->second.valeur;
 }
 
+bool Declarations::estModifiable(string const& identifiant)
+{
+	if(!identifiantPris(identifiant))
+		return true;
+	return _entites.find(identifiant)->second.modifiable;
+}
+
+bool Declarations::estSale(string const& identifiant)
+{
+	if(!identifiantPris(identifiant))
+		return false;
+	return _entites.find(identifiant)->second.optim_sale;	
+}
+
+void Declarations::rendSale(string const& identifiant)
+{
+	if(!identifiantPris(identifiant)) {
+		Entite entite(Entite::Type::VAR);
+		entite.optim_sale = true;
+		_entites.insert(Enregistrement(identifiant, entite));
+	} else {
+		_entites.find(identifiant)->second.optim_sale = true;
+	}
+}
+
+void Declarations::rendPropre(string const& identifiant)
+{
+	if(identifiantPris(identifiant)) {
+		_entites.find(identifiant)->second.optim_sale = false;
+	} 
+}
+
 void Declarations::setValeur(string const& identifiant, int valeur) {
 	if (identifiantPris(identifiant)) {
-		unordered_map<string, Entite>::iterator it = _entites.find(identifiant);
+		map<string, Entite>::iterator it = _entites.find(identifiant);
 		Entite& entite = it->second;
 		if (entite.modifiable) 
 			entite.valeur = valeur; 
@@ -123,7 +163,7 @@ void Declarations::IDV::ajouterVariable(std::string const& identifiant)
 
 void Declarations::afficher()
 {
-	unordered_map<string, Entite>::iterator it; 
+	map<string, Entite>::iterator it; 
 	for(it = _entites.begin(); it != _entites.end(); it++)
 	{
 		string temp = "";
@@ -154,7 +194,7 @@ void Declarations::signerUtiliser(Expression* expression)
 
 void Declarations::signerUtiliser(Identifiant* identifiant)
 {
-	unordered_map<string, Entite>::iterator it;
+	std::map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
 
@@ -165,11 +205,11 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 		_varUtiliseesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
 	} else {
 		// déclarée
-		it->second.utilise = true;
+		it->second.static_utilise = true;
 
 		// est-elle initialisée ?
 
-		if(!it->second.initialise) {
+		if(!it->second.static_initialise) {
 			_varUtiliseesNonAffectees.insert(Entree(identifiant->get(), identifiant));
 		}
 	}
@@ -179,7 +219,7 @@ void Declarations::signerUtiliser(Identifiant* identifiant)
 
 void Declarations::signerAffecter(Identifiant* identifiant)
 {
-	unordered_map<string, Entite>::iterator it;
+	map<string, Entite>::iterator it;
 
 	it = _entites.find(identifiant->get());
 
@@ -187,17 +227,58 @@ void Declarations::signerAffecter(Identifiant* identifiant)
 		// variable affectée mais non déclarée
 		_varAffecteesNonDeclarees.insert(Entree(identifiant->get(), identifiant));
 	} else {
+		it->second.static_utilise = true;
+		it->second.static_initialise = true;
+
 		if(!it->second.modifiable) {
 			_constModifiees.insert(Entree(identifiant->get(), identifiant));
 		}
 	}
 }
 
+void Declarations::intersecterIdentifiants(
+	std::unordered_set<std::string>& identifiants)
+{
+	std::unordered_set<std::string> aDetruire;
+
+	for(std::pair<std::string, Entite> paire : _entites) {
+		std::unordered_set<std::string>::iterator itId =
+			identifiants.find(paire.first);
+
+			if(itId == identifiants.end())
+				aDetruire.insert(paire.first);
+	}
+
+	for(std::string identifiant : aDetruire) {
+		_entites.erase(identifiant);
+	}
+}
+
+void Declarations::declarerVarNonDeclarees()
+{
+	std::unordered_set<std::string> varNonDeclarees;
+
+	for(Entree entree : _varUtiliseesNonDeclarees) {
+		varNonDeclarees.insert(entree.first);
+	}
+
+	for(Entree entree : _varAffecteesNonDeclarees) {
+		varNonDeclarees.insert(entree.first);
+	}
+
+	for(std::string variable : varNonDeclarees) {
+		Entite entite(Entite::Type::VAR);
+
+		_entites.insert(Enregistrement(variable, entite));
+	}
+
+}
+
 void Declarations::analyser()
 {
 	// faire l'affichage correct en lisant les données précalculées
 
-	std::cout << "Analyse statique du code lutin :" << std::endl;
+	//std::cout << "Analyse statique du code lutin :" << std::endl;
 
 	if(!_varUtiliseesNonDeclarees.empty()) {
 		std::cerr << "Identifiants utilisés non déclarés :" << std::endl;
@@ -255,4 +336,18 @@ void Declarations::formaterIdentifiants(
 	}
 
 	std::cerr << std::endl;
+}
+
+void Declarations::viderConstantes()
+{
+	std::unordered_set<std::string> aDetruire;
+
+	for(std::pair<std::string, Entite> paire : _entites) {
+		if(!paire.second.modifiable)
+			aDetruire.insert(paire.first);
+	}
+
+	for(std::string id : aDetruire) {
+		_entites.erase(id);
+	}
 }

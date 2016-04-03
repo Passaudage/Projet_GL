@@ -26,7 +26,7 @@ class SymboleTerminal : public Symbole
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+	virtual void deletePropre(){};
 
 //------------------------------------------------- Surcharge d'opérateurs
     SymboleTerminal& operator=(const SymboleTerminal & unSymboleTerminal) = delete;
@@ -34,9 +34,14 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     SymboleTerminal(const SymboleTerminal & unSymboleTerminal) = delete;
 
-    SymboleTerminal():Symbole(S){};
-	
+	static SymboleTerminal* getSymbole() {
+		static SymboleTerminal singleton;
+		return &singleton;
+	}
+
 	virtual ~SymboleTerminal(){};
+protected:
+    SymboleTerminal():Symbole(S){};
 //------------------------------------------------------------------ PRIVE 
 };
 
@@ -56,7 +61,7 @@ typedef SymboleTerminal<Symbole::Type::AFFICHAGE> Affichage;
 
 typedef SymboleTerminal<Symbole::Type::FINDEFLUX> FinDeFlux;
 
-class OperateurMult : public SymboleTerminal<Symbole::Type::OPERATEUR_MUL>
+class OperateurMult : public Symbole
 {
 public:
 //----------------------------------------------------- Méthodes publiques
@@ -67,7 +72,7 @@ protected:
 	bool _multiplie;
 };
 
-class OperateurAdd : public SymboleTerminal<Symbole::Type::OPERATEUR_ADD>
+class OperateurAdd : public Symbole
 {
 public:
 //----------------------------------------------------- Méthodes publiques

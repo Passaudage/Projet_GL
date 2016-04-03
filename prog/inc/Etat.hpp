@@ -4,12 +4,15 @@
 #include "Automate.hpp"
 #include "Symbole.hpp"
 
+/*
+ * Classe abstraite représentant un état.
+ */ 
 class Etat 
 {
-	public:
-		Etat();
-		virtual ~Etat();
-		virtual void transition(Automate* a, Symbole* s) = 0;
+public:
+	Etat();
+	virtual ~Etat();
+	virtual void transition(Automate* a, Symbole* s) = 0;
 };
 
 #endif

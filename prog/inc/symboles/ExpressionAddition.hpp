@@ -26,8 +26,11 @@ class ExpressionAddition : public ExpressionBinaire
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	int calculer(Programme& programme);
 	void afficher();
+    virtual Expression* simplifier(Programme& programme);
+
+    virtual ExpressionBinaire* construireExpression(Expression* exprGauche,
+        Expression* exprDroite, bool oppose = false);
 
 //------------------------------------------------- Surcharge d'opérateurs
     ExpressionAddition& operator=(
@@ -43,6 +46,9 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+
+    int operation(int a, int b, bool oppose = false);
+
 
 private:
 //------------------------------------------------------- Méthodes privées

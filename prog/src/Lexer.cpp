@@ -9,7 +9,6 @@
 #include "Lexer.hpp"
 #include "Symbole.hpp"
 
-#include "symboles/SymbolesTerminaux.hpp"
 #include "symboles/Valeur.hpp"
 #include "symboles/Identifiant.hpp"
 #include "symboles/SymbolesTerminaux.hpp"
@@ -49,6 +48,14 @@ Lexer::Lexer(std::string const& nomFichier)
 Lexer::~Lexer()
 {
 	_fichierSource.close();
+	if (_symboleCourant != nullptr) {
+		_symboleCourant->deletePropre();
+	}
+
+	while(!_fileSymboles.empty()) {
+		_fileSymboles.front()->deletePropre();
+		_fileSymboles.pop();
+	}
 }
 
 // #### Publique #### //
@@ -126,7 +133,7 @@ Symbole* Lexer::lire_decaler()
 		if(!_fichierSource.get(caractere)) {
 			//fin du flux
 
-			symbole = new FinDeFlux();
+			symbole = FinDeFlux::getSymbole();
 
 			if(!_debut_mot) {
 				// on renvoie la fin de flux
@@ -251,17 +258,17 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 	switch(caractere) {
 		case ',':
-			delimiteur = new Virgule();
+			delimiteur = Virgule::getSymbole();
 			break;
 		case ';':
-			delimiteur = new PointVirgule();
+			delimiteur = PointVirgule::getSymbole();
 			break;
 
 		case '(':
-			delimiteur = new ParentheseOuvrante();
+			delimiteur = ParentheseOuvrante::getSymbole();
 			break;
 		case ')':
-			delimiteur = new ParentheseFermante();
+			delimiteur = ParentheseFermante::getSymbole();
 			break;
 
 		case '+':
@@ -303,7 +310,7 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 			break;
 
 		case '=':
-			delimiteur = new Egal();
+			delimiteur = Egal::getSymbole();
 			break;
 
 		case ':':
@@ -315,7 +322,7 @@ Symbole* Lexer::lire_delimiteur(char& caractere)
 
 			_caractereCourant++;
 
-			delimiteur = new Affectation();
+			delimiteur = Affectation::getSymbole();
 			
 			break;
 	}
@@ -348,10 +355,11 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 
 		if(_nombre_negatif)
 		{
-			
-
+			// symboles pouvant précéder un signe soustraction
+			// pour le différencier d'un nombre négatif
 			if(int(*_symboleCourant) != Symbole::Type::VALEUR &&
-				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT) {
+				int(*_symboleCourant) != Symbole::Type::IDENTIFIANT &&
+				int(*_symboleCourant) != Symbole::Type::PARENTHESE_FER) {
 
 				valeur_id *= -1;
 
@@ -380,13 +388,13 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	Symbole* keyword = nullptr;
 
 	if(identifiant == "const") {
-		keyword = new Constante();
+		keyword = Constante::getSymbole();
 	} else if (identifiant == "var") {
-		keyword = new Variable();
+		keyword = Variable::getSymbole();
 	} else if(identifiant == "lire") {
-		keyword = new Lecture();
+		keyword = Lecture::getSymbole();
 	} else if(identifiant == "ecrire") {
-		keyword = new Affichage();
+		keyword = Affichage::getSymbole();
 	}
 
 	if(keyword != nullptr) {
@@ -410,11 +418,4 @@ Symbole* Lexer::lire_identifiant(std::string& identifiant)
 	}
 
 	return nullptr;
-}
-
-void Lexer::throwError(std::string message)
-{
-	std::ostringstream sstm;
-	sstm << message <<" ligne "<< _ligneCourante <<" !";
-	throw sstm.str().c_str();
 }

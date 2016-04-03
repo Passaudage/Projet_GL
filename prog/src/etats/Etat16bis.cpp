@@ -7,7 +7,7 @@
 
 #include "Erreurs.hpp"
 
-Etat16bis Etat16bis::m_instance = Etat16bis();
+Etat16bis Etat16bis::m_instance;
 
 Etat16bis::Etat16bis()
 {
@@ -31,7 +31,13 @@ void Etat16bis::transition(Automate* a, Symbole* s)
 			break;
 
 		default:
-			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+		
+			if(int(*(a->lireSymboleCourant())) == Symbole::Type::VALEUR) {
+				a->pushEtat(Etat16ter::getInstance());
+			} else {
+				throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+			}
+
 			break;
 	}
 }

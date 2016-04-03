@@ -1,2 +1,12 @@
 var a;
+lire a;
+a := a+1;
+ecrire a;
+a := a+2;
+ecrire a;
+a := a+3;
+ecrire a;
+a := a+4;
+ecrire a;
+a := a+5;
 ecrire a;

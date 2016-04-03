@@ -14,7 +14,10 @@ public:
 	std::string const& get() const;
 	virtual int calculer(Programme& programme);
 	void afficher();
+	virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false);
+
 	virtual std::unordered_set<Identifiant*> getIdentifiants();
+	bool estEvaluable(Programme& programme);
 
 //-------------------------------------------- Constructeurs - destructeur
 	Identifiant(std::string const& identifiant);

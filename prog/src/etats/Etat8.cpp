@@ -7,7 +7,7 @@
 
 #include "Erreurs.hpp"
 
-Etat8 Etat8::m_instance = Etat8();
+Etat8 Etat8::m_instance;
 
 Etat8::Etat8()
 {
@@ -25,12 +25,12 @@ void Etat8::transition(Automate* a, Symbole* s)
 	
 	switch(*s){
 		case Symbole::AFFECTATION:
-			//~ a->pushEtat(new Etat9());
 			a->pushEtat(Etat9::getInstance());
 			a->decaler();
 			break;
 		default:
-			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+			a->pushEtat(Etat9::getInstance());
+			//throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
 			break;
 	}
 }

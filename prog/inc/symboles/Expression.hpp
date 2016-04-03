@@ -25,6 +25,7 @@
 //------------------------------------------------------------------------ 
 
 class Identifiant;
+class Expression;
 
 class Expression : public Symbole
 {
@@ -37,6 +38,16 @@ public:
 	virtual void afficher() = 0;
 	virtual std::unordered_set<Identifiant*> getIdentifiants() = 0;
 
+	virtual Expression* horsParenthese();
+	virtual Expression* enleverParentheses();
+	virtual void ajouterParentheses();
+
+	virtual Expression* simplifier(Programme&);
+	virtual std::pair<Expression*, Expression*> optimiser(Programme& programme, bool remonter = false) = 0;
+
+	// renvoie vrai si la sous-expression "correspond" à une constante
+	virtual bool estEvaluable(Programme& programme) = 0;
+	
 //------------------------------------------------- Surcharge d'opérateurs
     Expression& operator=(const Expression & unExpression)=delete ;
 

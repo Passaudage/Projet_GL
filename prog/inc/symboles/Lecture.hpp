@@ -29,6 +29,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	virtual void afficher();
 	virtual void effectuer(Programme & programme);
+	virtual std::unordered_set<Identifiant*> const getVarUtilisees();
+	virtual Identifiant const * getVarAffectees();
+	void optimiser(Programme& programme);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Lecture& operator=(const Lecture & unLecture) = delete;

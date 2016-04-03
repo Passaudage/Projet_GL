@@ -4,7 +4,8 @@
 #include <iostream>
 #endif
 
-Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType)
+Symbole::Symbole(Symbole::Type symboleType):_symboleType(symboleType),
+	_initType(symboleType)
 {
 	_position.ligne = -1;
 	_position.caractere = -1;
@@ -25,6 +26,7 @@ void Symbole::setType(Type symboleType)
 	std::cout << "Type symbole : " << _symboleType << " => " << symboleType <<
 		std::endl;
 #endif
+	
 	_symboleType = symboleType;
 }
 
@@ -32,6 +34,11 @@ int Symbole::getLigne()
 {
 	return _position.ligne;
 }
+
+void Symbole::deletePropre() {
+	delete this;
+}
+
 int Symbole::getCaractere()
 {
 	return _position.caractere;
@@ -46,4 +53,9 @@ Lexer::Position Symbole::getPosition()
 void Symbole::setPosition(Lexer::Position position)
 {
 	_position = position;
+}
+
+int Symbole::getInitType()
+{
+	return _initType;
 }

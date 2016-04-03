@@ -23,7 +23,6 @@ Programme::~Programme()
 	delete _instructions;
 }
 
-
 void Programme::afficher()
 {
 	_declarations->afficher();
@@ -37,9 +36,25 @@ void Programme::transformer()
 	// éliminer les opérations avec élément neutre
 	// éliminer les parenthèses inutiles ?
 
+	// 0*x ; x*0 ; x/1 ; x+0 ; 0+x
+	// ERREUR : x/0
+
 	// plusieurs affectations de suite pour une même variable
 	// a:=5;lire b;a:=7; ---> lire b;a:=7;
 	// a:=8;b:=7;lire a; ---> b:=7;lire a;
+	
+	_declarations->declarerVarNonDeclarees();
+
+	_instructions->optimiser(*this);
+
+	_declarations->viderConstantes();
+
+	_instructions->optimiserInstructions();
+
+	std::unordered_set<std::string> identifiants =
+		_instructions->getIdentifiantsUtilises();
+
+	_declarations->intersecterIdentifiants(identifiants);
 }
 
 void Programme::executer()
@@ -71,4 +86,24 @@ int Programme::getValeur(std::string const& identifiant) const
 void Programme::setValeur(std::string const& identifiant, int valeur)
 {
 	_declarations->setValeur(identifiant, valeur);
+}
+
+bool Programme::estModifiable(std::string const& identifiant)
+{
+	return _declarations->estModifiable(identifiant);
+}
+
+bool Programme::estSale(std::string const & identifiant)
+{
+	return _declarations->estSale(identifiant);
+}
+
+void Programme::rendSale(std::string const & identifiant)
+{
+	return _declarations->rendSale(identifiant);
+}
+
+void Programme::rendPropre(std::string const & identifiant)
+{
+	return _declarations->rendPropre(identifiant);
 }

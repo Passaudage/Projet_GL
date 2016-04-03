@@ -10,13 +10,14 @@
 
 #include "Erreurs.hpp"
 
-Etat6 Etat6::m_instance = Etat6();
+Etat6 Etat6::m_instance;
 
 Etat6::Etat6()
 {
 }
 
-Etat6* Etat6::getInstance(){
+Etat6* Etat6::getInstance()
+{
 	return &m_instance;
 }
 
@@ -29,11 +30,11 @@ void Etat6::transition(Automate* a, Symbole* ) //réduction de la règle 11
 	Identifiant* id = (Identifiant*) a->popSymbole();
 	Symbole* lecture = new Lecture(*id);
 
-	if(int(*(a->symboleCourant())) == Symbole::Type::DECLARATIONS) {
-		(dynamic_cast<Declarations*> (a->symboleCourant()))->signerAffecter(id);
+	if(int(*(a->topSymbole())) == Symbole::Type::DECLARATIONS) {
+		(dynamic_cast<Declarations*> (a->topSymbole()))->signerAffecter(id);
 	} else {
 		Symbole* temp = a->popSymbole();
-		(dynamic_cast<Declarations*> (a->symboleCourant()))->signerAffecter(id);
+		(dynamic_cast<Declarations*> (a->topSymbole()))->signerAffecter(id);
 		a->pushSymbole(temp);
 	}
 

@@ -1,0 +1,11 @@
+var a, b, c;
+const d=12;
+lire a;
+b:=a;
+ecrire b;
+a := d;
+b:= a;
+ecrire b;
+lire a;
+c := 6 + a + b;
+ecrire c;

@@ -5,13 +5,14 @@
 
 #include "Erreurs.hpp"
 
-Etat24 Etat24::m_instance = Etat24();
+Etat24 Etat24::m_instance;
 
 Etat24::Etat24()
 {
 }
 
-Etat24* Etat24::getInstance(){
+Etat24* Etat24::getInstance()
+{
 	return &m_instance;
 }
 
@@ -22,7 +23,7 @@ void Etat24::transition(Automate* a, Symbole* ) //réduction règle 17
 	std::cout << "Etat24" << std::endl;
 #endif
 	
-	Symbole* terme = a->symboleCourant();
+	Symbole* terme = a->topSymbole();
 	terme->setType(Symbole::TERME);
 	a->popEtat();
 	a->etatCourant()->transition(a, terme);

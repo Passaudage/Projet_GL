@@ -10,7 +10,7 @@
 
 #include "Erreurs.hpp"
 
-Etat23 Etat23::m_instance = Etat23();
+Etat23 Etat23::m_instance;
 
 Etat23::Etat23()
 {
@@ -29,7 +29,6 @@ void Etat23::transition(Automate* a, Symbole* s)
     switch(*s){
 		case Symbole::OPERATEUR_MUL:
 			a->pushSymbole(s);
-			//~ a->pushEtat(new Etat29());
 			a->pushEtat(Etat29::getInstance());
 			a->decaler();
 			break;
@@ -46,6 +45,7 @@ void Etat23::transition(Automate* a, Symbole* s)
 				} else {
 					expr = new ExpressionSoustraction(*expr_gauche, *expr_droit);
 				}
+				delete operateur;
 				expr->setType(Symbole::EXPRESSION);
 				a->pushSymbole(expr);
 				a->popEtat();

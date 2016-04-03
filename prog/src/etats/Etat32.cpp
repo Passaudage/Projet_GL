@@ -9,7 +9,7 @@
 
 #include "Erreurs.hpp"
 
-Etat32 Etat32::m_instance = Etat32();
+Etat32 Etat32::m_instance;
 
 Etat32::Etat32()
 {
@@ -35,6 +35,7 @@ void Etat32::transition(Automate* a, Symbole* ) //réduction règle 16
 	else
 		terme = new ExpressionDivision(*gauche, *droite);
 	
+	delete opM;
 	terme->setType(Symbole::Type::TERME);
 	a->pushSymbole(terme);
 

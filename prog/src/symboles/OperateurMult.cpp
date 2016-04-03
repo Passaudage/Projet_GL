@@ -1,6 +1,6 @@
 #include "symboles/SymbolesTerminaux.hpp"
 
-OperateurMult::OperateurMult(bool multiplie):_multiplie(multiplie)
+OperateurMult::OperateurMult(bool multiplie):Symbole(Symbole::Type::OPERATEUR_MUL),_multiplie(multiplie)
 {
 }
 

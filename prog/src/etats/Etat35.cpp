@@ -7,7 +7,7 @@
 
 #include "Erreurs.hpp"
 
-Etat35 Etat35::m_instance = Etat35();
+Etat35 Etat35::m_instance;
 
 Etat35::Etat35()
 {
@@ -26,12 +26,11 @@ void Etat35::transition(Automate* a, Symbole* s)
 #endif
     switch(*s){
 		case Symbole::POINT_VIR:
-			//~ a->pushEtat(new Etat36());
 			a->pushEtat(Etat36::getInstance());
 			a->decaler();
 			break;
 		default:
-			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+			a->pushEtat(Etat36::getInstance());
 			break;
 	}
 }

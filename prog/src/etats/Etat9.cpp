@@ -12,7 +12,7 @@
 
 #include "Erreurs.hpp"
 
-Etat9 Etat9::m_instance = Etat9();
+Etat9 Etat9::m_instance;
 
 Etat9::Etat9()
 {

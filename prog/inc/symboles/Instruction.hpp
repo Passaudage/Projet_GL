@@ -33,10 +33,12 @@ class Instruction : public Symbole
 
 public:
 //----------------------------------------------------- Méthodes publiques
+	virtual bool estSansEffet();
 	virtual void effectuer(Programme& programme) = 0;
 	virtual void afficher() = 0;
-	virtual std::unordered_set<Identifiant*> const& getVarUtilisees();
-	virtual std::unordered_set<Identifiant*> const& getVarAffectees();
+	virtual void optimiser(Programme&) = 0;
+	virtual std::unordered_set<Identifiant*> const getVarUtilisees() = 0;
+	virtual Identifiant const * getVarAffectees() = 0;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -53,9 +55,7 @@ public:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-	std::unordered_set<Identifiant*> _varUtilisees;
-	std::unordered_set<Identifiant*> _varAffectees;
-
+//
 private:
 //------------------------------------------------------- Attributs privés
 

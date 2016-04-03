@@ -10,6 +10,10 @@
 
 #include "Erreurs.hpp"
 
+/*
+ * Cette structure stocke les informations utiles à la récupération
+ * et la gestion des arguments du programme.
+ */
 struct arg_cmd_struct {
 	bool afficher;
 	bool analyser;
@@ -19,47 +23,60 @@ struct arg_cmd_struct {
 	std::string fichier_lutin;
 
 	int arg_count;
+	int return_code;
 };
 
+/*
+ * Coeur du programme Lutin.
+ */
 void traiter_lutin(arg_cmd_struct* arg_cmd)
 {
+	Programme* programme = nullptr;
 	try {
-
 		Automate automate(arg_cmd->fichier_lutin);
 
 		// récupération du programme
 
-		Programme* programme = automate.getProgramme();
+		programme = automate.getProgramme();
 
 		if(arg_cmd->analyser) {
 			programme->analyser();
 		}
 		
 		if(arg_cmd->transformer) {
-			std::cout << "Transformation du code..." << std::endl;
+			//std::cout << "Transformation du code..." << std::endl;
 			programme->transformer();
 		}
 
 		if(arg_cmd->afficher) {
-			std::cout << "Voici l'affichage du code..." << std::endl;
+			//std::cout << "Voici l'affichage du code..." << std::endl;
 			programme->afficher();
 		}
 
 		if(arg_cmd->executer) {
 			std::cout << "Execution du programme..." << std::endl;
 			programme->executer();
-		}
+		}	
 
 	} catch(ExceptionFarfadet& e) {
 
 		std::cerr << "Erreur : " << e.getErreur() << std::endl;
 		std::cerr << "Sortie de Farfadet !" << std::endl;
+		arg_cmd->return_code = 1;
 
 	} catch(char const* message) {
 		std::cerr << "Une erreur est survenue : " << message << std::endl;
+		arg_cmd->return_code = 1;
+	} 
+
+	if (programme != nullptr) {
+		delete programme;
 	}
 }
 
+/*
+ * Procédure appelée à chaque fois qu'un argument est détecté par argp.
+ */
 int parse_opt(int key, char *arg, struct argp_state *state)
 {
 	arg_cmd_struct* arg_cmd = (arg_cmd_struct*) state->input;
@@ -103,6 +120,7 @@ int parse_opt(int key, char *arg, struct argp_state *state)
 
 int main(int argc, char* argv[])
 {
+	// On définit les arguments de la ligne commande.
 	struct argp_option options[5];
 
 	options[0] = {};
@@ -136,8 +154,9 @@ int main(int argc, char* argv[])
 	arg_cmd.analyser = false;
 	arg_cmd.transformer = false;
 	arg_cmd.executer = false;
+	arg_cmd.return_code = 0;
 
 	argp_parse(&argp, argc, argv, 0, 0, &arg_cmd);
 
-	return 0;
+	return arg_cmd.return_code;
 }

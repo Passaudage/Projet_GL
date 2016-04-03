@@ -8,13 +8,14 @@
 
 #include "Erreurs.hpp"
 
-Etat19 Etat19::m_instance = Etat19();
+Etat19 Etat19::m_instance;
 
 Etat19::Etat19()
 {
 }
 
-Etat19* Etat19::getInstance(){
+Etat19* Etat19::getInstance()
+{
 	return &m_instance;
 }
 
@@ -26,9 +27,12 @@ void Etat19::transition(Automate* a, Symbole* )
 #endif
 	Valeur* val = dynamic_cast<Valeur*> (a->popSymbole());
 	Identifiant* id = dynamic_cast<Identifiant*> (a->popSymbole());
-	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->symboleCourant());
+	Declarations::IDC* idc = dynamic_cast<Declarations::IDC*> (a->topSymbole());
 	
 	idc->ajouterConstante(id->get(), val->getValeur());
+
+	delete val;
+	delete id;
 
 	a-> popEtat();
 	a-> popEtat();

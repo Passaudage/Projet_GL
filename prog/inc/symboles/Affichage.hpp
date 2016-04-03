@@ -10,6 +10,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "symboles/InstructionExpression.hpp"
+#include <unordered_set>
 
 //------------------------------------------------------------- Constantes 
 
@@ -29,6 +30,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
 	void afficher();
 	void effectuer(Programme& programme);
+	void optimiser(Programme& programme);
+	static std::unordered_set<Affichage*> const & getAffichages();
+	virtual Identifiant const * getVarAffectees();
 
 //------------------------------------------------- Surcharge d'opérateurs
     Affichage& operator=(const Affichage & unAffichage) = delete;
@@ -37,6 +41,7 @@ public:
     Affichage(const Affichage & unAffichage) = delete;
 
     Affichage(Expression& expr);
+	virtual ~Affichage();
 
 //------------------------------------------------------------------ PRIVE 
 
@@ -45,11 +50,12 @@ protected:
 
 private:
 //------------------------------------------------------- Méthodes privées
-	static const std::string _keyword;
 protected:
 //----------------------------------------------------- Attributs protégés
 
 private:
+	static std::unordered_set<Affichage*> affichages;
+	static const std::string _keyword;
 //------------------------------------------------------- Attributs privés
 
 //---------------------------------------------------------- Classes amies
@@ -57,7 +63,6 @@ private:
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés
-
 };
 
 //----------------------------------------- Types dépendants de <Affichage>

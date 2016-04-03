@@ -1,36 +1,31 @@
-/*************************************************************************
-                           Declarations  -  description
-                             -------------------
-    début                : mer. 16 mars 2016
-*************************************************************************/
-
-//--------- Interface de la classe <Declarations> (fichier Declarations.hpp) ------
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
-//--------------------------------------------------- Interfaces utilisées
+
 #include "Symbole.hpp"
 
 #include <string>
 #include <list>
-#include <unordered_map>
 #include <unordered_set>
 #include <map>
 
-//------------------------------------------------------------- Constantes 
 
-//------------------------------------------------------------------ Types 
 using namespace std;
 
 class Identifiant;
 class Expression;
 
+/*
+ * Gère l'ensemble des déclarations du programme, variables et constantes.
+ */
 class Declarations : public Symbole
 {
-//----------------------------------------------------------------- PUBLIC
-
 public:
-//------------------------------------------------------ Classes publiques
+	/*
+	 * Une entité correspond à la donnée d'une variable ou d'une constante.
+	 * L'ensemble des informations nécessaires à sa description sont présentes
+	 * dans cette structure.
+	 */
 	struct Entite {
 		enum Type {
 			CONST, VAR
@@ -45,12 +40,22 @@ public:
 		bool const modifiable;
 		bool initialise;
 		bool utilise;
+
+		//Dit si la valeur dépend de la saisie de l'utilisateur
+		bool optim_sale;
+
+		bool static_initialise;
+		bool static_utilise;
 	};
 
 	typedef std::pair<std::string, Entite> Enregistrement;
 	typedef std::pair<std::string, Identifiant*> Entree;
 	typedef std::list<Enregistrement> ListEntites;
 
+	/*
+	 * Accumulateur de constantes.
+	 * cf. grammaire.
+	 */
 	class IDC : public Symbole
 	{
 	public:
@@ -64,6 +69,10 @@ public:
 
 	};
 
+	/*
+	 * Accumulateur de variables.
+	 * cf. grammaire.
+	 */
 	class IDV : public Symbole
 	{
 	public:
@@ -76,44 +85,76 @@ public:
 		ListEntites _listEntites;
 	};
 
-//----------------------------------------------------- Méthodes publiques
+
+    Declarations& operator=(const Declarations & unDeclarations) = delete;
+    Declarations(const Declarations & unDeclarations) = delete;
+
+    Declarations();
+
+
 	inline bool identifiantPris(string const& identifiant) const;
+	/*
+	 * Ajoute ces constantes aux déclarations déjà présentes.
+	 */
 	void enregistrerConstantes(IDC& idc);
+
+	/*
+	 * Ajoute ces variables aux déclarations déjà présentes.
+	 */
 	void enregistrerVariables(IDV& idv);
+
 	int getValeur(string const& identifiant) const;
 	void setValeur(string const& identifiant, int valeur);
+	bool estModifiable(string const& identifiant);
+	bool estSale(string const& identifiant);
+	void rendSale(string const& identifiant);
+	void rendPropre(string const& identifiant);
 
 	void afficher();
 
+	/*
+	 * Effectue l'analyse statique du programme.
+	 * Les informations sont récoltées lors de l'enregistrement des
+	 * instructions, via l'uilisation des méthodes Declarations::signer*().
+	 */
 	void analyser();
 
 	void signerUtiliser(Expression* expression);
 	void signerUtiliser(Identifiant* identifiant);
 	void signerAffecter(Identifiant* identifiant);
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Declarations& operator=(const Declarations & unDeclarations) = delete;
+	/*
+	 * Lorsqu'une variable n'est pas déclarée mais tout de même utilisée,
+	 * appeler cette méthode permet d'ajouter la déclaration de cette
+	 * variable. Appelée lors de l'optimisation du programme.
+	 */
+	void declarerVarNonDeclarees();
 
-//-------------------------------------------- Constructeurs - destructeur
-    Declarations(const Declarations & unDeclarations) = delete;
+	/*
+	 * Enlève l'ensemble des déclarations de constantes.
+	 * Appelée lors de l'optimisation du programme.
+	 */
+	void viderConstantes();
 
-    Declarations();
-
-//------------------------------------------------------------------ PRIVE 
-
-protected:
-//----------------------------------------------------- Méthodes protégées
+	/*
+	 * Effectue l'intersection de l'ensemble des identifiants présents
+	 * dans Declarations avec ceux passés en arguments.
+	 * Appelée lors de l'optimisation du programme.
+	 */
+	void intersecterIdentifiants(
+		std::unordered_set<std::string>& identifiants);
 
 private:
-//------------------------------------------------------- Méthodes privées
 
 	void formaterIdentifiants(
 		std::multimap<std::string, Identifiant*>& multimap);
 
 protected:
-//----------------------------------------------------- Attributs protégés
-	unordered_map<string, Entite> _entites;
+	map<string, Entite> _entites;
 
+	/*
+	 * Dictionnaires et ensembles nécessaires à l'analyse statique.
+	 */
 	std::multimap<std::string, Identifiant*> _varUtiliseesNonDeclarees;
 	std::multimap<std::string, Identifiant*> _varUtiliseesNonAffectees;
 	std::multimap<std::string, Identifiant*> _varAffecteesNonDeclarees;
@@ -121,18 +162,8 @@ protected:
 	std::unordered_set<std::string> _varUtilisees;
 	std::multimap<std::string, Identifiant*> _constModifiees;
 
-private:
-//------------------------------------------------------- Attributs privés
-
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privées
-
-//----------------------------------------------------------- Types privés
-
 };
 
-//----------------------------------------- Types dépendants de <Declarations>
 
 #endif // DECLARATIONS_H
 

@@ -7,7 +7,7 @@
 
 #include "Erreurs.hpp"
 
-Etat10 Etat10::m_instance = Etat10();
+Etat10 Etat10::m_instance;
 
 Etat10::Etat10()
 {
@@ -30,7 +30,7 @@ void Etat10::transition(Automate* a, Symbole* s)
 			a->decaler();
 			break;
 		default:
-			throw ExceptionSymbole(s, ExceptionSymbole::symbole_non_attendu);
+			a->pushEtat(Etat11::getInstance());
 			break;
 	}
 }

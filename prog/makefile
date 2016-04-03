@@ -27,7 +27,7 @@ OBJDIR=.obj
 
 # Dossier où sont mises les dépendances
 DEPDIR=.dep
-df=$(DEPDIR)/$(*F)
+df=$(@D)/$(*F)
 
 ALLSRC=$(shell find $(SRCDIR) -type f -name *.cpp)
 SRC=$(ALLSRC:$(SRCDIR)/%=%)
@@ -37,7 +37,7 @@ OBJ=$(SRC:.cpp=.o)
 
 CLEAR=clean
 
-MAKEDEPEND = g++ $(addprefix -I, $(EXTINCDIR)) -I$(INCDIR) -o $(df).d -std=c++11 -MM $< #Pour calculer les dépendances
+MAKEDEPEND = g++ $(addprefix -I, $(EXTINCDIR)) -I$(INCDIR) -o $(DEPDIR)/$(df:$(OBJDIR)/%=%).d -std=c++11 -MM $< #Pour calculer les dépendances
 
 #Compilateur
 CC=g++
@@ -46,6 +46,12 @@ CCFLAGS+=-Wall -fpermissive -Wextra -Woverloaded-virtual -c -std=c++11 -I$(INCDI
 
 EL=g++ #Éditeur de liens
 ELFLAGS=
+
+#dossier pour les tests
+TESTDIR=../test
+TESTCMD=./mktest.sh
+TESTLINK=$(TESTDIR)/lut
+TEST=test
 
 ifeq ($(OS),Windows_NT)
     ELFLAGS+= -largp
@@ -71,25 +77,32 @@ ifneq ($(PROF),FALSE)
     ELFLAGS+= -pg
 endif
 
-
 .PHONY: $(CLEAR)
+.PHONY: $(TEST)
 .PHONY: ALL
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
-	@mkdir -p $(DEPDIR);
-	@mkdir -p $(OBJDIR);
+	@mkdir -p $(dir $(DEPDIR)/$(df:$(OBJDIR)/%=%));
+	@mkdir -p $(@D);
 	@$(MAKEDEPEND); \
-		cp $(df).d $(df).P;\
+		cp $(DEPDIR)/$(df:$(OBJDIR)/%=%).d $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\
 		sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	            -e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P;\
-        	sed -i '1s/^/$(OBJDIR)\//' $(df).P;
-		@rm -f $(df).d
-	@$(ECHO) "Compilation de $<"
+	            -e '/^$$/ d' -e 's/$$/ :/' < $(DEPDIR)/$(df:$(OBJDIR)/%=%).d >> $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;\
+		    sed -i '1s/^/$(subst /,\/,$(@D))\//' $(DEPDIR)/$(df:$(OBJDIR)/%=%).P;
+		@rm -f $(DEPDIR)/$(df:$(OBJDIR)/%=%).d
+	$(ECHO) "Compilation de $<"
 	@mkdir -p $(dir $@)
 	$(CC) $(CCFLAGS) -o $@ $<
 
-
 ALL: $(PROGNAME)
+
+$(TESTLINK): $(PROGNAME)
+	ln -fs `pwd`/$(PROGNAME) $(TESTLINK)
+
+$(TEST): $(TESTLINK)
+	$(ECHO) "Batterie de test lancée"
+	cd $(TESTDIR); \
+		$(TESTCMD)
 	
 $(PROGNAME): $(addprefix $(OBJDIR)/, $(OBJ)) 
 	$(ECHO) "Fabrication de l'executable"

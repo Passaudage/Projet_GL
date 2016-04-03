@@ -50,6 +50,10 @@ public:
 
 	int getValeur(std::string const& identifiant) const;
     void setValeur(std::string const& identifiant, int valeur);
+	bool estSale(std::string const& identifiant);
+	void rendPropre(std::string const& identifiant);
+	void rendSale(std::string const& identifiant);
+    bool estModifiable(std::string const& identifiant);
 
 //------------------------------------------------------------------ PRIVE 
 

@@ -27,3 +27,13 @@ void Valeur::afficher()
 {
 	std::cout << _valeur;
 }
+
+std::pair<Expression*, Expression*> Valeur::optimiser(Programme&, bool)
+{
+	return std::pair<Expression*, Expression*>(this, nullptr);
+}
+
+bool Valeur::estEvaluable(Programme&)
+{
+	return true;
+}

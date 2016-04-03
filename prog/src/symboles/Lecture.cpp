@@ -34,13 +34,26 @@ void Lecture::effectuer(Programme & programme)
 }
 
 
-
 Lecture::Lecture(Identifiant& identifiant):_identifiant(identifiant)
 {
-	_varUtilisees.insert(&identifiant);
+}
+
+void Lecture::optimiser(Programme& programme)
+{
+	programme.rendSale(_identifiant.get());	
 }
 
 Lecture::~Lecture()
 {
 	delete &_identifiant;
+}
+
+std::unordered_set<Identifiant*> const Lecture::getVarUtilisees()
+{
+	return std::unordered_set<Identifiant*>();
+}
+
+Identifiant const * Lecture::getVarAffectees()
+{
+	return &_identifiant;
 }
