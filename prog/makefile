@@ -49,7 +49,7 @@ ELFLAGS=
 
 #dossier pour les tests
 TESTDIR=../test
-TESTCMD=./mktest.sh
+TESTCMD=bash mktest.sh
 TESTLINK=$(TESTDIR)/lut
 TEST=test
 
